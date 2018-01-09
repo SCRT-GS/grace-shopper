@@ -25,6 +25,7 @@ const getProductsActionCreator = products => ({type: GET_PRODUCTS, products})
 export const getProducts = () =>
   dispatch =>
     axios.get('/api/products/')
+    .then(res => res.data)
       .then(result => {
         dispatch(getProductsActionCreator(result))
       })
