@@ -12,3 +12,34 @@ router.get('/', (req, res, next) => {
     .then(users => res.json(users))
     .catch(next)
 })
+
+router.put('/update/:id', (req, res) => {
+  User.findOne({
+    where: {
+      id: +req.params.id
+    }
+  })
+    .then(user => {
+      return user.update({
+        email: req.body.email,
+        resetPassword: +req.body.resetPassword,
+        isAdmin: req.body.isAdmin
+      })
+    })
+    .then(user => user.reload())
+    .then(result => res.json(result))
+    .catch(err => res.send(err))
+})
+
+router.delete('/:id', (req, res) => {
+  User.findOne({
+    where: {
+      id: +req.params.id
+    }
+  })
+    .then(user => {
+      return user.destroy({ force: true })
+    })
+    .then((result) => res.json('this user record no longer exists'))
+    .catch(err => res.send(err))
+})
