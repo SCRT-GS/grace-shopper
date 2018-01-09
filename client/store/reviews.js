@@ -18,7 +18,7 @@ const getReviewsActionCreator = reviews => ({type: GET_REVIEWS, reviews})
 
 export const getReviews = () =>
   dispatch =>
-    axios.get('/api/reviews/')
+    axios.get(`/api/reviews/${id}`)
     .then(res => res.data)
       .then(result => {
         dispatch(getReviewsActionCreator(result))
