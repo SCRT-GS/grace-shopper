@@ -28,7 +28,8 @@ async function seed () {
   ])
   const categories = await Promise.all([
     Category.create({name: 'Dark'}),
-    Category.create({name: 'Single Origin '})
+    Category.create({name: 'Single Origin '}),
+    Category.create({name: 'All'})
   ])
   const orders = await Promise.all([
     Order.create({session: 'hash', email: 'seed@email.com', status: 'Created'}),
@@ -44,13 +45,13 @@ async function seed () {
       description: 'Single Origin Arriba Nacional, 78% cacao',
       price: 12.99,
       quantity: 20,
-      imgUrl: 'http://via.placeholder.com/100x100'}),
+      imgURL: 'http://via.placeholder.com/100x100'}),
     Product.create({
       name: 'Pacari - Super Milky',
       description: 'Single Origin Hybrid, 30% cacao',
       price: 15.99,
       quantity: 20,
-      imgUrl: 'http://via.placeholder.com/100x100'})
+      imgURL: 'http://via.placeholder.com/100x100'})
   ])
   const reviews = await Promise.all([
     Review.create({content: 'This is a review.', rating: 3}),
