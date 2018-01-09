@@ -4,14 +4,16 @@ import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 import { Main, Login, Signup, UserHome, ProductList } from './components'
-import { me } from './store'
+import store, { me, getProducts } from './store'
+
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
   componentDidMount() {
-    this.props.loadInitialData()
+    const productsThunk = getProducts()
+    store.dispatch(productsThunk);
   }
 
   render() {
