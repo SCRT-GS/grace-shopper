@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
+import ProductList from './ProductList'
 
 /**
  * COMPONENT
@@ -16,6 +17,7 @@ const Main = (props) => {
   return (
     <div>
       <h1>BOILERMAKER</h1>
+
       <nav>
         {
           isLoggedIn
@@ -61,8 +63,8 @@ export default withRouter(connect(mapState, mapDispatch)(Main))
 /**
  * PROP TYPES
  */
-Main.propTypes = {
-  children: PropTypes.object,
-  handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-}
+// Main.propTypes = {
+//   // children: PropTypes.object,
+//   handleClick: PropTypes.func.isRequired,
+//   isLoggedIn: PropTypes.bool.isRequired
+// }
