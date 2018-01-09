@@ -14,6 +14,7 @@ class Routes extends Component {
   componentDidMount() {
     const productsThunk = getProducts()
     store.dispatch(productsThunk);
+
   }
 
   render() {
