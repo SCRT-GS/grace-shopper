@@ -6,31 +6,26 @@ const OrderItem = require('./orderItem')
 const Product = require('./product')
 const Review = require('./review')
 
-
-
 /**
- * If we had any associations to make, this would be a great place to put them!
- * ex. if we had another model called BlogPost, we might say:
- *
- *    BlogPost.belongsTo(User)
+ * Associations
  */
 
- OrderItem.belongsTo(Order)
- OrderItem.belongsTo(Product)
+Address.belongsTo(Order)
 
- Review.belongsTo(Product)
- Review.belongsTo(User)
+OrderItem.belongsTo(Order)
+OrderItem.belongsTo(Product)
 
- Product.belongsToMany(Category, {through: 'product_category'})
+Order.belongsTo(User)
 
- Address.belongsTo(Order)
+Review.belongsTo(Product)
+Review.belongsTo(User)
+
+Product.belongsToMany(Category, {through: 'product_category'})
 
 
 /**
- * We'll export all of our models here, so that any time a module needs a model,
+ * Exporting all of our models here, so that any time a module needs a model,
  * we can just require it from 'db/models'
- * for example, we can say: const {User} = require('../db/models')
- * instead of: const User = require('../db/models/user')
  */
 
 module.exports = {
