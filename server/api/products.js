@@ -12,12 +12,16 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:id', (req, res, next) => {
-  Product.findOne({
+router.get('/:id', async (req, res, next) => {
+  try {
+  const product = Product.findOne({
     where: {
       id: req.params.id
     }
   })
-    .then(product => res.json(product))
-    .catch(next)
+     res.json(product)
+}
+     catch (error) {
+      next(error)
+    }
 })
