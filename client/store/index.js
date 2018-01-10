@@ -6,7 +6,7 @@ import user from './user'
 import users from './users'
 import products from './products'
 import reviews from './reviews'
-import users from './users'
+
 
 
 const reducer = combineReducers({user, users, products, reviews})
@@ -22,4 +22,4 @@ export * from './user'
 export * from './users'
 export * from './products'
 export * from './reviews'
-export * from './users'
+
