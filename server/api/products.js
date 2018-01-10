@@ -9,7 +9,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/:id', (req, res, next) => {
-  Product.findAll({
+  Product.findOne({
     where: {
       id: req.params.id
     }

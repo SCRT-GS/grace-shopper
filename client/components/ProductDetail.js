@@ -1,28 +1,28 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getProduct } from '../store'
+import { withRouter } from 'react-router-dom'
+//import { getProduct } from '../store'
 
 /**
  * COMPONENT
  */
 export const ProductDetail = (props) => {
 
-  componentDidMount() {
-    const productThunk = getProduct(productId);
-    store.dispatch(productThunk);
-  }
+  const productId = Number(props.match.params.productId)
+  const { products } = props
 
-  const product = props.product
-  //const productId = props.match.params.id
+  const productish = products.filter(elem => elem.id === productId)
 
-  console.log(props.product)
+  //const newProductId = productId - 1
+  const product = productish[0]
+
+  console.log('PRODUCTS', products)
+  console.log('PRODUCT', product)
+  console.log('PRODUCTISH', productish)
+
 
   return (
     <div>
-      <h3>{product.name}</h3>
-      <h3>{product.description}</h3>
-      <h3>{product.price}</h3>
-      <img id="product-pic" src={product.imgURL} />
     </div>
   )
 }
@@ -32,12 +32,11 @@ export const ProductDetail = (props) => {
  */
 const mapState = (state) => {
   return {
-    product: state.product
+    products: state.products
   }
 }
-// const mapDispatch = (state) => {
 
-export default connect(mapState)(ProductDetail)
+export default withRouter(connect(mapState)(ProductDetail))
 
 /**
  * PROP TYPES
@@ -45,3 +44,9 @@ export default connect(mapState)(ProductDetail)
 // UserHome.propTypes = {
 //   email: PropTypes.string
 // }
+
+
+// <h3>{product.name}</h3>
+//       <h3>{product.description}</h3>
+//       <h3>{product.price}</h3>
+//       <img id="product-pic" src={product.imgURL}/>
