@@ -4,7 +4,8 @@ const db = require('../db')
 
 const Order = db.define('order', {
   session: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false
   },
   email: {
     type: Sequelize.STRING,
