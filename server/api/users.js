@@ -13,22 +13,25 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
-router.put('/update/:id', (req, res) => {
-  User.findOne({
-    where: {
-      id: +req.params.id
-    }
-  })
-    .then(user => {
-      return user.update({
-        email: req.body.email,
-        resetPassword: +req.body.resetPassword,
-        isAdmin: req.body.isAdmin
-      })
+router.put('/update/:id', async (req, res) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        id: +req.params.id
+      }
     })
-    .then(user => user.reload())
-    .then(result => res.json(result))
-    .catch(err => res.send(err))
+
+    await user.update({
+      email: req.body.email,
+      resetPassword: +req.body.resetPassword,
+      isAdmin: req.body.isAdmin
+    })
+    await user.reload()
+    res.json(user)
+  }
+  catch (error) {
+    next(error)
+  }
 })
 
 router.delete('/:id', (req, res) => {

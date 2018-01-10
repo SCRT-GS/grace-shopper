@@ -25,13 +25,23 @@ class Routes extends Component {
 
     return (
       <Router history={history}>
+        <ErrorMessage/>
         <Main>
           <Switch>
 
-            <Route exact path="/products" component={ProductList}
+            <Route
+              component={ProductList}
+              exact
+              nextProp="hello"
+              path="/products"
             />
 
-            <Route exact path="/products/:productId" component={ProductDetail} />
+            <Route
+              component={ProductDetail}
+              exact
+              nextProp="something"
+              path="/products/:productId"
+            />
 
             <Route exact path="/admin/users" component={AdminUserList}
             />

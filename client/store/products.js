@@ -23,13 +23,15 @@ const getProductsActionCreator = products => ({type: GET_PRODUCTS, products})
  */
 
 export const getProducts = () =>
-  dispatch =>
-    axios.get('/api/products/')
-    .then(res => res.data)
-      .then(result => {
-        dispatch(getProductsActionCreator(result))
-      })
-      .catch(err => console.log(err))
+  async (dispatch) =>
+    try {
+      const res = await axios.get('/api/products/')
+      const result  = await res.data
+      dispatch(getProductsActionCreator(result))
+    }
+    catch (error) {
+      // handle error
+    }
 
 /**
  * REDUCER
