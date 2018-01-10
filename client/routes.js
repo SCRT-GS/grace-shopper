@@ -15,9 +15,10 @@ class Routes extends Component {
   componentDidMount() {
     const productsThunk = getProducts()
     const usersThunk = getUsers()
+    const reviewsThunk = getReviews()
     store.dispatch(usersThunk);
     store.dispatch(productsThunk);
-
+    store.dispatch(reviewsThunk);
   }
 
   render() {
