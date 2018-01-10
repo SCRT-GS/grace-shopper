@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-//import { getProduct } from '../store'
+
 
 /**
  * COMPONENT
@@ -23,6 +22,10 @@ export const ProductDetail = (props) => {
 
   return (
     <div>
+      <h3>{product.name}</h3>
+      <h3>{product.description}</h3>
+      <h3>{product.price}</h3>
+      <img id="product-pic" src={product.imgURL} />
     </div>
   )
 }
@@ -36,7 +39,7 @@ const mapState = (state) => {
   }
 }
 
-export default withRouter(connect(mapState)(ProductDetail))
+export default connect(mapState)(ProductDetail)
 
 /**
  * PROP TYPES
@@ -46,7 +49,4 @@ export default withRouter(connect(mapState)(ProductDetail))
 // }
 
 
-// <h3>{product.name}</h3>
-//       <h3>{product.description}</h3>
-//       <h3>{product.price}</h3>
-//       <img id="product-pic" src={product.imgURL}/>
+
