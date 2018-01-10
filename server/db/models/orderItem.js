@@ -4,7 +4,7 @@ const db = require('../db')
 
 const OrderItem = db.define('order_item', {
   price: {
-    type: Sequelize.DECIMAL(10, 2)
+    type: Sequelize.INTEGER
   },
   quantity: {
     type: Sequelize.INTEGER
