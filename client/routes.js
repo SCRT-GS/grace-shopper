@@ -25,7 +25,7 @@ class Routes extends Component {
 
     return (
       <Router history={history}>
-        <ErrorMessage/>
+       {/* <ErrorMessage/> */}
         <Main>
           <Switch>
 
