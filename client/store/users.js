@@ -6,6 +6,7 @@ import history from '../history'
  */
 const GET_USERS = 'GET_USERS'
 const DELETE_USER = 'DELETE_USER'
+const UPDATE_STUDENT = 'UPDATE_STUDENT';
 
 
 /**
