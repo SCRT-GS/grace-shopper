@@ -8,4 +8,6 @@ export {default as UserHome} from './user-home'
 export {Login, Signup} from './auth-form'
 export {default as ProductList} from './ProductList'
 export {default as ProductDetail} from './ProductDetail'
+export {default as AdminUserList} from './AdminUserList'
+export {default as AdminEditUserDetail} from './AdminEditUserDetail'
 
