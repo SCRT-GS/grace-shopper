@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router'
+import { NavLink } from 'react-router-dom'
 import {deleteUser} from '../store'
 
 /**
@@ -18,11 +18,11 @@ export const AdminUserList = (props) => {
       <thead>
       <tr>
       <th>User I.D.</th>
-      <th>{'Email Address  '}</th>
+      <th>Email Address</th>
       <th>{'Role  '}</th>
       <th>Reset Password?</th>
-      <th>{'  Update User  '}</th>
-      <th>{'  Delete User  '}</th>
+      <th>{'&nbsp;&nbsp;Update User  '}</th>
+      <th>Delete User</th>
     </tr>
     </thead>
     <tbody>
@@ -33,10 +33,19 @@ export const AdminUserList = (props) => {
                 <td className="user-info">{user.email} </td>
                 <td className="user-info">{user.isAdmin ? 'Admin' : 'User' }</td>
                 <td className="user-info">{user.resetPassword ? 'Yes' : 'No'}</td>
-                <td>Update User Details</td>
+                <td>
+                  <NavLink to='/home'>
+                    Update User Details
+                  </NavLink>
+                </td>
                 <td>
                 <button
-                id="delete" type="delete" onClick={() => deleteUser(user.id) }>{'     Delete User     '}</button>
+                  id="delete"
+                  onClick={() => deleteUser(user.id) }
+                  type="delete"
+                >
+                  {'     Delete User     '}
+                </button>
                 </td>
           </tr>
         )

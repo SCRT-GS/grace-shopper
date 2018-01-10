@@ -25,7 +25,10 @@ export const ProductDetail = (props) => {
       <h3>{product.name}</h3>
       <h3>{product.description}</h3>
       <h3>{product.price}</h3>
-      <img id="product-pic" src={product.imgURL} />
+      <img
+        id="product-pic"
+        src={product.imgURL}
+      />
     </div>
   )
 }
