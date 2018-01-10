@@ -53,7 +53,7 @@ class ReviewForm extends Component {
         <div id="form-container">
         <form onSubmit={this.handleReviewSubmit} className="new-project-form" id="project-form">
           <div>
-            <select value={reviewStar} onChange={this.inputReviewStar} name="reviewStar" className="select-star">
+            <select value={this.state.rating} onChange={this.inputReviewStar} name="reviewStar" className="select-star">
               <option defaultValue="">0</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -72,11 +72,10 @@ class ReviewForm extends Component {
             />
           </div>
         </form>
-            <div className="div-submit">
+          <div className="div-submit">
             <button className="review-submit" form="review-form" type='submit'>Submit Review</button>
-            </div>
+          </div>
         </div>
-
       </div>
     )
   }
