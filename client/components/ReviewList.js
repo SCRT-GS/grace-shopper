@@ -1,15 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { getReviews } from '../store'
 
 /**
  * COMPONENT
  */
 export const ReviewList = (props) => {
-
   const reviews  = props.reviews
   console.log(props.reviews)
+
 
   return (
     <div>
