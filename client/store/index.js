@@ -6,10 +6,13 @@ import user from './user'
 import users from './users'
 import products from './products'
 import reviews from './reviews'
+import product from './product'
+
 
 
 
 const reducer = combineReducers({user, users, products, reviews})
+
 
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
