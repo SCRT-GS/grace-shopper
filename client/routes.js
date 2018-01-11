@@ -3,9 +3,8 @@ import { connect } from 'react-redux'
 import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminUserList, AdminEditUserDetail, ReviewForm } from './components'
+import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminUserList, AdminEditUserDetail, ReviewForm, Checkout } from './components'
 import store, { me, getProducts, getUsers, getReviews } from './store'
-
 
 
 /**
@@ -45,22 +44,42 @@ class Routes extends Component {
               path="/products/:productId"
             />
 
-            <Route exact path="/admin/users" component={AdminUserList}
+            <Route
+              exact
+              path="/admin/users"
+              component={AdminUserList}
             />
-            <Route exact path="/admin/users/:userId" component={AdminEditUserDetail}
+
+            <Route
+              exact
+              path="/admin/users/:userId"
+              component={AdminEditUserDetail}
             />
 
             <Route
               exact
               path="/checkout"
+              component={Checkout}
+            />
 
             <Route
               exact
               path="/product/:productId/new-review"
               component={ReviewForm}
             />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
+
+            <Route
+              exact
+              path="/login"
+              component={Login}
+            />
+
+            <Route
+              exact
+              path="/signup"
+              component={Signup}
+            />
+
             {
               isLoggedIn &&
               <Switch>
