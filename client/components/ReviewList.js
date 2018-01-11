@@ -1,20 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router'
-import { getReviews } from '../store'
+import { NavLink } from 'react-router-dom'
 
 /**
  * COMPONENT
  */
 export const ReviewList = (props) => {
-  componentDidMount() {
-    const reviewsThunk = getReviews()
-    store.dispatch(reviewsThunk);
-
-  }
-
   const reviews  = props.reviews
   console.log(props.reviews)
+
 
   return (
     <div>
@@ -23,11 +17,10 @@ export const ReviewList = (props) => {
         return (
           <ul key={review.id} >
             <li>
-            {/*}
-            <NavLink to={`/reviews/${review.id}`} style={{ textDecoration: 'none' }}>*/}
-            <h2 id="review-rating">{review.rating}</h2>
-            <h3 id="review-content">{review.content}</h3>
-          {/*}</NavLink> */}
+              <NavLink to={`/reviews/${review.id}`} style={{ textDecoration: 'none' }}>*/}
+              <h2 id="review-rating">{review.rating}</h2>
+              <h3 id="review-content">{review.content}</h3>
+            </NavLink>
             </li>
           </ul>
         )

@@ -6,6 +6,7 @@ router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll()
     res.json(products)
+    console.log('session:', req.session)
   }
   catch (error) {
     next(error)
@@ -38,4 +39,4 @@ router.get('/:id/reviews', async (req, res, next) => {
   catch (error) {
     next(error)
   }
-})
+

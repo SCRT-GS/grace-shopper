@@ -3,11 +3,7 @@ const {Review} = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  Review.findAll({
-    where: {
-      productId: req.params.productId
-    }
-  })
+  Review.findAll(req.body)
     .then(review => res.json(review))
     .catch(next)
 })
@@ -23,7 +19,7 @@ router.get('/:reviewId', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  Review.create()
+  Review.create(req.body)
   .then(review => res.json(review))
   .catch(next)
 })
