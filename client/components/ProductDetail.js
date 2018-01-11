@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import store, { getProduct } from '../store'
-import ReviewList from './ReviewList'
 
 
 /**
@@ -39,7 +38,6 @@ export class ProductDetail extends Component {
           id="product-pic"
           src={product.imgURL}
         />
-        <ReviewList />
       </div>
     )
   }
