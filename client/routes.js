@@ -53,7 +53,7 @@ class Routes extends Component {
             <Route
               exact
               path="/checkout"
-
+              />
             <Route
               exact
               path="/product/:productId/new-review"
