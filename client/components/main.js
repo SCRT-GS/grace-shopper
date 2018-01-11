@@ -16,14 +16,19 @@ const Main = (props) => {
 
   return (
     <div>
-      <h1>BOILERMAKER</h1>
-
+      <h1>MVP Chocolate Store</h1>
+      <h2>Some links are for [dev]elopment purposes</h2>
       <nav>
+      <Link to="/">Home</Link>
+      <Link to="/products">Shop</Link>
+      <Link to="/my-cart">Cart</Link>
+      <Link to="/checkout">Checkout[dev]</Link>
         {
           isLoggedIn
             ? <div>
               {/* The navbar will show these links after you log in */}
               <Link to="/home">Home</Link>
+              <Link to="/my-account">My Account</Link>
               <a href="#" onClick={handleClick}>Logout</a>
             </div>
             : <div>
