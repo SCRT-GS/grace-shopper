@@ -7,12 +7,16 @@ import users from './users'
 import products from './products'
 import reviews from './reviews'
 import product from './product'
+import address from './address'
 import adminUser from './adminUser'
 
 
 
 
-const reducer = combineReducers({user, users, products, reviews, adminUser})
+
+
+const reducer = combineReducers({user, users, products, reviews, adminUser, address})
+
 
 
 const middleware = composeWithDevTools(applyMiddleware(
@@ -27,4 +31,5 @@ export * from './adminUser'
 export * from './users'
 export * from './products'
 export * from './reviews'
+export * from './address'
 
