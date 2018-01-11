@@ -13,7 +13,6 @@ export const getAdminUser = (id) =>
     axios.get(`/api/users/admin/${id}`)
       .then(res => res.data)
       .then(result => {
-        console.log('got to dispatc')
         dispatch(getAdminUserActionCreator(result))
       })
       .catch(err => console.log(err))
