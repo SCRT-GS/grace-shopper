@@ -5,6 +5,7 @@ import history from '../history'
 const GET_USERS = 'GET_USERS'
 const UPDATE_USER = 'UPDATE_USER'
 const DELETE_USER = 'DELETE_USER'
+const UPDATE_STUDENT = 'UPDATE_STUDENT';
 
 const getUsersActionCreator = users => ({ type: GET_USERS, users })
 const deleteUserActionCreator = id => ({ type: DELETE_USER, id })
