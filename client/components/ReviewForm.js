@@ -35,7 +35,7 @@ class ReviewForm extends Component {
 
     handleReviewSubmit(e) {
       e.preventDefault()
-      this.props.submitReview(this.state.project)
+      this.props.submitReview(this.state.rating, this.state.content)
       this.setState({
         redirect: true
       })
