@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import store, { getProductDetail } from '../store'
+import store, { getProduct } from '../store'
 
 
 /**
@@ -13,23 +13,22 @@ export class ProductDetail extends Component {
     this.state = {
       name: '',
       description: '',
-      price: '',
+      price: 0,
       imgURL: '',
     }
   }
 
   componentDidMount() {
     const productId = Number(this.props.match.params.productId)
-    const productDetailThunk = getProductDetail(productId)
+    const productDetailThunk = getProduct(productId)
     store.dispatch(productDetailThunk)
   }
 
-  // const { products } = props
-  // const productish = products.filter(elem => elem.id === productId)
-  // const product = productish[0]
 
   render() {
+
     const product = this.props.product
+
     return (
       <div>
         <h3>{product.name}</h3>
@@ -44,16 +43,17 @@ export class ProductDetail extends Component {
   }
 }
 
+
 /**
  * CONTAINER
  */
 const mapState = (state) => {
   return {
-    products: state.products
+    product: state.product
   }
 }
 
-const mapDispatch = { getProductDetail }
+const mapDispatch = { getProduct }
 
 export default connect(mapState, mapDispatch)(ProductDetail)
 
