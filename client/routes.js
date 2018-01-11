@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminUserList, AdminEditUserDetail } from './components'
-import store, { me, getProducts, getUsers } from './store'
+import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminUserList, AdminEditUserDetail, ReviewForm } from './components'
+import store, { me, getProducts, getUsers, getReviews } from './store'
 
 
 
@@ -16,9 +16,10 @@ class Routes extends Component {
     this.props.loadInitialData()
     const productsThunk = getProducts()
     const usersThunk = getUsers()
+    const reviewsThunk = getReviews()
     store.dispatch(usersThunk);
     store.dispatch(productsThunk);
-
+    store.dispatch(reviewsThunk);
   }
 
   render() {
@@ -49,6 +50,11 @@ class Routes extends Component {
             <Route exact path="/admin/users/:userId" component={AdminEditUserDetail}
             />
 
+            <Route
+              exact
+              path="/product/:productId/new-review"
+              component={ReviewForm}
+            />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             {
