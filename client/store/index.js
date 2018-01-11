@@ -8,6 +8,7 @@ import reviews from './reviews'
 import product from './product'
 import address from './address'
 import adminUser from './adminUser'
+import users from './users'
 
 
 
