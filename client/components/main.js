@@ -21,7 +21,7 @@ const Main = (props) => {
       <nav>
       <Link to="/">Home</Link>
       <Link to="/products">Shop</Link>
-      <Link to="/my-cart">Cart</Link>
+      <Link to="/cart">Cart</Link>
       <Link to="/checkout">Checkout[dev]</Link>
         {
           isLoggedIn

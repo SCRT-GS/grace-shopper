@@ -7,7 +7,7 @@ import users from './users'
 import products from './products'
 import reviews from './reviews'
 import product from './product'
-
+import cart from './cart'
 
 
 

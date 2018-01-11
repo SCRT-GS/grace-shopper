@@ -3,14 +3,9 @@ import { connect } from 'react-redux'
 import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminUserList, AdminEditUserDetail, ReviewForm } from './components'
+import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminUserList, AdminEditUserDetail, ReviewForm, Cart } from './components'
 import store, { me, getProducts, getUsers, getReviews } from './store'
 
-
-
-/**
- * COMPONENT
- */
 class Routes extends Component {
   componentDidMount() {
     const productsThunk = getProducts()
@@ -23,7 +18,6 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props
-
     return (
       <Router history={history}>
        {/* <ErrorMessage/> */}
@@ -44,9 +38,15 @@ class Routes extends Component {
               path="/products/:productId"
             />
 
-            <Route exact path="/admin/users" component={AdminUserList}
+            <Route
+              exact
+              path="/admin/users"
+              component={AdminUserList}
             />
-            <Route exact path="/admin/users/:userId" component={AdminEditUserDetail}
+            <Route
+              exact
+              path="/admin/users/:userId"
+              component={AdminEditUserDetail}
             />
 
             <Route
@@ -54,8 +54,25 @@ class Routes extends Component {
               path="/product/:productId/new-review"
               component={ReviewForm}
             />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
+
+            <Route
+              exact
+              path="/login"
+              component={Login}
+            />
+            
+            <Route
+              exact
+              path="/signup"
+              component={Signup}
+            />
+
+            <Route
+              exact
+              path="/cart"
+              component={Cart}
+            />
+
             {
               isLoggedIn &&
               <Switch>

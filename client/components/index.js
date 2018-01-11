@@ -10,4 +10,6 @@ export {default as ProductList} from './ProductList'
 export {default as ProductDetail} from './ProductDetail'
 export {default as AdminUserList} from './AdminUserList'
 export {default as AdminEditUserDetail} from './AdminEditUserDetail'
+export {default as Cart} from './Cart'
 
+//will be exporting the centsToDollarString function from here 
