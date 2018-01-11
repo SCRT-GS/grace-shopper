@@ -30,6 +30,7 @@ router.get('/admin/:id', async (req, res) => {
   }
 })
 router.put('/update/:id', async (req, res) => {
+  console.log('made it to back end')
   try {
     const user = await User.findOne({
       where: {
