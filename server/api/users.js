@@ -39,8 +39,8 @@ router.put('/update/:id', async (req, res) => {
     })
     await user.update({
       email: req.body.email,
-      resetPassword: +req.body.resetPassword,
-      isAdmin: req.body.isAdmin
+      isAdmin: req.body.isAdmin,
+      resetPassword: req.body.resetPassword
     })
     await user.reload()
     res.json(user)

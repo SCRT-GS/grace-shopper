@@ -1,32 +1,14 @@
 import axios from 'axios'
 import history from '../history'
 
-/**
- * ACTION TYPES
- */
 
 const GET_ADMIN_USER = 'GET_ADMIN_USER'
 
 
-
-/**
- * INITIAL STATE
- */
-// const defaultUSERS = {}
-
-/**
- * ACTION CREATORS
- */
-
-const getAdminUserActionCreator = user => ({type: GET_ADMIN_USER, user})
+const getAdminUserActionCreator = user => ({ type: GET_ADMIN_USER, user })
 
 
-/**
- * THUNK CREATORS
- */
-
-
-  export const getAdminUser = (id) =>
+export const getAdminUser = (id) =>
   dispatch =>
     axios.get(`/api/users/admin/${id}`)
       .then(res => res.data)
@@ -36,14 +18,12 @@ const getAdminUserActionCreator = user => ({type: GET_ADMIN_USER, user})
       })
       .catch(err => console.log(err))
 
-/**
- * REDUCER
- */
-export default function (adUser = {}, action) {
+
+export default function (adminUser = {}, action) {
   switch (action.type) {
-      case GET_ADMIN_USER:
+    case GET_ADMIN_USER:
       return action.user
     default:
-      return adUser
+      return adminUser
   }
 }
