@@ -7,11 +7,16 @@ import users from './users'
 import products from './products'
 import reviews from './reviews'
 import product from './product'
+import address from './address'
+import adminUser from './adminUser'
 
 
 
 
-const reducer = combineReducers({user, users, products, reviews})
+
+
+const reducer = combineReducers({user, users, products, reviews, adminUser, address})
+
 
 
 const middleware = composeWithDevTools(applyMiddleware(
@@ -22,7 +27,9 @@ const store = createStore(reducer, middleware)
 
 export default store
 export * from './user'
+export * from './adminUser'
 export * from './users'
 export * from './products'
 export * from './reviews'
+export * from './address'
 
