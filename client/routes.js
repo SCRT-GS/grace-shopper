@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminUserList, AdminEditUserDetail, ReviewForm } from './components'
+import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, ReviewForm } from './components'
 import store, { me, getProducts, getUsers, getReviews } from './store'
 
 
@@ -44,10 +44,21 @@ class Routes extends Component {
               nextProp="something"
               path="/products/:productId"
             />
-
-            <Route exact path="/admin/users" component={AdminUserList}
+            <Route
+            component={AdminHome}
+            exact
+            path="/admin"
             />
-            <Route exact path="/admin/users/:userId" component={AdminEditUserDetail}
+
+            <Route
+            component={AdminUserList}
+            exact
+            path="/admin/users"
+            />
+            <Route
+            component={AdminEditUserDetail}
+            exact
+            path="/admin/users/:userId"
             />
 
             <Route

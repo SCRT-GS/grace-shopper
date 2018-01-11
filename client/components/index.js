@@ -11,4 +11,5 @@ export {default as ProductDetail} from './ProductDetail'
 export {default as AdminUserList} from './AdminUserList'
 export {default as AdminEditUserDetail} from './AdminEditUserDetail'
 export {default as Checkout} from './Checkout'
+export { AdminHome} from './AdminHome'
 
