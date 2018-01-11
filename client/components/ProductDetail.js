@@ -1,36 +1,47 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
+import store, { getProductDetail } from '../store'
 
 
 /**
  * COMPONENT
  */
-export const ProductDetail = (props) => {
+export class ProductDetail extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: '',
+      description: '',
+      price: '',
+      imgURL: '',
+    }
+  }
 
-  const productId = Number(props.match.params.productId)
-  const { products } = props
+  componentDidMount() {
+    const productId = Number(this.props.match.params.productId)
+    const productDetailThunk = getProductDetail(productId)
+    store.dispatch(productDetailThunk)
+  }
 
-  const productish = products.filter(elem => elem.id === productId)
+  // const { products } = props
+  // const productish = products.filter(elem => elem.id === productId)
+  // const product = productish[0]
 
-  //const newProductId = productId - 1
-  const product = productish[0]
-
-  console.log('PRODUCTS', products)
-  console.log('PRODUCT', product)
-  console.log('PRODUCTISH', productish)
-
-
-  return (
-    <div>
-      <h3>{product.name}</h3>
-      <h3>{product.description}</h3>
-      <h3>{product.price}</h3>
-      <img
-        id="product-pic"
-        src={product.imgURL}
-      />
-    </div>
-  )
+  render() {
+    const product = this.props.product
+    return (
+      <div>
+        <h3>{product.name}</h3>
+        <h3>{product.description}</h3>
+        <h3>{product.price}</h3>
+        <img
+          id="product-pic"
+          src={product.imgURL}
+        />
+      </div>
+    )
+  }
 }
 
 /**
@@ -42,14 +53,11 @@ const mapState = (state) => {
   }
 }
 
-export default connect(mapState)(ProductDetail)
+const mapDispatch = { getProductDetail }
+
+export default connect(mapState, mapDispatch)(ProductDetail)
 
 /**
  * PROP TYPES
  */
-// UserHome.propTypes = {
-//   email: PropTypes.string
-// }
-
-
 
