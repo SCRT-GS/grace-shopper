@@ -11,7 +11,9 @@ export {default as AdminProductList} from './AdminProductList'
 export {default as ProductDetail} from './ProductDetail'
 export {default as AdminUserList} from './AdminUserList'
 export {default as AdminEditUserDetail} from './AdminEditUserDetail'
+export {default as Cart} from './Cart'
 export {default as AdminEditProductDetail} from './AdminEditProductDetail'
 export {default as Checkout} from './Checkout'
 export { AdminHome} from './AdminHome'
 
+//will be exporting the centsToDollarString function from here 

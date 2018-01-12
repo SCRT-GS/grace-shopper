@@ -3,14 +3,9 @@ import { connect } from 'react-redux'
 import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminProductList, ReviewForm } from './components'
+import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminProductList, ReviewForm, Cart } from './components'
 import store, { me, getProducts, getUsers, getReviews } from './store'
 
-
-
-/**
- * COMPONENT
- */
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
@@ -24,7 +19,6 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props
-
     return (
       <Router history={history}>
         {/* <ErrorMessage/> */}
@@ -60,6 +54,15 @@ class Routes extends Component {
             />
 
             <Route
+              exact
+              path="/admin/users"
+              component={AdminUserList}
+            />
+            <Route
+              exact
+              path="/admin/users/:userId"
+              component={AdminEditUserDetail}
+            <Route
               component={AdminUserList}
               exact
               path="/admin/users"
@@ -89,6 +92,13 @@ class Routes extends Component {
               path="/signup"
               component={Signup}
             />
+      
+            <Route
+              exact
+              path="/cart"
+              component={Cart}
+            />
+
             {
               isLoggedIn &&
               <Switch>
