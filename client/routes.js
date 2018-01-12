@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminProductList, ReviewForm, Cart, Checkout } from './components'
+import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminProductList, ReviewForm, Cart, Checkout, reviewDetail } from './components'
 import store, { me, getProducts, getUsers, getReviews } from './store'
 
 class Routes extends Component {
@@ -67,6 +67,12 @@ class Routes extends Component {
 
             <Route
               exact
+              path="/reviews/:reviewId"
+              component={reviewDetail}
+            />
+
+            <Route
+              exact
               path="/checkout"
               component={Checkout}
             />
@@ -76,6 +82,8 @@ class Routes extends Component {
               path="/products/:productId/new-review"
               component={ReviewForm}
             />
+
+
 
             <Route
               exact

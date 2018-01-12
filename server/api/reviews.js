@@ -8,18 +8,33 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
-router.get('/:reviewId', (req, res, next) => {
-  Review.findOne({
-    where: {
-      id: req.params.reviewId
-    }
-  })
-    .then(review => res.json(review))
-    .catch(next)
+// router.get('/:reviewId', (req, res, next) => {
+//   Review.findOne({
+//     where: {
+//       id: req.params.reviewId
+//     }
+//   })
+//     .then(review => res.json(review))
+//     .catch(next)
+// })
+
+
+router.get('/:reviewId', async (req, res, next) => {
+  try {
+    const review = await Review.findOne({
+      where: {
+        id: req.params.reviewId
+      }
+    })
+    res.json(review)
+  }
+  catch (error) {
+    next(error)
+  }
 })
 
 
-router.post('/', async (req, res) => { //NEED TO ADD USERID TO ADD REVIEW//
+router.post('/', async (req, res, next) => { //NEED TO ADD USERID TO ADD REVIEW//
   try {
     const review = await Review.create({
       rating: req.body.rating,

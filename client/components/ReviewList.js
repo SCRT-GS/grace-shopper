@@ -18,7 +18,7 @@ export class ReviewList extends Component {
 
     return (
       <div>
-        <h3>REVIEWS </h3>
+        <h3>REVIEWS</h3>
         {reviews.map((review) => {
           return (
             <ul key={review.id} >
