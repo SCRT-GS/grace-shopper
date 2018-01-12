@@ -7,7 +7,7 @@ export const AdminHome = (props) => {
 
   return (
     <div>
-      <h3>Admin Dashboard</h3>
+      <h3 className="funny">Admin Dashboard</h3>
       <NavLink
         to={`/admin/users`}
         style={{ textDecoration: 'none' }}
@@ -36,5 +36,10 @@ export const AdminHome = (props) => {
   )
 }
 
+const mapState = (state) => {
+  return {products: state.products
+}
+}
 
+export default connect(mapState)(AdminHome)
 
