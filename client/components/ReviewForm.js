@@ -13,7 +13,6 @@ class ReviewForm extends Component {
       this.state = {
         rating: '',
         content: '',
-        redirect: false
       }
       this.inputReviewStar = this.inputReviewStar.bind(this)
       this.inputContent = this.inputContent.bind(this)
@@ -36,9 +35,7 @@ class ReviewForm extends Component {
     handleReviewSubmit(e) {
       e.preventDefault()
       this.props.submitReview(this.state.rating, this.state.content)
-      this.setState({
-        redirect: true
-      })
+      // this.props.history.push({`/products/${product.id}`})
     }
 
 
@@ -73,7 +70,7 @@ class ReviewForm extends Component {
           </div>
         </form>
           <div className="div-submit">
-            <button className="review-submit" form="review-form" type='submit'>Submit Review</button>
+            <button className="review-submit" form="review-form" type="button">Submit Review</button>
           </div>
         </div>
       </div>

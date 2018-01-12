@@ -4,6 +4,14 @@ import { Link } from 'react-router-dom'
 import { addNewAddress } from '../store/address'
 
 
+/**********************
+
+
+Still need to add ORDER ID to Address
+
+
+***********************/
+
 class Checkout extends Component {
   constructor(props) {
     super(props);

@@ -19,13 +19,13 @@ const newReview = review => ({type: NEW_REVIEW, review})
 /************ THUNK CREATORS ************/
 
 export const getReviews = () =>
-  dispatch =>
-    axios.get(`/api/reviews`)
-    .then(res => res.data)
-      .then(result => {
-        dispatch(getReviewsActionCreator(result))
-      })
-      .catch(err => console.log(err))
+dispatch =>
+  axios.get(`/api/reviews`)
+  .then(res => res.data)
+    .then(result => {
+      dispatch(getReviewsActionCreator(result))
+    })
+    .catch(err => console.log(err))
 
 
 export const addNewReview = (rating, content) => dispatch => {
