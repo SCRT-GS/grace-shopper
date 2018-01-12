@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminProductList, ReviewForm, Cart, Checkout } from './components'
+import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminProductList, ReviewForm, Cart, Checkout, MyOrders } from './components'
 import store, { me, getProducts, getUsers, getReviews } from './store'
 
 class Routes extends Component {
@@ -99,7 +99,15 @@ class Routes extends Component {
               isLoggedIn &&
               <Switch>
                 {/* Routes placed here are only available after logging in */}
-                <Route exact path="/home" component={UserHome} />
+                <Route
+                  exact
+                  path="/home"
+                  component={UserHome} />
+                <Route
+                  exact
+                  path="/my-account"
+                  component={MyOrders}
+                />
               </Switch>
             }
             {/* Displays our Login component as a fallback */}

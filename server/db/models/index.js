@@ -12,7 +12,7 @@ const Review = require('./review')
 
 Address.belongsTo(Order)
 
-OrderItem.belongsTo(Order)
+Order.hasMany(OrderItem)
 OrderItem.belongsTo(Product)
 
 Order.belongsTo(User)

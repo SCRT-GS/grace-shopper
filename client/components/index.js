@@ -17,5 +17,6 @@ export {default as Checkout} from './Checkout'
 export {default as ReviewForm} from './ReviewForm'
 export {default as ReviewList} from './ReviewList'
 export { AdminHome} from './AdminHome'
+export {default as MyOrders} from './MyOrders'
 
 //will be exporting the centsToDollarString function from here

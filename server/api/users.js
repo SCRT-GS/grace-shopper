@@ -1,20 +1,20 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const { User, Order, OrderItem, Product } = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-    // explicitly select only the id and email fields - even though
-    // users' passwords are encrypted, it won't help if we just
-    // send everything to anyone who asks!
-    attributes: ['id', 'email']
-  })
+      // explicitly select only the id and email fields - even though
+      // users' passwords are encrypted, it won't help if we just
+      // send everything to anyone who asks!
+      attributes: ['id', 'email']
+    })
     res.json(users)
-}
-    catch(error){
-      next(error)
-    }
+  }
+  catch (error) {
+    next(error)
+  }
 })
 router.get('/admin/:id', async (req, res) => {
   try {
@@ -29,6 +29,25 @@ router.get('/admin/:id', async (req, res) => {
     next(error)
   }
 })
+
+router.get('/:id/orders', async (req, res) => {
+  try {
+    const orders = await Order.findAll({
+      where: {
+        status: 'Completed',
+        userId: +req.params.id
+      },
+      include: [{
+        model: OrderItem
+      }]
+    })
+    res.json(orders)
+  }
+  catch (error) {
+    next(error)
+  }
+})
+
 router.put('/update/:id', async (req, res) => {
   try {
     const user = await User.findOne({
@@ -50,16 +69,16 @@ router.put('/update/:id', async (req, res) => {
 })
 
 router.delete('/:id', async (req, res) => {
-  try{
+  try {
     const user = await User.findOne({
-    where: {
-      id: +req.params.id
-    }
-  })
+      where: {
+        id: +req.params.id
+      }
+    })
     await user.destroy({ force: true })
     res.json('this user record no longer exists')
-    }
-catch(error){
-  next(error)
-}
+  }
+  catch (error) {
+    next(error)
+  }
 })
