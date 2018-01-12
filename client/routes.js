@@ -40,7 +40,7 @@ class Routes extends Component {
             <Route
               component={ProductDetail}
               exact
-              nextProp="something"
+              // nextProp="something"
               path="/products/:productId"
             />
 
@@ -59,13 +59,9 @@ class Routes extends Component {
             <Route
               exact
               path="/checkout"
-<<<<<<< HEAD
               component={Checkout}
             />
 
-=======
-              />
->>>>>>> 9a9e2caaa0317da51fe14fa3752fe3f9a1a05091
             <Route
               exact
               path="/product/:productId/new-review"

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import store, { getProduct } from '../store'
+import store, { getProduct, getProductReviews } from '../store'
+import { ReviewList } from './ReviewList'
 
 
 /**
@@ -20,8 +21,11 @@ export class ProductDetail extends Component {
 
   componentDidMount() {
     const productId = Number(this.props.match.params.productId)
+    const product = getProductReviews(productId)
     const productDetailThunk = getProduct(productId)
     store.dispatch(productDetailThunk)
+    store.dispatch(product)
+
   }
 
 
@@ -38,6 +42,8 @@ export class ProductDetail extends Component {
           id="product-pic"
           src={product.imgURL}
         />
+
+        <ReviewList currentProduct={this.props} />
       </div>
     )
   }
@@ -49,11 +55,12 @@ export class ProductDetail extends Component {
  */
 const mapState = (state) => {
   return {
-    product: state.product
+    product: state.product,
+    productReviews: state.productReviews,
   }
 }
 
-const mapDispatch = { getProduct }
+const mapDispatch = { getProduct, getProductReviews }
 
 export default connect(mapState, mapDispatch)(ProductDetail)
 
