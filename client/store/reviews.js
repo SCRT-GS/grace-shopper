@@ -28,10 +28,13 @@ dispatch =>
     .catch(err => console.log(err))
 
 
-export const addNewReview = (rating, content) => dispatch => {
+
+
+export const addNewReview = (rating, content, productId) => dispatch => { //NEED TO ADD USERID TO ADD REVIEW//
   axios.post(`/api/reviews`, {
     rating,
-    content
+    content,
+    productId
   })
   .then(review => dispatch(newReview(review)))
   .catch(err => console.log('New review was not successfully created', err))
@@ -43,6 +46,8 @@ export default function (reviews = [], action) {
   switch (action.type) {
     case GET_REVIEWS:
       return action.reviews
+    case NEW_REVIEW:
+      return [...reviews, action.reviews]
     default:
       return reviews
   }
