@@ -6,7 +6,26 @@ router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll()
     res.json(products)
-    console.log('session:', req.session)
+  }
+  catch (error) {
+    next(error)
+  }
+})
+router.put('/update/:id', async (req, res) => {
+  try {
+    const product = await Product.findOne({
+      where: {
+        id: +req.params.id
+      }
+    })
+    await product.update({
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      imgURL: req.body.imgURL,
+    })
+    await product.reload()
+    res.json(product)
   }
   catch (error) {
     next(error)
@@ -41,3 +60,18 @@ router.get('/:id/reviews', async (req, res, next) => {
   }
 })
 
+router.post('/', async (req, res) => {
+  try {
+    const product = await Product.create({
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      quantity: req.body.quantity,
+      imgURL: req.body.imgURL
+    })
+    res.json(product)
+  }
+  catch (error) {
+    next(error)
+  }
+})

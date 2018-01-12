@@ -27,7 +27,7 @@ export const AdminHome = (props) => {
         Orders
               </NavLink>
       <NavLink
-        to={`/admin/orders`}
+        to={`/admin/categories`}
         style={{ textDecoration: 'none' }}
       >
         Categories

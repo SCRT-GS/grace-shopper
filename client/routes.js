@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, ReviewForm } from './components'
+import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminProductList, ReviewForm } from './components'
 import store, { me, getProducts, getUsers, getReviews } from './store'
 
 
@@ -27,7 +27,7 @@ class Routes extends Component {
 
     return (
       <Router history={history}>
-       {/* <ErrorMessage/> */}
+        {/* <ErrorMessage/> */}
         <Main>
           <Switch>
 
@@ -41,37 +41,54 @@ class Routes extends Component {
             <Route
               component={ProductDetail}
               exact
-              nextProp="something"
               path="/products/:productId"
             />
             <Route
-            component={AdminHome}
-            exact
-            path="/admin"
+              component={AdminEditProductDetail}
+              exact
+              path="/admin/products/:productId"
+            />
+            <Route
+              component={AdminProductList}
+              exact
+              path="/admin/products/"
+            />
+            <Route
+              component={AdminHome}
+              exact
+              path="/admin"
             />
 
             <Route
-            component={AdminUserList}
-            exact
-            path="/admin/users"
+              component={AdminUserList}
+              exact
+              path="/admin/users"
             />
             <Route
-            component={AdminEditUserDetail}
-            exact
-            path="/admin/users/:userId"
+              component={AdminEditUserDetail}
+              exact
+              path="/admin/users/:userId"
             />
 
             <Route
               exact
               path="/checkout"
-              />
+            />
             <Route
               exact
               path="/product/:productId/new-review"
               component={ReviewForm}
             />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
+            <Route
+              exact
+              path="/login"
+              component={Login}
+            />
+            <Route
+              exact
+              path="/signup"
+              component={Signup}
+            />
             {
               isLoggedIn &&
               <Switch>
