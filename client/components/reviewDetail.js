@@ -47,6 +47,3 @@ const mapState = (state) => {
   const mapDispatch = {getSingleReview, getProduct }
 
   export default connect(mapState, mapDispatch)(reviewDetail)
-
-
-
