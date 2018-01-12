@@ -1,13 +1,17 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-
-//orderItems: [orderItem1, orderItem2]
-//cart:
+import store, { getCart } from '../store'
 
 class Cart extends Component {
     constructor(){
         super()
         this.subTotal = this.subTotal.bind(this)
+    }
+
+    componentDidMount(){
+        const userId = this.props.userObject.id || 2 //the default user here is just for testing
+        const getCartThunk = getCart(userId)
+        store.dispatch(getCartThunk)
     }
 
     centsToDollarString(cents){
@@ -34,7 +38,7 @@ class Cart extends Component {
 
     //a list of stacked order items
     render(){
-        const orderItems = this.props.orderItems || [{
+        const orderItems = this.props.cart.order_items || [{
             id: 99,
             name: 'Chocolate Bar',
             price: 1099,
@@ -92,6 +96,8 @@ class Cart extends Component {
 }
 
 const mapState = state => ({
-    
+   cart: state.cart,
+   userObject: state.user
 })
+
 export default connect(mapState)(Cart)

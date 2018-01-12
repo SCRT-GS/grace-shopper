@@ -1,45 +1,28 @@
 import axios from 'axios'
 import history from '../history'
 
+//ACTION TYPES
+const GET_CART = 'GET_CART'
 
-/**
- * ACTION TYPES
- */
-const GET_PRODUCT = 'GET_PRODUCT'
+//ACTION CREATORS
+const getCartActionCreator = cart => ({type: GET_CART, cart})
 
-
-/**
- * INITIAL STATE
- */
-
-
-/**
- * ACTION CREATORS
- */
-const getProductActionCreator = product => ({type: GET_PRODUCT, product})
-
-
-/**
- * THUNK CREATORS
- */
-
-export const getProduct = (id) =>
+//THUNK CREATORS
+export const getCart = id =>
   dispatch =>
-    axios.get(`/api/products/${id}`)
+    axios.get(`/api/cart/user/${id}`)
     .then(res => res.data)
       .then(result => {
-        dispatch(getProductActionCreator(result))
+        dispatch(getCartActionCreator(result))
       })
       .catch(err => console.log(err))
 
-/**
- * REDUCER
- */
-export default function (product = {}, action) {
+//REDUCER
+export default function (cart = {}, action) {
   switch (action.type) {
-    case GET_PRODUCT:
-      return action.product
+    case GET_CART:
+      return action.cart
     default:
-      return product
+      return cart
   }
 }
