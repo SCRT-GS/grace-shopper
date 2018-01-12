@@ -53,19 +53,29 @@ export class AdminEditProductDetail extends Component {
 
     return (
       <div>
-        <h3>
+        <h3
+          className="product-title"
+        >
           Product Details
         </h3>
-        <h3>
+        <h3
+          className="product-name"
+        >
           {product.name}
         </h3>
-        <h3>
+        <h3
+          className="product-description"
+        >
           {product.description}
         </h3>
-        <h3>
+        <h3
+          className="product-price"
+        >
           ${product.price}
         </h3>
-        <h3>
+        <h3
+          className="product-quantity"
+        >
           Quantity Available: {' ' + product.quantity}
         </h3>
         <img

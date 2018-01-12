@@ -16,7 +16,7 @@
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public",
-    "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/boilermaker-test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js --compilers js:babel-register --require babel-polyfill"
+    "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/scrt' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js --compilers js:babel-register --require babel-polyfill"
   },
   "author": "",
   "license": "ISC",
@@ -67,6 +67,7 @@
     "react-test-renderer": "^16.0.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-mock-store": "^1.2.3",
+    "sinon": "^4.1.4",
     "supertest": "^3.0.0",
     "webpack": "^2.2.1",
     "webpack-livereload-plugin": "^1.0.0"

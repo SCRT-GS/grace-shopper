@@ -44,7 +44,7 @@ export class AdminProductList extends Component {
     const products = this.props.products
     return (
       <div>
-        <h3>Our Products</h3>
+        <h3 className="title">Our Products</h3>
         {products.map((product) => {
           return (
             <li
