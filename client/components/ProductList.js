@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom'
 export const ProductList = (props) => {
   const products = props.products
 
-
   return (
     <div>
       <h3>Welcome to the Products Page!</h3>
@@ -13,7 +12,7 @@ export const ProductList = (props) => {
         return (
           <li
           key={product.id} >
-            <NavLink
+            <Link
             to={`/products/${product.id}`}
             style={{ textDecoration: 'none' }}
             >
@@ -27,10 +26,10 @@ export const ProductList = (props) => {
               <h3>
               ${product.price}
               </h3>
-              <button>
+            </Link>
+            <button onClick={addToCart}>
               Add to Cart
               </button>
-            </NavLink>
           </li>
         )
       }
