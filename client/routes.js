@@ -3,13 +3,9 @@ import { connect } from 'react-redux'
 import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminUserList, AdminEditUserDetail, ReviewForm, Checkout } from './components'
+import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminProductList, ReviewForm, Cart, Checkout } from './components'
 import store, { me, getProducts, getUsers, getReviews } from './store'
 
-
-/**
- * COMPONENT
- */
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
@@ -23,10 +19,9 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props
-
     return (
       <Router history={history}>
-       {/* <ErrorMessage/> */}
+        {/* <ErrorMessage/> */}
         <Main>
           <Switch>
 
@@ -40,8 +35,22 @@ class Routes extends Component {
             <Route
               component={ProductDetail}
               exact
-              // nextProp="something"
               path="/products/:productId"
+            />
+            <Route
+              component={AdminEditProductDetail}
+              exact
+              path="/admin/products/:productId"
+            />
+            <Route
+              component={AdminProductList}
+              exact
+              path="/admin/products/"
+            />
+            <Route
+              component={AdminHome}
+              exact
+              path="/admin"
             />
 
             <Route
@@ -55,13 +64,13 @@ class Routes extends Component {
               path="/admin/users/:userId"
               component={AdminEditUserDetail}
             />
-
+            
             <Route
               exact
               path="/checkout"
               component={Checkout}
             />
-
+      
             <Route
               exact
               path="/product/:productId/new-review"
@@ -78,6 +87,12 @@ class Routes extends Component {
               exact
               path="/signup"
               component={Signup}
+            />
+      
+            <Route
+              exact
+              path="/cart"
+              component={Cart}
             />
 
             {
