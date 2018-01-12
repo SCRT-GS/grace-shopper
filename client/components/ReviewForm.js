@@ -4,10 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { addNewReview } from '../store/reviews'
 
 
-
-
-
-class ReviewForm extends Component {
+export class ReviewForm extends Component {
     constructor(props) {
       super(props);
       this.state = {
