@@ -16,7 +16,7 @@ const GET_PRODUCT = 'GET_PRODUCT'
 /**
  * ACTION CREATORS
  */
-const getProductActionCreator = product => ({type: GET_PRODUCT, product})
+const getProductActionCreator = product => ({ type: GET_PRODUCT, product })
 
 
 /**
@@ -26,7 +26,7 @@ const getProductActionCreator = product => ({type: GET_PRODUCT, product})
 export const getProduct = (id) =>
   dispatch =>
     axios.get(`/api/products/${id}`)
-    .then(res => res.data)
+      .then(res => res.data)
       .then(result => {
         dispatch(getProductActionCreator(result))
       })

@@ -3,11 +3,12 @@ import { connect } from 'react-redux'
 import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminUserList, AdminEditUserDetail, ReviewForm, Cart } from './components'
+import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminProductList, ReviewForm, Cart } from './components'
 import store, { me, getProducts, getUsers, getReviews } from './store'
 
 class Routes extends Component {
   componentDidMount() {
+    this.props.loadInitialData()
     const productsThunk = getProducts()
     const usersThunk = getUsers()
     const reviewsThunk = getReviews()
@@ -20,7 +21,7 @@ class Routes extends Component {
     const { isLoggedIn } = this.props
     return (
       <Router history={history}>
-       {/* <ErrorMessage/> */}
+        {/* <ErrorMessage/> */}
         <Main>
           <Switch>
 
@@ -34,8 +35,22 @@ class Routes extends Component {
             <Route
               component={ProductDetail}
               exact
-              nextProp="something"
               path="/products/:productId"
+            />
+            <Route
+              component={AdminEditProductDetail}
+              exact
+              path="/admin/products/:productId"
+            />
+            <Route
+              component={AdminProductList}
+              exact
+              path="/admin/products/"
+            />
+            <Route
+              component={AdminHome}
+              exact
+              path="/admin"
             />
 
             <Route
@@ -47,26 +62,37 @@ class Routes extends Component {
               exact
               path="/admin/users/:userId"
               component={AdminEditUserDetail}
+            <Route
+              component={AdminUserList}
+              exact
+              path="/admin/users"
+            />
+            <Route
+              component={AdminEditUserDetail}
+              exact
+              path="/admin/users/:userId"
             />
 
+            <Route
+              exact
+              path="/checkout"
+            />
             <Route
               exact
               path="/product/:productId/new-review"
               component={ReviewForm}
             />
-
             <Route
               exact
               path="/login"
               component={Login}
             />
-            
             <Route
               exact
               path="/signup"
               component={Signup}
             />
-
+      
             <Route
               exact
               path="/cart"
@@ -96,7 +122,8 @@ const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+
   }
 }
 

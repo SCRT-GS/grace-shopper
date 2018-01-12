@@ -1,55 +1,63 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
+import store, { getProduct } from '../store'
 
 
 /**
  * COMPONENT
  */
-export const ProductDetail = (props) => {
+export class ProductDetail extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: '',
+      description: '',
+      price: 0,
+      imgURL: '',
+    }
+  }
 
-  const productId = Number(props.match.params.productId)
-  const { products } = props
-
-  const productish = products.filter(elem => elem.id === productId)
-
-  //const newProductId = productId - 1
-  const product = productish[0]
-
-  console.log('PRODUCTS', products)
-  console.log('PRODUCT', product)
-  console.log('PRODUCTISH', productish)
+  componentDidMount() {
+    const productId = Number(this.props.match.params.productId)
+    const productDetailThunk = getProduct(productId)
+    store.dispatch(productDetailThunk)
+  }
 
 
-  return (
-    <div>
-      <h3>{product.name}</h3>
-      <h3>{product.description}</h3>
-      <h3>{product.price}</h3>
-      <img
-        id="product-pic"
-        src={product.imgURL}
-      />
-    </div>
-  )
+  render() {
+
+    const product = this.props.product
+
+    return (
+      <div>
+        <h3>{product.name}</h3>
+        <h3>{product.description}</h3>
+        <h3>{product.price}</h3>
+        <img
+          id="product-pic"
+          src={product.imgURL}
+        />
+      </div>
+    )
+  }
 }
+
 
 /**
  * CONTAINER
  */
 const mapState = (state) => {
   return {
-    products: state.products
+    product: state.product
   }
 }
 
-export default connect(mapState)(ProductDetail)
+const mapDispatch = { getProduct }
+
+export default connect(mapState, mapDispatch)(ProductDetail)
 
 /**
  * PROP TYPES
  */
-// UserHome.propTypes = {
-//   email: PropTypes.string
-// }
-
-
 
