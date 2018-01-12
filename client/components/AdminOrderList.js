@@ -22,20 +22,17 @@ export class AdminOrderList extends Component {
         {orders.map((order) => {
           const sum = (order.order_items.reduce((total, item) => {
             return total + item.price * item.quantity
-        }, 0))/100
-        let count = 0
+          }, 0)) / 100
+          let count = 0
           return (
 
             <ul key={order.id} >
               <li>
                 <NavLink to={`/admin/orders/${order.id}`} >
-                <h3>Order # {order.id}</h3>
+                  <h3>Order # {order.id}</h3>
                   <h4 id="order-item">Items:{order.order_items.map(orderItem => {
-                    const products1 = products
                     count++
                     const realPrice = (orderItem.price / 100)
-                    const lineTotal = (orderItem.price * orderItem.quantity)
-
 
                     return (
                       <ul key={orderItem.id} >
