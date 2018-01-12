@@ -13,65 +13,72 @@ class ReviewForm extends Component {
       this.state = {
         rating: '',
         content: '',
+        productId: ''
       }
       this.inputReviewStar = this.inputReviewStar.bind(this)
       this.inputContent = this.inputContent.bind(this)
-      this.handleReviewSubmit = this.handleReviewSubmit.bind(this)
+      this.submit = this.submit.bind(this)
     }
 
-
-    inputReviewStar(e){
+    componentWillMount() {
       this.setState({
-        rating: e.target.value
+        productId: this.props.product.id
       })
     }
 
-    inputContent(e){
+    inputReviewStar(evt){
       this.setState({
-        content: e.target.value
+        rating: evt.target.value
       })
     }
 
-    handleReviewSubmit(e) {
-      e.preventDefault()
-      this.props.submitReview(this.state.rating, this.state.content)
-      // this.props.history.push({`/products/${product.id}`})
+    inputContent(evt){
+      this.setState({
+        content: evt.target.value
+      })
     }
 
+
+    submit(evt) {
+      evt.preventDefault()
+      const productId = this.props.product.id
+      this.props.submitReview(this.state.rating, this.state.content, this.state.productId) //NEED TO ADD USERID TO SUBMIT HANDLER
+      this.props.history.push(`/products/${productId}`)
+    }
 
 
   render() {
 
+    const productName = this.props.product.name
+
     return (
       <div id="review-page-container">
         <div id="label-review">
-          <label >Submit a review for {'INPUT PRODUCT NAME'}</label>
+          <label >Write a review for { productName }</label>
         </div>
         <div id="form-container">
-        <form onSubmit={this.handleReviewSubmit} className="new-project-form" id="project-form">
-          <div>
-            <select value={this.state.rating} onChange={this.inputReviewStar} name="reviewStar" className="select-star">
-              <option defaultValue="">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-          <div>
-            <input
-              value={this.state.content}
-              onChange={this.inputContent}
-              type="text"
-              placeholder="Write your review here..."
-              className="form-one-col"
-            />
-          </div>
-        </form>
-          <div className="div-submit">
-            <button className="review-submit" form="review-form" type="button">Submit Review</button>
-          </div>
+          <form onSubmit={this.submit} id="review-form">
+            <div>
+              <select value={this.state.rating} onChange={this.inputReviewStar} name="reviewStar" className="select-star">
+                <option defaultValue="">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <div>
+              <textarea
+                value={this.state.content}
+                onChange={this.inputContent}
+                type="text"
+                placeholder="Write your review here..."
+                className="form-one-col"
+              />
+            </div>
+            <button className="review-submit" form="review-form" type="submit" id="submit">Submit Review</button>
+          </form>
         </div>
       </div>
     )
@@ -88,8 +95,8 @@ const mapState = state => {
 
 const mapDispatch = (dispatch) => {
   return {
-    submitReview: (rating, content) => {
-      dispatch(addNewReview(rating, content))
+    submitReview: (rating, content, productId) => { //NEED TO ADD USERID TO SUBMIT HANDLER
+      dispatch(addNewReview(rating, content, productId)) //NEED TO ADD USERID TO SUBMIT HANDLER
     }
 
   }

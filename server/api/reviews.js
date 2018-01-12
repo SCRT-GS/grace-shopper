@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Review} = require('../db/models')
+const {Review, Product} = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -18,8 +18,17 @@ router.get('/:reviewId', (req, res, next) => {
     .catch(next)
 })
 
-router.post('/', (req, res, next) => {
-  Review.create(req.body)
-  .then(review => res.json(review))
-  .catch(next)
+
+router.post('/', async (req, res) => { //NEED TO ADD USERID TO ADD REVIEW//
+  try {
+    const review = await Review.create({
+      rating: req.body.rating,
+      content: req.body.content,
+      productId: req.body.productId,
+    })
+    res.json(review)
+  }
+  catch (error) {
+    next(error)
+  }
 })

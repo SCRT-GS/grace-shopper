@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import store, { getProduct, getProductReviews } from '../store'
 import { ReviewList } from './ReviewList'
 
@@ -42,6 +42,14 @@ export class ProductDetail extends Component {
           id="product-pic"
           src={product.imgURL}
         />
+        <div>
+          <button>Add to cart</button>
+        </div>
+        <Link to={`/products/${product.id}/new-review`}>
+          <div>
+            <button>Write a review</button>
+          </div>
+        </Link>
 
         <ReviewList currentProduct={this.props} />
       </div>

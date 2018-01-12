@@ -14,6 +14,8 @@ export {default as AdminEditUserDetail} from './AdminEditUserDetail'
 export {default as Cart} from './Cart'
 export {default as AdminEditProductDetail} from './AdminEditProductDetail'
 export {default as Checkout} from './Checkout'
+export {default as ReviewForm} from './ReviewForm'
+export {default as ReviewList} from './ReviewList'
 export { AdminHome} from './AdminHome'
 
-//will be exporting the centsToDollarString function from here 
+//will be exporting the centsToDollarString function from here
