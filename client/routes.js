@@ -64,16 +64,16 @@ class Routes extends Component {
               path="/admin/users/:userId"
               component={AdminEditUserDetail}
             />
-            
+
             <Route
               exact
               path="/checkout"
               component={Checkout}
             />
-      
+
             <Route
               exact
-              path="/product/:productId/new-review"
+              path="/products/:productId/new-review"
               component={ReviewForm}
             />
 
@@ -88,7 +88,7 @@ class Routes extends Component {
               path="/signup"
               component={Signup}
             />
-      
+
             <Route
               exact
               path="/cart"
