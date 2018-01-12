@@ -4,7 +4,7 @@ import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminProductList, ReviewForm, Cart, Checkout, reviewDetail } from './components'
-import store, { me, getProducts, getUsers, getReviews } from './store'
+import store, { me, getProducts, getUsers, getReviews, getCart } from './store'
 
 class Routes extends Component {
   componentDidMount() {

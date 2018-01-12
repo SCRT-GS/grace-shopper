@@ -23,3 +23,20 @@ router.put('/', async (req, res, next) => {
     
 })
 
+router.get('/user/:id', async (req, res, next) => {
+    try {
+        const cart = await Order.findOne({
+            where: {
+                userId: req.params.id,
+                status: 'Created'
+            },
+            include: [{
+                model: OrderItem
+            }]
+        }) || {}
+        res.json(cart)
+    } catch (error) {
+        next(error)
+    }
+})
+
