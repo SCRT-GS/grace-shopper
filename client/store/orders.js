@@ -3,7 +3,9 @@ import history from '../history'
 
 
 const GET_ORDERS = 'GET_ORDERS'
+const UPDATE_ORDER = 'UPDATE_ORDER'
 
+const updateOrderActionCreator = order => ({ type: UPDATE_ORDER, order })
 const getOrdersActionCreator = orders => ({ type: GET_ORDERS, orders })
 
 
@@ -15,6 +17,15 @@ export const getOrders = () =>
         dispatch(getOrdersActionCreator(result))
       })
       .catch(err => console.log(err))
+
+  export const updateOrder = (id, order) =>
+      dispatch =>
+        axios.put(`/update/orders/${id}`, order)
+          .then(res => res.data)
+          .then(result => {
+            dispatch(updateOrderActionCreator(result))
+          })
+          .catch(err => console.log(err))
 
 export default function (orders = [], action) {
   switch (action.type) {

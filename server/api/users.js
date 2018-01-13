@@ -41,6 +41,39 @@ router.get('/orders', async (req, res) => {
     next(error)
   }
 })
+router.get('/admin/orders/:id', async (req, res) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        id: +req.params.id
+      },
+      include: [{
+        model: OrderItem
+    }]
+    })
+    res.json(order)
+  }
+  catch (error) {
+    next(error)
+  }
+})
+router.put('/update/orders/:id', async (req, res) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        id: +req.params.id
+      }
+    })
+    await order.update({
+      status: req.body.status,
+    })
+    await order.reload()
+    res.json(order)
+  }
+  catch (error) {
+    next(error)
+  }
+})
 
 router.put('/update/:id', async (req, res) => {
   try {
