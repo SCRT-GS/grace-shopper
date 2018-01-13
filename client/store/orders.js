@@ -20,17 +20,20 @@ export const getOrders = () =>
 
   export const updateOrder = (id, order) =>
       dispatch =>
-        axios.put(`/update/orders/${id}`, order)
+        axios.put(`/api/users/update/orders/${id}`, order)
           .then(res => res.data)
           .then(result => {
             dispatch(updateOrderActionCreator(result))
           })
+          .then(console.log('reached backend'))
           .catch(err => console.log(err))
 
 export default function (orders = [], action) {
   switch (action.type) {
     case GET_ORDERS:
       return action.orders
+    case UPDATE_ORDER:
+      return orders.map(order => (action.order.id === order.id ? action.order : order))
     default:
       return orders
   }

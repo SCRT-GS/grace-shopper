@@ -29,9 +29,9 @@ export class AdminEditOrderDetail extends Component {
     const updatedOrder = {
       status: event.target.status.value
     }
-
+    console.log(updatedOrder)
     this.props.updateOrder(order.id, updatedOrder)
-    this.props.history.push(`/admin/orders`)
+    // this.props.history.push(`/admin/orders`)
   }
 
 
@@ -92,10 +92,11 @@ export class AdminEditOrderDetail extends Component {
 
         { <p id="total">Order Total: ${sum}</p>}
         <p id="date">Date Placed: {order.createdAt}</p>
-        <p id="date">Select New Order Status </p>
+        <p id="status">Select New Order Status </p>
           <form
           id="orderform"
-          onSubmit={this.submit} >
+          onSubmit={this.submit}
+          >
           <select
             form="orderform"
             name="status"
