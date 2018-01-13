@@ -33,7 +33,7 @@ router.get('/admin/:id', async (req, res) => {
 })
 
 
-router.get('/:id/orders', async (req, res) => {
+router.get('/:id/orders', async (req, res, next) => {
   try {
     const orders = await Order.findAll({
       where: {
@@ -45,6 +45,11 @@ router.get('/:id/orders', async (req, res) => {
       }]
     })
     res.json(orders)
+  }
+  catch (error){
+    next(error)
+  }
+})
 
 router.get('/orders/', async (req, res, next) => {
   try {
@@ -76,7 +81,7 @@ router.get('/admin/orders/:id', async (req, res) => {
     next(error)
   }
 })
-    
+
 router.put('/update/orders/:id', async (req, res) => {
   try {
     const order = await Order.findOne({
@@ -116,7 +121,6 @@ router.put('/update/:id', async (req, res) => {
 })
 
 router.delete('/:id', async (req, res, next) => {
-
   try {
     const user = await User.findOne({
       where: {
