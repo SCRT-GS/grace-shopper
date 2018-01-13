@@ -4,8 +4,8 @@ import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 
-import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminEditOrderDetail, AdminProductList, AdminOrderList, ReviewForm, MyOrders, Cart, Checkout, ReviewDetail, OrderSubmitted } from './components'
-import store, { me, getProducts, getUsers, getReviews, getCart, getOrders } from './store'
+import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminEditOrderDetail, AdminProductList, AdminOrderList, ReviewForm, MyOrders, Cart, Checkout, ReviewDetail, AdminCategoryList, OrderSubmitted } from './components'
+import store, { me, getProducts, getUsers, getReviews, getCart, getOrders, getCategories } from './store'
 
 
 class Routes extends Component {
@@ -15,6 +15,8 @@ class Routes extends Component {
     const usersThunk = getUsers()
     const reviewsThunk = getReviews()
     const getAllOrdersThunk = getOrders()
+    const getCategoriesThunk = getCategories()
+    store.dispatch(getCategoriesThunk)
     store.dispatch(getAllOrdersThunk)
     store.dispatch(usersThunk);
     store.dispatch(productsThunk);
@@ -67,6 +69,11 @@ class Routes extends Component {
               exact
               path="/admin/users"
               component={AdminUserList}
+            />
+            <Route
+              exact
+              path="/admin/categories"
+              component={AdminCategoryList}
             />
 
             <Route
