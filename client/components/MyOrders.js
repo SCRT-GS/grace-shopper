@@ -43,6 +43,7 @@ class MyOrders extends Component {
             return total + item.price * item.quantity
           }, 0)) / 100
           let count = 0
+          let date = order.createdAt || 'today'
           return (
 
             <ul key={order.id} >
@@ -66,7 +67,7 @@ class MyOrders extends Component {
                     )
                   })}</h4>
                   <p id="total">Order Total: ${sum}</p>
-                  <p id="date">Date Placed: {order.createdAt}</p>
+                  <p id="date">Date Placed: {date.slice(0, 10)}}</p>
                 </NavLink>
               </li>
             </ul>
