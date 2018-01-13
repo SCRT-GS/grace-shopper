@@ -17,6 +17,7 @@ export const getCart = id =>
       })
       .catch(err => console.log(err))
 
+
 //REDUCER
 export default function (cart = {}, action) {
   switch (action.type) {

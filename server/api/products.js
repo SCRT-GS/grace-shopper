@@ -11,6 +11,7 @@ router.get('/', async (req, res, next) => {
     next(error)
   }
 })
+
 router.put('/update/:id', async (req, res, next) => {
   try {
     const product = await Product.findOne({
