@@ -30,21 +30,22 @@ export class AdminOrderList extends Component {
               <li>
                 <NavLink to={`/admin/orders/${order.id}`} >
                   <h3>Order # {order.id}</h3>
+                  <h3
+                   className="order-status"
+                    >
+                    Order Status: {order.status}
+                      </h3>
                   <h4 id="order-item">Items:{order.order_items.map(orderItem => {
                     count++
+                    let idx = orderItem.productId -1
+            let product = products[idx]
                     const realPrice = (orderItem.price / 100)
 
                     return (
                       <ul key={orderItem.id} >
                         <li>
                           <p>{count}.</p>
-                          {products.map(product => {
-                            return (
-                              <ul key={product.id} >
-                                <p>{product.name}</p>
-                              </ul>
-                            )
-                          })}
+                          <p>{products[idx] ? products[idx].name : null}</p>
                           <p>${realPrice}</p>
                           <p>Quantity: {orderItem.quantity}</p>
                         </li>
