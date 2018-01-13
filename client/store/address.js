@@ -16,13 +16,14 @@ const addAddressActionCreator = address => ({
 
 /************ THUNK CREATORS ************/
 
-export const addNewAddress = (line1, line2, city, state, zip) => dispatch => {
+export const addNewAddress = (line1, line2, city, state, zip, orderId) => dispatch => {
   axios.post(`/api/addresses`, {
     line1,
     line2,
     city,
     state,
-    zip
+    zip,
+    orderId
   })
   .then(address => dispatch(addAddressActionCreator(address)))
   .catch(err => console.error('Your address was NOT successfully added to your order', err))

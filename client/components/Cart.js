@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import store, { getCart } from '../store'
+import { Link } from 'react-router-dom'
 
 class Cart extends Component {
     constructor(){
@@ -80,16 +81,18 @@ class Cart extends Component {
                 <h4>
                     Subtotal: {this.subTotal()}
                 </h4>
-                <button 
+                <button
                     type='button'
                 >
                     SHOP MORE
                 </button>
-                <button 
-                    type='button'
-                >
-                    CHECKOUT
-                </button>
+                <Link to="/checkout">
+                    <button
+                        type="button"
+                    >
+                        CHECKOUT
+                    </button>
+                </Link>
             </div>
         )
     }

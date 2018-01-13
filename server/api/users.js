@@ -16,6 +16,7 @@ router.get('/', async (req, res, next) => {
       next(error)
     }
 })
+
 router.get('/admin/:id', async (req, res) => {
   try {
     const user = await User.findOne({
@@ -29,7 +30,8 @@ router.get('/admin/:id', async (req, res) => {
     next(error)
   }
 })
-router.put('/update/:id', async (req, res) => {
+
+router.put('/update/:id', async (req, res, next) => {
   try {
     const user = await User.findOne({
       where: {
@@ -49,8 +51,8 @@ router.put('/update/:id', async (req, res) => {
   }
 })
 
-router.delete('/:id', async (req, res) => {
-  try{
+router.delete('/:id', async (req, res, next) => {
+  try {
     const user = await User.findOne({
     where: {
       id: +req.params.id
@@ -59,7 +61,7 @@ router.delete('/:id', async (req, res) => {
     await user.destroy({ force: true })
     res.json('this user record no longer exists')
     }
-catch(error){
-  next(error)
-}
+  catch (error){
+    next(error)
+  }
 })
