@@ -25,7 +25,6 @@ export const getOrders = () =>
           .then(result => {
             dispatch(updateOrderActionCreator(result))
           })
-          .then(console.log('reached backend'))
           .catch(err => console.log(err))
 
 export default function (orders = [], action) {

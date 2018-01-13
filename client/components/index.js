@@ -20,6 +20,7 @@ export {default as ReviewForm} from './ReviewForm'
 export {default as ReviewList} from './ReviewList'
 export {default as ReviewDetail} from './ReviewDetail'
 export { AdminHome} from './AdminHome'
+export { OrderSubmitted } from './OrderSubmitted'
 
 
 //will be exporting the centsToDollarString function from here
