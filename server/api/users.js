@@ -32,6 +32,19 @@ router.get('/admin/:id', async (req, res) => {
   }
 })
 
+router.get('/orders/', async (req, res, next) => {
+  try {
+    const orders = await Order.findAll({
+      include: [{
+        model: OrderItem
+    }]
+    })
+    res.json(orders)
+  }
+  catch (error) {
+    next(error)
+  }
+})
 
 router.get('/admin/orders/:id', async (req, res) => {
   try {
