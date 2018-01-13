@@ -12,14 +12,13 @@ export class AdminEditOrderDetail extends Component {
     }
 
     this.submit = this.submit.bind(this);
-
   }
 
   componentDidMount() {
     const orderId = Number(this.props.match.params.orderId)
     const orderThunk = getOrder(orderId)
-    store.dispatch(orderThunk);
 
+    store.dispatch(orderThunk);
   }
 
   submit(event) {
@@ -29,7 +28,7 @@ export class AdminEditOrderDetail extends Component {
     const updatedOrder = {
       status: event.target.status.value
     }
-    console.log(updatedOrder)
+
     this.props.updateOrder(order.id, updatedOrder)
     // this.props.history.push(`/admin/orders`)
   }
@@ -43,18 +42,19 @@ export class AdminEditOrderDetail extends Component {
       price: 1599,
       quantity: 20,
       imgURL: 'http://via.placeholder.com/100x100'
-  }]
-    const items = this.props.order.order_items || [{
+    }]
+    const items = order.order_items || [{
       id: 99,
       name: 'Chocolate Bar',
       price: 1099,
       quantity: 2,
       imgURL: 'http://via.placeholder.com/32x32'
-  }]
-    console.log('items', items)
+    }]
     const sum = (items.reduce((total, item) => {
       return total + item.price * item.quantity
     }, 0)) / 100
+    const date = order.createdAt || 'today'
+
     let count = 0
     let idx = count
 
@@ -70,33 +70,61 @@ export class AdminEditOrderDetail extends Component {
         >
           Order Status: {order.status}
         </h2>
-        <h4 id="order-item"></h4>
-          {items.map(item => {
-            count++
-            let idx = item.productId -1
-            let product = products[idx]
+        <h4
+          id="order-item"
+        >
+        </h4>
+        {items.map(item => {
+          count++
 
-            const realPrice = (item.price / 100)
-            return (
-              <ul key={item.id} >
-                <li>
-                  <p>{count}.</p>
-                  <p>{products[idx] ? products[idx].name : null}</p>
-                  <p>${realPrice}</p>
-                  <p>Quantity: {item.quantity}</p>
-                </li>
-              </ul>
-            )
-          }
-          )}
+          let idx = item.productId - 1
+          let product = products[idx]
 
-        { <p id="total">Order Total: ${sum}</p>}
-        <p id="date">Date Placed: {order.createdAt}</p>
-        <p id="status">Select New Order Status </p>
-          <form
+          const realPrice = (item.price / 100)
+          return (
+            <ul
+              key={item.id}
+            >
+              <li>
+                <p>
+                  {count}.
+                  </p>
+                <p>
+                  {products[idx] ? products[idx].name : null}
+                </p>
+                <p>
+                  ${realPrice}
+                </p>
+                <p>
+                  Quantity: {item.quantity}
+                </p>
+              </li>
+            </ul>
+          )
+        }
+        )}
+
+        {
+          <p
+            id="total"
+          >
+            Order Total: ${sum}
+          </p>
+        }
+        <p
+          id="date"
+        >
+          Date Placed: {date.slice(0, 10)}
+        </p>
+        <p
+          id="status"
+        >
+          Select New Order Status
+        </p>
+        <form
           id="orderform"
           onSubmit={this.submit}
-          >
+        >
           <select
             form="orderform"
             name="status"
@@ -104,26 +132,26 @@ export class AdminEditOrderDetail extends Component {
             <option
               value="Processing"
             >
-            Processing
+              Processing
             </option>
             <option
               value="Cancelled"
             >
-            Cancelled
+              Cancelled
             </option>
             <option
               value="Completed"
             >
-            Completed
+              Completed
             </option>
-            </select>
-            <button
+          </select>
+          <button
             id="submit"
             type="submit"
           >
             Set New Order Status
           </button>
-          </form>
+        </form>
 
 
         <br />
@@ -141,73 +169,3 @@ const mapState = (state) => {
 const mapDispatch = { getOrder, updateOrder }
 
 export default connect(mapState, mapDispatch)(AdminEditOrderDetail)
-
-      // <h3
-      //     className="product-name"
-      //   >
-      //     {product.name}
-      //   </h3>
-      //   <h3
-      //     className="product-description"
-      //   >
-      //     {product.description}
-      //   </h3>
-      //   <h3
-      //     className="product-price"
-      //   >
-      //     ${product.price}
-      //   </h3>
-      //   <h3
-      //     className="product-quantity"
-      //   >
-      //     Quantity Available: {' ' + product.quantity}
-      //   </h3>
-      //   <img
-      //     id="product-pic"
-      //     src={product.imgURL}
-      //   />
-      //   <p>
-      //     Enter any changes to this product's information in the form below.
-      //   </p>
-      //   <form
-      //     id="productform"
-      //     onSubmit={this.submit}
-      //   >
-      //     <input
-      //       name="name"
-      //       type="text"
-      //       className="form-like"
-      //       placeholder="Name"
-      //     />
-      //     <input
-      //       name="description"
-      //       type="text"
-      //       className="form-like"
-      //       placeholder="Description"
-      //     />
-      //     <input
-      //       name="price"
-      //       type="number"
-      //       className="form-like"
-      //       placeholder="price"
-      //     />
-      //     <input
-      //       name="imgURL"
-      //       type="text"
-      //       className="form-like"
-      //       placeholder="Image Link"
-      //     />
-      //     <input
-      //       name="quantity"
-      //       type="number"
-      //       className="form-like"
-      //       placeholder="Quantity"
-      //     />
-
-      //     <button
-      //       id="submit"
-      //       type="submit"
-      //     >
-      //       Save Changes
-      //     </button>
-      //   </form>

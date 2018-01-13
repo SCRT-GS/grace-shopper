@@ -16,44 +16,79 @@ export class AdminOrderList extends Component {
   render() {
     const orders = this.props.orders
     const products = this.props.products
+
     return (
       <div>
-        <h1>All Orders </h1>
+        <h1>
+          All Orders
+        </h1>
+
         {orders.map((order) => {
-          const sum = (order.order_items.reduce((total, item) => {
+          const items = order.order_items
+          const sum = (items.reduce((total, item) => {
             return total + item.price * item.quantity
           }, 0)) / 100
           let count = 0
+          let date = order.createdAt || 'today'
+
           return (
-
-            <ul key={order.id} >
+            <ul
+              key={order.id}
+            >
               <li>
-                <NavLink to={`/admin/orders/${order.id}`} >
-                  <h3>Order # {order.id}</h3>
+                <NavLink
+                  to={`/admin/orders/${order.id}`}
+                >
+                  <h3>
+                    Order # {order.id}
+                  </h3>
                   <h3
-                   className="order-status"
-                    >
+                    className="order-status"
+                  >
                     Order Status: {order.status}
-                      </h3>
-                  <h4 id="order-item">Items:{order.order_items.map(orderItem => {
-                    count++
-                    let idx = orderItem.productId -1
-            let product = products[idx]
-                    const realPrice = (orderItem.price / 100)
+                  </h3>
+                  <h4
+                    id="order-item"
+                  >
+                    Items:{items.map(orderItem => {
+                      count++
 
-                    return (
-                      <ul key={orderItem.id} >
-                        <li>
-                          <p>{count}.</p>
-                          <p>{products[idx] ? products[idx].name : null}</p>
-                          <p>${realPrice}</p>
-                          <p>Quantity: {orderItem.quantity}</p>
-                        </li>
-                      </ul>
-                    )
-                  })}</h4>
-                  <p id="total">Order Total: ${sum}</p>
-                  <p id="date">Date Placed: {order.createdAt}</p>
+                      let idx = orderItem.productId - 1
+                      let product = products[idx]
+
+                      const realPrice = (orderItem.price / 100)
+
+                      return (
+                        <ul
+                          key={count}
+                        >
+                          <li>
+                            <p>
+                              {count}.
+                          </p>
+                            <p>
+                              {products[idx] ? products[idx].name : null}
+                            </p>
+                            <p>
+                              ${realPrice}
+                            </p>
+                            <p>
+                              Quantity: {orderItem.quantity}
+                            </p>
+                          </li>
+                        </ul>
+                      )
+                    })}
+                  </h4>
+                  <p
+                    id="total"
+                  >
+                    Order Total: ${sum}
+                  </p>
+                  <p
+                    id="date"
+                  >
+                    Date Placed: {date.slice(0, 10)}</p>
                 </NavLink>
               </li>
             </ul>
