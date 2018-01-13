@@ -32,6 +32,8 @@ export class ProductDetail extends Component {
   render() {
 
     const product = this.props.product
+    const categories = product.categories || [{name: 'notaname'}]
+    console.log('productwithcats?', categories[0])
 
     return (
       <div>
@@ -42,8 +44,22 @@ export class ProductDetail extends Component {
           id="product-pic"
           src={product.imgURL}
         />
+        <h4>
+        Categories: {categories.map(category => {
+          return (
+            <ul
+            key={category.name}
+            >
+            <li>
+            {category.name}
+            </li>
+            </ul>
+          )}
+        )}</h4>
         <div>
-          <button>Add to cart</button>
+          <button>
+          Add to cart
+          </button>
         </div>
         <Link to={`/products/${product.id}/new-review`}>
           <div>

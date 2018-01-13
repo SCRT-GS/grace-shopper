@@ -45,19 +45,19 @@ router.put('/update/:id', async (req, res, next) => {
   }
 })
 
-router.get('/:id', async (req, res, next) => {
-  try {
-    const product = await Product.findOne({
+router.get('/:id', (req, res, next) => {
+  return Product.findOne({
       where: {
         id: req.params.id
-      }
+      },
+      include: [{
+        model: Category
+      }]
     })
-    res.json(product)
-  }
-  catch (error) {
-    next(error)
-  }
-})
+    .then(product => res.json(product))
+    .catch(error => console.error(error))
+  })
+
 
 router.get('/:id/reviews', async (req, res, next) => {
   try {
