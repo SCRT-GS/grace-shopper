@@ -3,8 +3,10 @@ import { connect } from 'react-redux'
 import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminProductList, ReviewForm, Cart, Checkout, MyOrders } from './components'
-import store, { me, getProducts, getUsers, getReviews } from './store'
+
+import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminEditOrderDetail, AdminProductList, AdminOrderList, ReviewForm, MyOrders, Cart, Checkout, ReviewDetail, OrderSubmitted } from './components'
+import store, { me, getProducts, getUsers, getReviews, getCart, getOrders } from './store'
+
 
 class Routes extends Component {
   componentDidMount() {
@@ -12,6 +14,8 @@ class Routes extends Component {
     const productsThunk = getProducts()
     const usersThunk = getUsers()
     const reviewsThunk = getReviews()
+    const getAllOrdersThunk = getOrders()
+    store.dispatch(getAllOrdersThunk)
     store.dispatch(usersThunk);
     store.dispatch(productsThunk);
     store.dispatch(reviewsThunk);
@@ -54,6 +58,12 @@ class Routes extends Component {
             />
 
             <Route
+              component={OrderSubmitted}
+              exact
+              path="/order-submitted"
+            />
+
+            <Route
               exact
               path="/admin/users"
               component={AdminUserList}
@@ -63,6 +73,22 @@ class Routes extends Component {
               exact
               path="/admin/users/:userId"
               component={AdminEditUserDetail}
+            />
+            <Route
+              exact
+              path="/admin/orders/:orderId"
+              component={AdminEditOrderDetail}
+            />
+            <Route
+              exact
+              path="/admin/orders"
+              component={AdminOrderList}
+            />
+
+            <Route
+              exact
+              path="/reviews/:reviewId"
+              component={ReviewDetail}
             />
 
             <Route
@@ -76,6 +102,8 @@ class Routes extends Component {
               path="/products/:productId/new-review"
               component={ReviewForm}
             />
+
+
 
             <Route
               exact

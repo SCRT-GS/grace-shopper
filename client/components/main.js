@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
+import {withRouter, Link, NavLink} from 'react-router-dom'
 import {logout} from '../store'
 import ProductList from './ProductList'
 
@@ -19,22 +19,28 @@ const Main = (props) => {
       <h1>MVP Chocolate Store</h1>
       <h2>Some links are for [dev]elopment purposes</h2>
       <nav>
-      <Link to="/">Home</Link>
-      <Link to="/products">Shop</Link>
-      <Link to="/cart">Cart</Link>
-      <Link to="/checkout">Checkout[dev]</Link>
+      <NavLink to="/">Home</NavLink>
+      <NavLink to="/products">Shop</NavLink>
+      <NavLink to="/cart">Cart</NavLink>
+      {/* temporary navlinks for development */}
+      <NavLink to="/checkout">Checkout[dev]</NavLink>
+      <NavLink to="/home">Home[dev]</NavLink>
+      <NavLink to="/my-account">My Account[dev]</NavLink>
+      <NavLink to="/admin">Admin Home[dev]</NavLink>
+      <NavLink to="/admin/products">Admin Proucts[dev]</NavLink>
+      <NavLink to="/admin/users">Admin Users[dev]</NavLink>
         {
           isLoggedIn
             ? <div>
               {/* The navbar will show these links after you log in */}
-              <Link to="/home">Home</Link>
-              <Link to="/my-account">My Account</Link>
+              <NavLink to="/home">Home</NavLink>
+              <NavLink to="/my-account">My Account</NavLink>
               <a href="#" onClick={handleClick}>Logout</a>
             </div>
             : <div>
               {/* The navbar will show these links before you log in */}
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Sign Up</Link>
+              <NavLink to="/login">Login</NavLink>
+              <NavLink to="/signup">Sign Up</NavLink>
             </div>
         }
       </nav>

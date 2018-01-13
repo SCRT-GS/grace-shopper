@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 
 export const AdminHome = (props) => {
-
+const user = props.user
   return (
     <div>
       <h3 className="funny">Admin Dashboard</h3>
@@ -37,7 +37,9 @@ export const AdminHome = (props) => {
 }
 
 const mapState = (state) => {
-  return {products: state.products
+  return {
+    products: state.products,
+    user: state.user
 }
 }
 

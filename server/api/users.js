@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const { User, Order, OrderItem, Product } = require('../db/models')
+
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -16,6 +17,7 @@ router.get('/', async (req, res, next) => {
     next(error)
   }
 })
+
 router.get('/admin/:id', async (req, res) => {
   try {
     const user = await User.findOne({
@@ -30,6 +32,7 @@ router.get('/admin/:id', async (req, res) => {
   }
 })
 
+
 router.get('/:id/orders', async (req, res) => {
   try {
     const orders = await Order.findAll({
@@ -42,6 +45,50 @@ router.get('/:id/orders', async (req, res) => {
       }]
     })
     res.json(orders)
+
+router.get('/orders/', async (req, res, next) => {
+  try {
+    const orders = await Order.findAll({
+      include: [{
+        model: OrderItem
+    }]
+    })
+    res.json(orders)
+  }
+  catch (error) {
+    next(error)
+  }
+})
+
+router.get('/admin/orders/:id', async (req, res) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        id: +req.params.id
+      },
+      include: [{
+        model: OrderItem
+    }]
+    })
+    res.json(order)
+  }
+  catch (error) {
+    next(error)
+  }
+})
+    
+router.put('/update/orders/:id', async (req, res) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        id: +req.params.id
+      }
+    })
+    await order.update({
+      status: req.body.status,
+    })
+    await order.reload()
+    res.json(order)
   }
   catch (error) {
     next(error)
@@ -68,7 +115,8 @@ router.put('/update/:id', async (req, res) => {
   }
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', async (req, res, next) => {
+
   try {
     const user = await User.findOne({
       where: {
@@ -77,8 +125,8 @@ router.delete('/:id', async (req, res) => {
     })
     await user.destroy({ force: true })
     res.json('this user record no longer exists')
-  }
-  catch (error) {
+    }
+  catch (error){
     next(error)
   }
 })

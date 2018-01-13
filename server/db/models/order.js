@@ -8,8 +8,7 @@ const Order = db.define('order', {
     allowNull: false
   },
   email: {
-    type: Sequelize.STRING,
-    unique: true
+    type: Sequelize.STRING
   },
   status: {
     type: Sequelize.ENUM('Created', 'Processing', 'Cancelled', 'Completed')

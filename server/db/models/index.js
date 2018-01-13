@@ -12,7 +12,8 @@ const Review = require('./review')
 
 Address.belongsTo(Order)
 
-Order.hasMany(OrderItem)
+Order.hasMany(OrderItem)// Old association: OrderItem.belongsTo(Order)
+
 OrderItem.belongsTo(Product)
 
 Order.belongsTo(User)
