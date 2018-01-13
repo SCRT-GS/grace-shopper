@@ -46,10 +46,7 @@ export class AdminCategoryList extends Component {
           return (
             <li
               key={category.id} >
-              <NavLink
-                to={`/admin/categories/${category.id}`}
-                style={{ textDecoration: 'none' }}
-              ></NavLink>
+
                 <h3>
                   {category.name}
                 </h3>
