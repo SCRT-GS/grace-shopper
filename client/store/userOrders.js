@@ -5,25 +5,24 @@ import history from '../history'
 
 const GET_MY_ORDERS = 'GET_MY_ORDERS'
 
-/************ INITIAL STATE ************/
-
 
 /************ ACTION CREATORS ************/
 
 
-const getMyOrdersActionCreator = myOrders => ({type: GET_MY_ORDERS, myOrders})
+const getMyOrdersActionCreator = myOrders => ({ type: GET_MY_ORDERS, myOrders })
+
 
 /************ THUNK CREATORS ************/
-
 
 export const getMyOrders = (id) =>
   dispatch =>
     axios.get(`/api/users/${id}/orders`)
-    .then(res => res.data)
+      .then(res => res.data)
       .then(result => {
         dispatch(getMyOrdersActionCreator(result))
       })
       .catch(err => console.log(err))
+
 
 /************ REDUCER ************/
 
