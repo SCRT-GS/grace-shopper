@@ -82,3 +82,34 @@ router.get('/user/:id', async (req, res, next) => {
         next(error)
     }
 })
+
+router.delete('/item/:id', async (req, res, next) => {
+    try {
+        //technically, anyone can delete an orderItem even if it isn't in their cart
+        //can fix this in V2
+        const order = await OrderItem.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+        const orderId = order.dataValues.orderId
+        const numberOfDeletedOrderItems = await OrderItem.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        console.log('This is the ID of the order being edited:', orderId)
+        console.log(`Just deleted ${numberOfDeletedOrderItems} orderItem.`)
+        const updatedOrder = await Order.findOne({
+            where: {
+                id: orderId
+            },
+            include: [{
+                model: OrderItem
+            }]
+        })
+        res.json(updatedOrder)
+    } catch (error) {
+        next(error)
+    }
+})
