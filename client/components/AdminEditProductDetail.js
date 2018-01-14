@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import store, { getProduct, updateProduct } from '../store'
+import store, { getProduct, updateProduct, getProductCategories, addCategoryToProduct, removeCategoryFromProduct } from '../store'
 
 
 export class AdminEditProductDetail extends Component {
@@ -16,18 +16,21 @@ export class AdminEditProductDetail extends Component {
     }
 
     this.submit = this.submit.bind(this);
+    this.submitCats = this.submitCats.bind(this);
+    this.delete = this.delete.bind(this);
 
   }
 
   componentDidMount() {
     const productId = Number(this.props.match.params.productId)
     const productThunk = getProduct(productId)
+    const productCatsThunk = getProductCategories(productId)
 
+    store.dispatch(productCatsThunk);
     store.dispatch(productThunk);
   }
 
   submit(event) {
-    event.preventDefault();
 
     const product = this.props.product;
     const newName = (event.target.name.value ? event.target.name.value : product.name)
@@ -47,9 +50,30 @@ export class AdminEditProductDetail extends Component {
     this.props.history.push(`/admin/products`)
   }
 
+submitCats(event){
+  event.preventDefault();
+  const categories = this.props.categories
+  const productCategories = this.props.productCategories || []
+  const newProdCats = productCategories.filter(category => category.name === event.target.category.value)
+  const product = this.props.product;
+
+  if (!newProdCats.length){
+    const wholeCat = categories.filter(category => category.name === event.target.category.value)
+
+    this.props.addCategoryToProduct(product.id, wholeCat)
+  }
+
+}
+
+delete(id){
+  const product = this.props.product
+  this.props.removeCategoryFromProduct(product.id, id)
+ }
 
   render() {
     const product = this.props.product
+    const categories = this.props.categories
+    const productCategories = this.props.productCategories || []
 
     return (
       <div>
@@ -82,62 +106,116 @@ export class AdminEditProductDetail extends Component {
           id="product-pic"
           src={product.imgURL}
         />
-        <p>
-          Enter any changes to this product's information in the form below.
-        </p>
-        <form
-          id="productform"
-          onSubmit={this.submit}
-        >
-          <input
-            name="name"
-            type="text"
-            className="form-like"
-            placeholder="Name"
-          />
-          <input
-            name="description"
-            type="text"
-            className="form-like"
-            placeholder="Description"
-          />
-          <input
-            name="price"
-            type="number"
-            className="form-like"
-            placeholder="price"
-          />
-          <input
-            name="imgURL"
-            type="text"
-            className="form-like"
-            placeholder="Image Link"
-          />
-          <input
-            name="quantity"
-            type="number"
-            className="form-like"
-            placeholder="Quantity"
-          />
 
-          <button
+        Categories:
+
+        {productCategories.map(category => {
+
+          return (
+            <ul
+            key={category.name}
+            >
+              <li>
+                {category.name}
+              </li>
+              <button
+              onClick={() => this.delete(category.id)}
+              >
+                Remove Category from Product
+            </button>
+              </ul>
+              )
+        })}
+          <p>
+           Select a category to add to this item below.
+           </p>
+       <form
+       id="addCatform"
+       onSubmit={this.submitCats}
+     >
+       <select
+         form="addCatform"
+         name="category"
+       >
+         {categories.map(category => {
+          return (
+
+            <option
+                className="form-like"
+                key={category.id}
+              value={category.name}
+              >
+              {category.name}
+              </option>
+
+          )}
+        )}
+        </select>
+        <button
             id="submit"
             type="submit"
           >
-            Save Changes
+            Add Category to Item
           </button>
         </form>
-        <br />
-      </div>
-    )
-  }
-}
+
+        <p>
+                Enter any changes to this product's information in the form below.
+        </p>
+              <form
+                id="productform"
+                onSubmit={this.submit}
+              >
+                <input
+                  name="name"
+                  type="text"
+                  className="form-like"
+                  placeholder="Name"
+                />
+                <input
+                  name="description"
+                  type="text"
+                  className="form-like"
+                  placeholder="Description"
+                />
+                <input
+                  name="price"
+                  type="number"
+                  className="form-like"
+                  placeholder="price"
+                />
+                <input
+                  name="imgURL"
+                  type="text"
+                  className="form-like"
+                  placeholder="Image Link"
+                />
+                <input
+                  name="quantity"
+                  type="number"
+                  className="form-like"
+                  placeholder="Quantity"
+                />
+
+                <button
+                  id="submit"
+                  type="submit"
+                >
+                  Save Changes
+          </button>
+              </form>
+
+        </div>
+      )}}
+
 
 const mapState = (state) => {
-  return {
-    product: state.product
+       return {
+        product: state.product,
+        categories: state.categories,
+        productCategories: state.productCategories
   }
 }
-const mapDispatch = { getProduct, updateProduct }
+const mapDispatch = {getProduct, getProductCategories, updateProduct, addCategoryToProduct, removeCategoryFromProduct }
 
 export default connect(mapState, mapDispatch)(AdminEditProductDetail)
