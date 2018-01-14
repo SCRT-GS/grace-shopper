@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import store, { getCart } from '../store'
+import store, { getCart, deleteFromCart } from '../store'
 import Subtotal from './Subtotal'
 import { Link } from 'react-router-dom'
 
@@ -60,9 +60,12 @@ class Cart extends Component {
                                     <span>
                                         {this.centsToDollarString(item.price)}
                                     </span>
-                                    <span>
-                                        DELET THIS
-                                    </span>
+                                    <button
+                                        type="button"
+                                        onClick={() => store.dispatch(deleteFromCart(item.id))}
+                                    >
+                                        DELETE
+                                    </button>
 
                                 </li>
                             )
