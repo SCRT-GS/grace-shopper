@@ -3,8 +3,10 @@ import { connect } from 'react-redux'
 import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminProductList, ReviewForm, Cart, Checkout, reviewDetail } from './components'
-import store, { me, getProducts, getUsers, getReviews, getCart } from './store'
+
+import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminEditOrderDetail, AdminProductList, AdminOrderList, ReviewForm, MyOrders, Cart, Checkout, ReviewDetail, AdminCategoryList, OrderSubmitted } from './components'
+import store, { me, getProducts, getUsers, getReviews, getCart, getOrders, getCategories } from './store'
+
 
 class Routes extends Component {
   componentDidMount() {
@@ -12,6 +14,10 @@ class Routes extends Component {
     const productsThunk = getProducts()
     const usersThunk = getUsers()
     const reviewsThunk = getReviews()
+    const getAllOrdersThunk = getOrders()
+    const getCategoriesThunk = getCategories()
+    store.dispatch(getCategoriesThunk)
+    store.dispatch(getAllOrdersThunk)
     store.dispatch(usersThunk);
     store.dispatch(productsThunk);
     store.dispatch(reviewsThunk);
@@ -54,9 +60,20 @@ class Routes extends Component {
             />
 
             <Route
+              component={OrderSubmitted}
+              exact
+              path="/order-submitted"
+            />
+
+            <Route
               exact
               path="/admin/users"
               component={AdminUserList}
+            />
+            <Route
+              exact
+              path="/admin/categories"
+              component={AdminCategoryList}
             />
 
             <Route
@@ -64,11 +81,21 @@ class Routes extends Component {
               path="/admin/users/:userId"
               component={AdminEditUserDetail}
             />
+            <Route
+              exact
+              path="/admin/orders/:orderId"
+              component={AdminEditOrderDetail}
+            />
+            <Route
+              exact
+              path="/admin/orders"
+              component={AdminOrderList}
+            />
 
             <Route
               exact
               path="/reviews/:reviewId"
-              component={reviewDetail}
+              component={ReviewDetail}
             />
 
             <Route
@@ -107,7 +134,15 @@ class Routes extends Component {
               isLoggedIn &&
               <Switch>
                 {/* Routes placed here are only available after logging in */}
-                <Route exact path="/home" component={UserHome} />
+                <Route
+                  exact
+                  path="/home"
+                  component={UserHome} />
+                <Route
+                  exact
+                  path="/my-account"
+                  component={MyOrders}
+                />
               </Switch>
             }
             {/* Displays our Login component as a fallback */}

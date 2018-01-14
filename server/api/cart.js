@@ -4,6 +4,7 @@ const {Order, OrderItem} = require('../db/models')
 module.exports = router
 
 router.post('/', async (req, res, next) => {
+
     try {
         let foundCart, cart
         if (!req.user){

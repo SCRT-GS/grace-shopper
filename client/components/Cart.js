@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import store, { getCart } from '../store'
 import Subtotal from './Subtotal'
+import { Link } from 'react-router-dom'
+
 
 class Cart extends Component {
     constructor(){
@@ -76,11 +78,13 @@ class Cart extends Component {
                 >
                     SHOP MORE
                 </button>
-                <button 
-                    type='button'
-                >
-                    CHECKOUT
-                </button>
+                <Link to="/checkout">
+                    <button
+                        type="button"
+                    >
+                        CHECKOUT
+                    </button>
+                </Link>
             </div>
         )
     }

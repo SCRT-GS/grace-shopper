@@ -8,17 +8,6 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
-// router.get('/:reviewId', (req, res, next) => {
-//   Review.findOne({
-//     where: {
-//       id: req.params.reviewId
-//     }
-//   })
-//     .then(review => res.json(review))
-//     .catch(next)
-// })
-
-
 router.get('/:reviewId', async (req, res, next) => {
   try {
     const review = await Review.findOne({

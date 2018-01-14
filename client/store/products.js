@@ -11,7 +11,6 @@ const updateProductActionCreator = product => ({ type: UPDATE_PRODUCT, product }
 const addProductActionCreator = product => ({ type: ADD_PRODUCT, product })
 
 
-
 // export const getProducts = () =>
 //   async (dispatch) =>
 //     try {
