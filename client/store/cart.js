@@ -7,7 +7,7 @@ const ADD_TO_CART = 'ADD_TO_CART'
 
 //ACTION CREATORS
 const getCartActionCreator = cart => ({type: GET_CART, cart})
-const addToCartActionCreator = cart => ({ADD_TO_CART, cart})
+const addToCartActionCreator = cart => ({type: ADD_TO_CART, cart})
 
 //THUNK CREATORS
 export const getCart = id =>

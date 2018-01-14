@@ -5,21 +5,24 @@ module.exports = router
 
 router.post('/', async (req, res, next) => {
     try {
+        let foundCart, cart
         if (!req.user){
             console.log('The user adding to their cart is not logged in: ', req.sessionID)
             //Since the user is not logged in, the only thing we can associate to the order is the session
-            //The user may be creating an order 
-            const orderWithoutUser = await Order.create({
-                //other stuff
+            //check if there is a cart to edit
+            foundCart = await Order.findOne({
+                where: {
+                    session: req.sessionID,
+                    status: 'Created'
+                }
+                
+            })
+            console.log('type of foundOder: ', typeof foundCart)
+            //if there is no cart in db, create one
+            cart = await foundCart ||  Order.create({
                 session: req.sessionID,
                 status: 'Created'
             })
-            //or editing one accessible via the session
-            const foundOrder = await Order.findOne({
-                session: req.sessionID,
-                status: 'Created'
-            })
-
         } else {
             console.log('The user adding to their cart is logged in: ', req.sessionID)
             //Since the user is logged in, we can associate to the order a user
@@ -28,33 +31,38 @@ router.post('/', async (req, res, next) => {
             //The saved cart takes precedence
             const user = req.user
             console.log('user: ', user)
-            const savedOrder = await Order.findOne({
+            foundCart = await Order.findOne({
+                where: {
                 userId: user,
                 status: 'Created'
+                }
             })
-
-            
-
+            //if there is no found cart, create a cart
+            cart = await foundCart || Order.create({
+                userId: user,
+                session: req.sessionID,
+                status: 'Created'
+            })
         }
-        //if there is no other 'Created' order, create one
-        // const foundOrder = await Order.findOne({
-        //     session: req.sessionID,
-        //     status: 'Created'
-        // })
-        
-         
-        // const createdOrderItem = await OrderItem.create({
-        //     price: req.body.price,
-        //     quantity: req.body.quantity
-        // }) 
-        res.json(req.user) 
-
+        const item = await OrderItem.create({
+            price: req.body.price,
+            quantity: req.body.quantity || 1,
+            orderId: cart.id,
+            productId: req.body.productId
+        })
+        const updatedCart = await Order.findOne({
+            where: {
+                id: cart.id
+            },
+            include: [{
+                model: OrderItem
+            }]
+        })
+        res.json(updatedCart) 
     }
     catch (error) {
         next(error)
     }
-
-    
 })
 
 router.get('/user/:id', async (req, res, next) => {
@@ -73,4 +81,3 @@ router.get('/user/:id', async (req, res, next) => {
         next(error)
     }
 })
-
