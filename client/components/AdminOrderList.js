@@ -8,22 +8,52 @@ export class AdminOrderList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      orders: []
+      orders: [],
+      status: 'All',
     }
+
+    this.inputStatus = this.inputStatus.bind(this)
   }
 
+  inputStatus(evt) {
+    this.setState({
+      status: evt.target.value
+    })
+  }
 
   render() {
-    const orders = this.props.orders
+    const allOrder = this.props.orders
     const products = this.props.products
+
+    const displayOrders = this.props.orders.filter( order => {
+      if (this.state.status === 'All') {
+        return allOrder
+      }
+        return order.status === this.state.status;
+      })
 
     return (
       <div>
+
+        <select onChange={this.inputStatus} className="select-type">
+          <option value="All">All</option>
+          <option value="Created">Created</option>
+          <option value="Processing">Processing</option>
+          <option value="Cancelled">Cancelled</option>
+          <option value="Completed">Completed</option>
+        </select>
         <h1>
-          All Orders
+          {this.state.status} Orders
         </h1>
 
-        {orders.map((order) => {
+        {
+          // console.log(displayOrders)
+          displayOrders.length === 0 ?
+            <h2>
+              No {this.state.status} orders to display
+            </h2> :
+
+          displayOrders.map((order) => {
           const items = order.order_items
           const sum = (items.reduce((total, item) => {
             return total + item.price * item.quantity
@@ -94,7 +124,8 @@ export class AdminOrderList extends Component {
             </ul>
           )
         }
-        )}
+        )
+      }
       </div>
     )
   }

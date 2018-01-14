@@ -41,7 +41,6 @@ export default function (users = [], action) {
       return users.map(user => (action.user.id === user.id ? action.user : user))
     case DELETE_USER:
       return users.filter(user => user.id !== action.id)
-
     default:
       return users
   }
