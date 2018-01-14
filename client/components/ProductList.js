@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import store, {addToCart} from '../store'
 
 export const ProductList = (props) => {
   const products = props.products
-
 
   return (
     <div>
@@ -13,7 +13,7 @@ export const ProductList = (props) => {
         return (
           <li
           key={product.id} >
-            <NavLink
+            <Link
             to={`/products/${product.id}`}
             style={{ textDecoration: 'none' }}
             >
@@ -27,10 +27,10 @@ export const ProductList = (props) => {
               <h3>
               ${product.price}
               </h3>
-              <button>
+            </Link>
+            <button onClick={() => store.dispatch(addToCart(product.id, 1, product.price))}>
               Add to Cart
               </button>
-            </NavLink>
           </li>
         )
       }

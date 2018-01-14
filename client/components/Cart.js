@@ -1,18 +1,23 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import store, { getCart } from '../store'
+import Subtotal from './Subtotal'
 import { Link } from 'react-router-dom'
+
 
 class Cart extends Component {
     constructor(){
         super()
-        this.subTotal = this.subTotal.bind(this)
+        this.calculateSubTotal = this.calculateSubTotal.bind(this)
+        this.centsToDollarString = this.centsToDollarString.bind(this)
     }
 
     componentDidMount(){
-        const userId = this.props.userObject.id || 2 //the default user here is just for testing
-        const getCartThunk = getCart(userId)
-        store.dispatch(getCartThunk)
+        const userId = this.props.userObject.id
+        if (userId && !this.props.cart.id) {
+            const getCartThunk = getCart(userId)
+            store.dispatch(getCartThunk)
+        }   
     }
 
     centsToDollarString(cents){
@@ -23,29 +28,15 @@ class Cart extends Component {
         return '$' + justDollars + '.' + justCents
     }
 
-    subTotal(){
-        const orderItems = this.props.orderItems || [{
-            id: 99,
-            name: 'Chocolate Bar',
-            price: 1099,
-            quantity: 2,
-            imgURL: 'http://via.placeholder.com/32x32'
-        }]
-        const sum = orderItems.reduce((total, item) => {
+    calculateSubTotal(items){
+        const sum = items.reduce((total, item) => {
             return total + item.price * item.quantity
         }, 0)
         return this.centsToDollarString(sum)
     }
 
-    //a list of stacked order items
     render(){
-        const orderItems = this.props.cart.order_items || [{
-            id: 99,
-            name: 'Chocolate Bar',
-            price: 1099,
-            quantity: 2,
-            imgURL: 'http://via.placeholder.com/32x32'
-        }]
+        const orderItems = this.props.cart.order_items || []
         return (
             <div>
                 <h2>Cart</h2>
@@ -78,10 +69,11 @@ class Cart extends Component {
                         })
                     }
                 </ul>
-                <h4>
-                    Subtotal: {this.subTotal()}
-                </h4>
-                <button
+                <Subtotal 
+                    calculateSubTotal={this.calculateSubTotal}
+                    orderItems={this.props.cart.order_items || []}
+                />
+                <button 
                     type='button'
                 >
                     SHOP MORE

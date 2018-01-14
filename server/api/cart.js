@@ -3,26 +3,68 @@ const {Order, OrderItem} = require('../db/models')
 
 module.exports = router
 
-//when a user clicks on 'Add to shopping cart' for any item
-router.put('/', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
 
     try {
-        //create a new orderItem for the respective Item
-        //if there is no other 'Created' order, create one
-        const createdOrder = await Order.create({
-            session: req.sessionID
+        let foundCart, cart
+        if (!req.user){
+            console.log('The user adding to their cart is not logged in: ', req.sessionID)
+            //Since the user is not logged in, the only thing we can associate to the order is the session
+            //check if there is a cart to edit
+            foundCart = await Order.findOne({
+                where: {
+                    session: req.sessionID,
+                    status: 'Created'
+                }
+                
+            })
+            console.log('type of foundOder: ', typeof foundCart)
+            //if there is no cart in db, create one
+            cart = await foundCart ||  Order.create({
+                session: req.sessionID,
+                status: 'Created'
+            })
+        } else {
+            console.log('The user adding to their cart is logged in: ', req.sessionID)
+            //Since the user is logged in, we can associate to the order a user
+            //The Order model has the foreign key for this
+            //We have to see if there is a cart for the user to 'edit'
+            //The saved cart takes precedence
+            const user = req.user
+            console.log('user: ', user)
+            foundCart = await Order.findOne({
+                where: {
+                userId: user,
+                status: 'Created'
+                }
+            })
+            //if there is no found cart, create a cart
+            cart = await foundCart || Order.create({
+                userId: user,
+                session: req.sessionID,
+                status: 'Created'
+            })
+        }
+        const item = await OrderItem.create({
+            price: req.body.price,
+            quantity: req.body.quantity || 1,
+            orderId: cart.id,
+            productId: req.body.productId
         })
-
-        //console.log this to see what kind of object it spits out
-        res.json(createdOrder)
-        //otherwise, use that previously 'created' order to associate the new orderItem
+        const updatedCart = await Order.findOne({
+            where: {
+                id: cart.id
+            },
+            include: [{
+                model: OrderItem
+            }]
+        })
+        res.json(updatedCart) 
     }
     catch (error) {
         next(error)
     }
-
 })
-
 
 router.get('/user/:id', async (req, res, next) => {
     try {
@@ -40,4 +82,3 @@ router.get('/user/:id', async (req, res, next) => {
         next(error)
     }
 })
-
