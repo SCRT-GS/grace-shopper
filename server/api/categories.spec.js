@@ -1,35 +1,36 @@
 /* global describe beforeEach it */
 
-/*
-const {expect} = require('chai')
+
+const { expect } = require('chai')
 const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
-const User = db.model('user')
+const Category = db.model('category')
 
-describe('User routes', () => {
+describe('Category routes', () => {
   beforeEach(() => {
-    return db.sync({force: true})
+    return db.sync({ force: true })
   })
 
-  describe('/api/users/', () => {
-    const codysEmail = 'cody@puppybook.com'
+  describe('/api/categories/', () => {
+    const testChocolate = {
+      name: 'test',
+    }
 
     beforeEach(() => {
-      return User.create({
-        email: codysEmail
+      return Category.create({
+        name: testChocolate.name,
       })
     })
 
-    it('GET /api/users', () => {
+    it('GET /api/categories should respond with an array of all categories', () => {
       return request(app)
-        .get('/api/users')
+        .get('/api/categories')
         .expect(200)
         .then(res => {
           expect(res.body).to.be.an('array')
-          expect(res.body[0].email).to.be.equal(codysEmail)
+          expect(res.body[0].name).to.be.equal(testChocolate.name)
         })
     })
-  }) // end describe('/api/users')
-}) // end describe('User routes')
-*/
+  }) // end describe('/api/categories')
+}) // end describe('categories routes')
