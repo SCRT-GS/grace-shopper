@@ -29,6 +29,7 @@ export const getMyOrders = (id) =>
 export default function (myOrders = [], action) {
   switch (action.type) {
     case GET_MY_ORDERS:
+    console.log(action.myOrders)
       return action.myOrders
     default:
       return myOrders
