@@ -1,33 +1,21 @@
 const db = require('../server/db')
-const { User, Category, Product, Review, Order, OrderItem } = require('../server/db/models')
+const {User, Category, Product, Review, Order, OrderItem} = require('../server/db/models')
 
-async function seed() {
-  await db.sync({ force: true })
+async function seed () {
+  await db.sync({force: true})
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({
-      email: 'emptycartmcuser@email.com',
-      password: '123'
-    }),
-    User.create({
-      email: 'murphy@email.com',
-      password: '123'
-    }),
     User.create({
       email: 'cody@email.com',
       password: '123'
     }),
     User.create({
-      email: 'lebron@email.com',
-      password: '123'
-    }),
-    User.create({
-      email: 'kanye@email.com',
+      email: 'murphy@email.com',
       password: '123'
     })
   ])
-
+  
   const categories = await Promise.all([
     Category.create({
       name: 'Dark'
@@ -51,82 +39,21 @@ async function seed() {
       name: 'Bar'
     })
   ])
-
+  
   const products = await Promise.all([
     Product.create({
       name: 'Arawi - Deluxe',
       description: 'Single Origin Arriba Nacional, 78% cacao',
       price: 1299,
       quantity: 20,
-      imgURL: 'http://via.placeholder.com/100x100'
-    }),
+      imgURL: 'http://via.placeholder.com/100x100'}),
     Product.create({
       name: 'Pacari - Super Milky',
       description: 'Single Origin Hybrid, 30% cacao',
       price: 1599,
       quantity: 20,
-      imgURL: 'http://via.placeholder.com/100x100'
-    }),
-      Product.create({
-      name: 'Valrhona - Le Noir Amer',
-      description: '71%% cacao',
-      price: 1599,
-      quantity: 20,
-      imgURL: 'http://via.placeholder.com/100x100'
-    }),
-      Product.create({
-      name: 'Confluence',
-      description: 'Tien Giang batch 10-2-16, 78% cacao',
-      price: 1599,
-      quantity: 20,
-      imgURL: 'http://via.placeholder.com/100x100'
-    }),
-      Product.create({
-      name: 'Pralus',
-      description: '75% cacao',
-      price: 1599,
-      quantity: 20,
-      imgURL: 'http://via.placeholder.com/100x100'
-    }),
-      Product.create({
-      name: 'Domori - Porcelana',
-      description: '70% cacao',
-      price: 1599,
-      quantity: 20,
-      imgURL: 'http://via.placeholder.com/100x100'
-    }),
-      Product.create({
-      name: 'Soma - Chuao',
-      description: '70% cacao',
-      price: 1599,
-      quantity: 20,
-      imgURL: 'http://via.placeholder.com/100x100'
-    }),
-      Product.create({
-      name: 'Belcolade',
-      description: 'Peru, 64% cacao',
-      price: 1599,
-      quantity: 20,
-      imgURL: 'http://via.placeholder.com/100x100'
-    }),
-      Product.create({
-      name: 'Arete - Phantom',
-      description: '70% cacao',
-      price: 1599,
-      quantity: 20,
-      imgURL: 'http://via.placeholder.com/100x100'
-    }),
-      Product.create({
-      name: 'Zokoko',
-      description: 'Tokiala, 66% cacao',
-      price: 1599,
-      quantity: 20,
-      imgURL: 'http://via.placeholder.com/100x100'
-    }),
-
+      imgURL: 'http://via.placeholder.com/100x100'})
   ])
-
-
   const reviews = await Promise.all([
     Review.create({
       userId: 1,
@@ -177,9 +104,7 @@ async function seed() {
       productId: 1
     })
   ])
-
-
-
+  
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${categories.length} categories`)
   console.log(`seeded ${products.length} products`)
