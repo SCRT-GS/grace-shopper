@@ -12,13 +12,6 @@ class Cart extends Component {
         this.centsToDollarString = this.centsToDollarString.bind(this)
     }
 
-    componentDidMount(){
-        const userId = this.props.userObject.id
-        if (userId && !this.props.cart.id) {
-            const getCartThunk = getCart(userId)
-            store.dispatch(getCartThunk)
-        }   
-    }
 
     centsToDollarString(cents){
         if(typeof cents !== 'number') throw TypeError()
@@ -36,7 +29,8 @@ class Cart extends Component {
     }
 
     render(){
-        const orderItems = this.props.cart.order_items || []
+        console.log('cart: ', this.props.cart)
+        const orderItems = this.props.cart && this.props.cart.order_items || []
         return (
             <div>
                 <h2>Cart</h2>
@@ -74,7 +68,7 @@ class Cart extends Component {
                 </ul>
                 <Subtotal 
                     calculateSubTotal={this.calculateSubTotal}
-                    orderItems={this.props.cart.order_items || []}
+                    orderItems={this.props.cart && this.props.cart.order_items || []}
                 />
                 <button 
                     type='button'
