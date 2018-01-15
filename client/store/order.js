@@ -3,7 +3,9 @@ import history from '../history'
 
 const GET_ORDER =  'GET_ORDER'
 
+
 const getOrderActionCreator = order => ({ type: GET_ORDER, order })
+
 
 
 /**
@@ -18,6 +20,8 @@ export const getOrder = (id) =>
         dispatch(getOrderActionCreator(result))
       })
       .catch(err => console.log(err))
+
+
 
 /**
  * REDUCER
