@@ -27,6 +27,7 @@ export const getOrders = () =>
           })
           .catch(err => console.log(err))
 
+
 export default function (orders = [], action) {
   switch (action.type) {
     case GET_ORDERS:
