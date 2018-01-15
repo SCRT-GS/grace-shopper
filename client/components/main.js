@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {withRouter, Link, NavLink} from 'react-router-dom'
 import {logout} from '../store'
 import ProductList from './ProductList'
+import SideBar from './SideBar'
 
 /**
  * COMPONENT
@@ -18,6 +19,7 @@ const Main = (props) => {
     <div>
       <h1>MVP Chocolate Store</h1>
       <h2>Some links are for [dev]elopment purposes</h2>
+      <SideBar />
       <nav>
       <NavLink to="/">Home</NavLink>
       <NavLink to="/products">Shop</NavLink>

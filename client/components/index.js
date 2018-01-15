@@ -23,5 +23,6 @@ export {default as ReviewDetail} from './ReviewDetail'
 export { AdminHome} from './AdminHome'
 export {default as MyOrders} from './MyOrders'
 export { OrderSubmitted } from './OrderSubmitted'
+export { SideBar } from './SideBar'
 
 //will be exporting the centsToDollarString function from here
