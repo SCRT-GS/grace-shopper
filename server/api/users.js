@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/admin/:id', async (req, res) => {
+router.get('/admin/:id', async (req, res, next) => {
   try {
     const user = await User.findOne({
       where: {
@@ -46,7 +46,26 @@ router.get('/:id/orders', async (req, res, next) => {
     })
     res.json(orders)
   }
-  catch (error){
+  catch (error) {
+    next(error)
+  }
+})
+
+router.get('/:id/orders/:orderId', async (req, res, next) => {
+  try {
+    const orders = await Order.findOne({
+      where: {
+        status: 'Completed',
+        userId: +req.params.id,
+        id: +req.params.orderId
+      },
+      include: [{
+        model: OrderItem
+      }]
+    })
+    res.json(orders)
+  }
+  catch (error) {
     next(error)
   }
 })
@@ -56,7 +75,7 @@ router.get('/orders/', async (req, res, next) => {
     const orders = await Order.findAll({
       include: [{
         model: OrderItem
-    }]
+      }]
     })
     res.json(orders)
   }
@@ -65,7 +84,7 @@ router.get('/orders/', async (req, res, next) => {
   }
 })
 
-router.get('/admin/orders/:id', async (req, res) => {
+router.get('/admin/orders/:id', async (req, res, next) => {
   try {
     const order = await Order.findOne({
       where: {
@@ -73,7 +92,7 @@ router.get('/admin/orders/:id', async (req, res) => {
       },
       include: [{
         model: OrderItem
-    }]
+      }]
     })
     res.json(order)
   }
@@ -82,7 +101,7 @@ router.get('/admin/orders/:id', async (req, res) => {
   }
 })
 
-router.put('/update/orders/:id', async (req, res) => {
+router.put('/update/orders/:id', async (req, res, next) => {
   try {
     const order = await Order.findOne({
       where: {
@@ -100,7 +119,7 @@ router.put('/update/orders/:id', async (req, res) => {
   }
 })
 
-router.put('/update/:id', async (req, res) => {
+router.put('/update/:id', async (req, res, next) => {
   try {
     const user = await User.findOne({
       where: {
@@ -129,8 +148,8 @@ router.delete('/:id', async (req, res, next) => {
     })
     await user.destroy({ force: true })
     res.json('this user record no longer exists')
-    }
-  catch (error){
+  }
+  catch (error) {
     next(error)
   }
 })

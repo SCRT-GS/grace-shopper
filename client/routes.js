@@ -4,7 +4,7 @@ import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 
-import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminEditOrderDetail, AdminProductList, AdminOrderList, ReviewForm, MyOrders, Cart, Checkout, ReviewDetail, AdminCategoryList, OrderSubmitted } from './components'
+import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, AdminEditProductDetail, AdminEditOrderDetail, AdminProductList, AdminOrderList, ReviewForm, MyOrders, MyOrderDetail, Cart, Checkout, ReviewDetail, AdminCategoryList, OrderSubmitted } from './components'
 import store, { me, getProducts, getUsers, getReviews, getCart, getOrders, getCategories } from './store'
 
 
@@ -142,6 +142,11 @@ class Routes extends Component {
                   exact
                   path="/my-account"
                   component={MyOrders}
+                />
+                <Route
+                  exact
+                  path="/my-account/:orderId"
+                  component={MyOrderDetail}
                 />
               </Switch>
             }
