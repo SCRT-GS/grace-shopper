@@ -46,7 +46,7 @@ export class AdminEditUserDetail extends Component {
 
   render() {
     const user = this.props.adminUser
-    const str = "mailto:" + user.email + "?subject=Please%20Reset%20Your%20Password&body=Please%20log%20in%20%20at%20Grace%20Shopper%20to%20reset%20your%20password."
+
 
     return (
       <div>
@@ -62,15 +62,6 @@ export class AdminEditUserDetail extends Component {
         <h2>
           Password Reset Pending? {user.resetPassword ? ' Yes' : ' No'}
         </h2>
-        <form
-          action={str}
-          method="post"
-        >
-          <input
-            type="submit"
-            value="Send Email to User"
-          />
-        </form>
         <form
           id="userform"
           onSubmit={this.submit}

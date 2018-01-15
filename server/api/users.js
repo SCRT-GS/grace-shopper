@@ -84,7 +84,7 @@ router.get('/admin/orders/:id', async (req, res) => {
   }
 })
 
-router.put('/update/orders/:id', async (req, res) => {
+router.put('/update/orders/:id', async (req, res, next) => {
   try {
     const order = await Order.findOne({
       where: {
@@ -126,6 +126,34 @@ router.put('/update/orders/:id', async (req, res) => {
         }
       });
     }
+      if (order.status === 'Completed') {
+        const transporter = nodemailer.createTransport({
+          service: 'Gmail',
+          auth: {
+            user: 'wwchocolatefactory2@gmail.com',
+            pass: 'chocolicious'
+          }
+        })
+
+        const text = `Your order from The Chocolate Store has been delivered. Your order number is ${order.id}. We appreciate your business!\n\nLove and chocolate,\n\n William Wonka\n\n
+       Chocolatier & CEO \n\n The Chocolate Store`
+
+        const mailOptions = {
+          from: 'wwchocolatefactory2@gmail.com',
+          to: `${order.email}`,
+          subject: 'Your order has been delivered!',
+          text: text
+        }
+        await transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+            res.json({ yo: 'error' });
+          } else {
+            console.log('Message sent: ' + info.response);
+            res.json({ yo: info.response });
+          }
+        })
+    }
   }
 
   catch (error) {
@@ -134,16 +162,18 @@ router.put('/update/orders/:id', async (req, res) => {
 })
 
 
+router.put('/update/:id', async (req, res, next) => {
 
-
-
-router.put('/update/:id', async (req, res) => {
   try {
     const user = await User.findOne({
       where: {
         id: +req.params.id
       }
     })
+    let changePossible = false
+    if (user.resetPassword === false){
+     changePossible = true
+    }
     await user.update({
       email: req.body.email,
       isAdmin: req.body.isAdmin,
@@ -151,7 +181,34 @@ router.put('/update/:id', async (req, res) => {
     })
     await user.reload()
     res.json(user)
+    if (changePossible  && req.body.resetPassword === true ) {
+      const transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+          user: 'wwchocolatefactory2@gmail.com',
+          pass: 'chocolicious'
+        }
+      })
+
+      const text = `Please log in to the Chocolate Factory website to reset your password.`
+
+      const mailOptions = {
+        from: 'wwchocolatefactory2@gmail.com',
+        to: `${user.email}`,
+        subject: 'Please reset your password.',
+        text: text
+      }
+      await transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+          res.json({ yo: 'error' });
+        } else {
+          console.log('Message sent: ' + info.response);
+          res.json({ yo: info.response });
+        }
+      })
   }
+}
   catch (error) {
     next(error)
   }
