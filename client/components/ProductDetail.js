@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink, Link } from 'react-router-dom'
-import store, { getProduct, getProductReviews } from '../store'
+import store, { getProduct, getProductReviews, addToCart } from '../store'
 import { ReviewList } from './ReviewList'
 
 
@@ -57,7 +57,9 @@ export class ProductDetail extends Component {
           )}
         )}</h4>
         <div>
-          <button>
+          <button
+          onClick={() => store.dispatch(addToCart(product.id, 1, product.price))}
+          >
           Add to cart
           </button>
         </div>
