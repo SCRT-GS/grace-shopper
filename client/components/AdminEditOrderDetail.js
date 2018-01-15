@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import store, { getOrder, updateOrder } from '../store'
+import axios from 'axios'
 
 
 export class AdminEditOrderDetail extends Component {
@@ -12,6 +13,8 @@ export class AdminEditOrderDetail extends Component {
     }
 
     this.submit = this.submit.bind(this);
+    this.sendEmail = this.sendEmail.bind(this);
+
   }
 
   componentDidMount() {
@@ -32,7 +35,15 @@ export class AdminEditOrderDetail extends Component {
     this.props.updateOrder(order.id, updatedOrder)
     // this.props.history.push(`/admin/orders`)
   }
+  sendEmail(event) {
+    event.preventDefault();
 
+    const order = this.props.order;
+
+    axios.post(`/api/users/admin/shipping-email`, order)
+      .then(res => res.data)
+      .catch(err => console.error(`Could not send email:`, err));
+  }
 
   render() {
     const order = this.props.order
@@ -152,7 +163,13 @@ export class AdminEditOrderDetail extends Component {
             Set New Order Status
           </button>
         </form>
-
+        <button
+          id="sendEmail"
+          onClick={this.sendEmail}
+          type="button"
+        >
+          Send Shipping Notification Email
+      </button>
 
         <br />
       </div>

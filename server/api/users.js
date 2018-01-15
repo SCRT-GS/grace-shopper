@@ -4,6 +4,13 @@ var nodemailer = require('nodemailer');
 
 module.exports = router
 
+const transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: 'wwchocolatefactory2@gmail.com',
+    pass: 'chocolicious'
+  }
+})
 
 router.get('/', async (req, res, next) => {
   try {
@@ -84,6 +91,36 @@ router.get('/admin/orders/:id', async (req, res) => {
   }
 })
 
+router.post('/admin/shipping-email', async (req, res, next) => {
+  try {
+    const order = req.body
+
+    const text = `Thank you for placing your order at The Chocolate Store. Your package has been shipped!. Your order number is ${order.id}. We appreciate your business!\n\nLove and chocolate,\n\nWilliam Wonka\n\nChocolatier & CEO \n\nThe Chocolate Store`
+
+    const mailOptions = {
+      from: 'wwchocolatefactory2@gmail.com',
+      to: `${order.email}`,
+      subject: 'Your order from The Chocolate Store has shipped!',
+      text: text
+    }
+    await transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+        res.json({ yo: 'error' });
+      } else {
+        console.log('Message sent: ' + info.response);
+        res.json({ yo: info.response });
+      }
+    });
+    res.json(order)
+  }
+  catch (error) {
+    next(error)
+  }
+})
+
+
+
 router.put('/update/orders/:id', async (req, res, next) => {
   try {
     const order = await Order.findOne({
@@ -99,16 +136,8 @@ router.put('/update/orders/:id', async (req, res, next) => {
     res.json(order)
 
     if (order.status === 'Processing') {
-      const transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-          user: 'wwchocolatefactory2@gmail.com',
-          pass: 'chocolicious'
-        }
-      })
 
-      const text = `Thank you for placing your order at The Chocolate Store. We\'re packing up your sweet treats now and will send you a notification email when it ships. Your order number is ${order.id}. We appreciate your business!\n\nLove and chocolate,\n\n William Wonka\n\n
-     Chocolatier & CEO \n\n The Chocolate Store`
+      const text = `Thank you for placing your order at The Chocolate Store. We\'re packing up your sweet treats now and will send you a notification email when it ships. Your order number is ${order.id}. We appreciate your business!\n\nLove and chocolate,\n\nWilliam Wonka\n\nChocolatier & CEO \n\nThe Chocolate Store`
 
       const mailOptions = {
         from: 'wwchocolatefactory2@gmail.com',
@@ -127,16 +156,8 @@ router.put('/update/orders/:id', async (req, res, next) => {
       });
     }
       if (order.status === 'Completed') {
-        const transporter = nodemailer.createTransport({
-          service: 'Gmail',
-          auth: {
-            user: 'wwchocolatefactory2@gmail.com',
-            pass: 'chocolicious'
-          }
-        })
 
-        const text = `Your order from The Chocolate Store has been delivered. Your order number is ${order.id}. We appreciate your business!\n\nLove and chocolate,\n\n William Wonka\n\n
-       Chocolatier & CEO \n\n The Chocolate Store`
+        const text = `Your order from The Chocolate Store has been delivered. Your order number is ${order.id}. We appreciate your business!\n\nLove and chocolate,\n\nWilliam Wonka\n\nChocolatier & CEO \n\nThe Chocolate Store`
 
         const mailOptions = {
           from: 'wwchocolatefactory2@gmail.com',
@@ -182,13 +203,6 @@ router.put('/update/:id', async (req, res, next) => {
     await user.reload()
     res.json(user)
     if (changePossible  && req.body.resetPassword === true ) {
-      const transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-          user: 'wwchocolatefactory2@gmail.com',
-          pass: 'chocolicious'
-        }
-      })
 
       const text = `Please log in to the Chocolate Factory website to reset your password.`
 
