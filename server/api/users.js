@@ -27,18 +27,35 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/admin/:id', async (req, res) => {
-  try {
-    const user = await User.findOne({
-      where: {
-        id: +req.params.id
+router.get('/admin/:id', async (req, res, next) => {
+  if (req.session.passport) {
+    if (req.session.passport.user) {
+
+      try {
+        const adminUser = await User.findOne({
+          where: {
+            id: req.session.passport.user
+          }
+        })
+
+        if (adminUser.isAdmin) {
+
+          const user = await User.findOne({
+            where: {
+              id: +req.params.id
+            }
+          })
+          res.json(user)
+        }
       }
-    })
-    res.json(user)
+      catch (error) {
+        next(error)
+      }
+    }
+  } else {
+    return res.status(500).send('You do not have permission to view this page')
   }
-  catch (error) {
-    next(error)
-  }
+
 })
 
 
@@ -74,50 +91,84 @@ router.get('/orders/', async (req, res, next) => {
   }
 })
 
-router.get('/admin/orders/:id', async (req, res) => {
-  try {
-    const order = await Order.findOne({
-      where: {
-        id: +req.params.id
-      },
-      include: [{
-        model: OrderItem
-      }]
-    })
-    res.json(order)
+router.get('/admin/orders/:id', async (req, res, next) => {
+  if (req.session.passport) {
+    if (req.session.passport.user) {
+      try {
+        const adminUser = await User.findOne({
+          where: {
+            id: req.session.passport.user
+          }
+        })
+
+        if (adminUser.isAdmin) {
+
+          const order = await Order.findOne({
+            where: {
+              id: +req.params.id
+            },
+            include: [{
+              model: OrderItem
+            }]
+          })
+          res.json(order)
+        }
+      }
+      catch (error) {
+        next(error)
+      }
+    }
   }
-  catch (error) {
-    next(error)
+  else {
+    return res.status(500).send('You do not have permission to view this page')
   }
 })
 
 router.post('/admin/shipping-email', async (req, res, next) => {
-  try {
-    const order = req.body
+  if (req.session.passport) {
+    if (req.session.passport.user) {
+      try {
+        const adminUser = await User.findOne({
+          where: {
+            id: req.session.passport.user
+          }
+        })
 
-    const text = `Thank you for placing your order at The Chocolate Store. Your package has been shipped!. Your order number is ${order.id}. We appreciate your business!\n\nLove and chocolate,\n\nWilliam Wonka\n\nChocolatier & CEO \n\nThe Chocolate Store`
+        if (adminUser.isAdmin) {
+          {
+            const order = req.body
 
-    const mailOptions = {
-      from: 'wwchocolatefactory2@gmail.com',
-      to: `${order.email}`,
-      subject: 'Your order from The Chocolate Store has shipped!',
-      text: text
-    }
-    await transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-        res.json({ yo: 'error' });
-      } else {
-        console.log('Message sent: ' + info.response);
-        res.json({ yo: info.response });
+            const text = `Thank you for placing your order at The Chocolate Store. Your package has been shipped!. Your order number is ${order.id}. We appreciate your business!\n\nLove and chocolate,\n\nWilliam Wonka\n\nChocolatier & CEO \n\nThe Chocolate Store`
+
+            const mailOptions = {
+              from: 'wwchocolatefactory2@gmail.com',
+              to: `${order.email}`,
+              subject: 'Your order from The Chocolate Store has shipped!',
+              text: text
+            }
+            await transporter.sendMail(mailOptions, function (error, info) {
+              if (error) {
+                console.log(error);
+                res.json({ yo: 'error' });
+              } else {
+                console.log('Message sent: ' + info.response);
+                res.json({ yo: info.response });
+              }
+            });
+            res.json(order)
+          }
+        }
       }
-    });
-    res.json(order)
+      catch (error) {
+        next(error)
+      }
+    }
   }
-  catch (error) {
-    next(error)
+  else {
+    return res.status(500).send('You do not have permission to view this page')
   }
 })
+
 
 
 
@@ -155,25 +206,25 @@ router.put('/update/orders/:id', async (req, res, next) => {
         }
       });
     }
-      if (order.status === 'Completed') {
+    if (order.status === 'Completed') {
 
-        const text = `Your order from The Chocolate Store has been delivered. Your order number is ${order.id}. We appreciate your business!\n\nLove and chocolate,\n\nWilliam Wonka\n\nChocolatier & CEO \n\nThe Chocolate Store`
+      const text = `Your order from The Chocolate Store has been delivered. Your order number is ${order.id}. We appreciate your business!\n\nLove and chocolate,\n\nWilliam Wonka\n\nChocolatier & CEO \n\nThe Chocolate Store`
 
-        const mailOptions = {
-          from: 'wwchocolatefactory2@gmail.com',
-          to: `${order.email}`,
-          subject: 'Your order has been delivered!',
-          text: text
+      const mailOptions = {
+        from: 'wwchocolatefactory2@gmail.com',
+        to: `${order.email}`,
+        subject: 'Your order has been delivered!',
+        text: text
+      }
+      await transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+          res.json({ yo: 'error' });
+        } else {
+          console.log('Message sent: ' + info.response);
+          res.json({ yo: info.response });
         }
-        await transporter.sendMail(mailOptions, function (error, info) {
-          if (error) {
-            console.log(error);
-            res.json({ yo: 'error' });
-          } else {
-            console.log('Message sent: ' + info.response);
-            res.json({ yo: info.response });
-          }
-        })
+      })
     }
   }
 
@@ -192,8 +243,8 @@ router.put('/update/:id', async (req, res, next) => {
       }
     })
     let changePossible = false
-    if (user.resetPassword === false){
-     changePossible = true
+    if (user.resetPassword === false) {
+      changePossible = true
     }
     await user.update({
       email: req.body.email,
@@ -202,7 +253,7 @@ router.put('/update/:id', async (req, res, next) => {
     })
     await user.reload()
     res.json(user)
-    if (changePossible  && req.body.resetPassword === true ) {
+    if (changePossible && req.body.resetPassword === true) {
 
       const text = `Please log in to the Chocolate Factory website to reset your password.`
 
@@ -221,24 +272,39 @@ router.put('/update/:id', async (req, res, next) => {
           res.json({ yo: info.response });
         }
       })
+    }
   }
-}
   catch (error) {
     next(error)
   }
 })
 
 router.delete('/:id', async (req, res, next) => {
-  try {
-    const user = await User.findOne({
-      where: {
-        id: +req.params.id
+  if (req.session.passport) {
+    if (req.session.passport.user) {
+      try {
+        const adminUser = await User.findOne({
+          where: {
+            id: req.session.passport.user
+          }
+        })
+
+        if (adminUser.isAdmin) {
+          const user = await User.findOne({
+            where: {
+              id: +req.params.id
+            }
+          })
+          await user.destroy({ force: true })
+          res.json('this user record no longer exists')
+        }
       }
+      catch (error) {
+        next(error)
+      }
+    }
+  }
+  else {
+    return res.status(500).send('You do not have permission to view this page')
+  }
     })
-    await user.destroy({ force: true })
-    res.json('this user record no longer exists')
-  }
-  catch (error) {
-    next(error)
-  }
-})
