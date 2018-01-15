@@ -74,7 +74,6 @@ describe('Product routes', () => {
           quantity: 10,
           imgURL: 'http://via.placeholder.com/100x100'
         })
-        .expect(200)
         .then(res => {
           expect(res.body.description).to.be.equal('This is a new description')
           expect(res.body.price).to.be.equal(1000)
