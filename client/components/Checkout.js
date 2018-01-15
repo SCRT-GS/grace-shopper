@@ -83,8 +83,8 @@ class Checkout extends Component {
     const processingStatus = 'Processing'
     const orderEmail = this.state.email
     const updatedOrder = {
-      status: processingStatus,
-      email: orderEmail
+      email: orderEmail,
+      status: processingStatus
     }
     this.props.submitCheckout(this.state.line1, this.state.line2, this.state.city, this.state.state, this.state.zip, this.state.orderId)
     this.props.processingOrder(orderId, updatedOrder)
@@ -96,6 +96,7 @@ render() {
 
   const selectState = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
 
+    console.log("PROPS: ", this.props)
 
   return (
     <div id="checkout-page-container">
@@ -144,6 +145,7 @@ render() {
 const mapState = state => {
 return {
   product: state.product,
+  user: state.user,
   auth: state.auth,
   cart: state.cart
 };
