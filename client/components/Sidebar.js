@@ -19,6 +19,7 @@ export const SideBar = (props) => {
     return 0;
   })
 
+  console.log("PROPS: ", props)
 
     return (
       <div>

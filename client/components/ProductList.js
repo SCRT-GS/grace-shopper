@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import store, { addToCart } from '../store'
-import { SideBar } from './Sidebar'
+import Sidebar, { SideBar } from './Sidebar'
 
 export class ProductList extends Component {
   constructor(props) {
@@ -38,8 +38,8 @@ export class ProductList extends Component {
 
     return (
       <div>
+        <Sidebar props={this.props} />
         <div className="ui category search">
-        <SideBar />
         <div className="ui icon input">
           <input
           value={this.state.search}
