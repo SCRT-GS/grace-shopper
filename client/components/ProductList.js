@@ -23,6 +23,7 @@ export class ProductList extends Component {
 
   render() {
 
+
     const products = this.props.products.sort(function (a, b) {
       var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
       if (nameA < nameB)
