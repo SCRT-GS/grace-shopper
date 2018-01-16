@@ -52,7 +52,8 @@ router.post('/', async (req, res, next) => {
                 //create a session cart
                 const createdCartAssociatedWithUser = await Order.create({
                     session: req.sessionID,
-                    userId: req.user.dataValues.id
+                    userId: req.user.dataValues.id,
+                    status: 'Created'
                 })
                 cart = createdCartAssociatedWithUser
             }
