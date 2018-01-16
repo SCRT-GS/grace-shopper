@@ -44,83 +44,121 @@ export class AdminProductList extends Component {
     const products = this.props.products
     return (
       <div>
-        <h3 className="title">Our Products</h3>
+        <h2 className="ui icon header">
+    <i className="circular money icon"></i>
+      <div className="content">
+    Manage Products
+      </div>
+    </h2>
+        <ul className="ui relaxed divided list">
         {products.map((product) => {
           return (
-            <li
+            <div className="item"
               key={product.id} >
               <NavLink
                 to={`/admin/products/${product.id}`}
                 style={{ textDecoration: 'none' }}
               >
-                <img
-                  id="product-pic"
-                  src={product.imgURL}
-                />
-                <h3>
+              
+                
+                <div class="ui grid">
+                  <div class="two wide column">
+                    <img
+                      id="product-pic"
+                      src={product.imgURL}
+                      className="ui avatar image"
+                    />
+                  </div>
+  <div class="eight wide column">
+  <span>
                   {product.name}
-                </h3>
-                <h3>
+                </span >
+  </div>
+  <div class="four wide column">
+                <span  >
                   ${product.price}
-                </h3>
-                <h3>
-                  Quantity Available: {' ' + product.quantity}
-                </h3>
-                <button>
-                  See Product Detail
-              </button>
+                </span>
+  </div>
+  <div class="two wide column">
+                <span >
+                  {product.quantity}
+                </span></div>
+</div>
+               
+                
+                
+              
               </NavLink>
-            </li>
+            </div>
           )
         }
         )}
-        <h2>Add A Product</h2>
-        <section >
+        </ul>
+        <h4 class="ui horizontal divider header">
+          NEW PROUCT
+        </h4>
+        <section className="ui form">
           <form
             id="productform"
             onSubmit={this.handleSubmit}
           >
-            <input
-              name="name"
-              type="text"
-              className="form-like"
-              onChange={this.handleChange}
-              placeholder="Name"
-            />
-            <input
-              name="description"
-              type="text"
-              className="form-like"
-              onChange={this.handleChange}
-              placeholder="Description"
-            />
+          <div className="fields">
+            <div className="ui four wide field">
+              <input
+                name="name"
+                type="text"
+                
+                onChange={this.handleChange}
+                placeholder="Name"
+              />
+            </div>
+            <div className="ui twelve wide field">
+              <input
+                name="description"
+                type="text"
+                
+                onChange={this.handleChange}
+                placeholder="Description"
+              />
+            </div>
+          </div>
+          <div className="fields">
+            <div className="ui four wide field">
             <input
               name="price"
               type="number"
-              className="form-like"
+              
               onChange={this.handleChange}
               placeholder="price"
             />
+            </div>
+            <div className="ui four wide field">
             <input
               name="imgURL"
               type="text"
-              className="form-like"
+              
               onChange={this.handleChange}
               placeholder="Image Link"
             />
+            </div>
+            <div className="ui eight wide field">
             <input
               name="quantity"
               type="number"
-              className="form-like"
+              
               onChange={this.handleChange}
               placeholder="Quantity"
             />
+            </div>
+          </div>
 
             <button
               id="submit"
               type="submit"
+              className="ui right floated button"
             >
-              Save Changes
+            <i class="add sign icon"></i>
+              ADD
         </button>
           </form>
         </section>
