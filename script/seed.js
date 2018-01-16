@@ -16,7 +16,8 @@ async function seed() {
     }),
     User.create({
       email: 'cody@email.com',
-      password: '123'
+      password: '123',
+      isAdmin: true
     }),
     User.create({
       email: 'lebron@email.com',
@@ -24,6 +25,26 @@ async function seed() {
     }),
     User.create({
       email: 'kanye@email.com',
+      password: '123'
+    }),
+    User.create({
+      email: 'hermionegranger@email.com',
+      password: '123'
+    }),
+    User.create({
+      email: 'ronweasley@email.com',
+      password: '123'
+    }),
+    User.create({
+      email: 'harrypotter@email.com',
+      password: '123'
+    }),
+    User.create({
+      email: 'albusdumbledore@email.com',
+      password: '123'
+    }),
+    User.create({
+      email: 'jeffreylebowski@email.com',
       password: '123'
     })
   ])
@@ -49,6 +70,24 @@ async function seed() {
     }),
     Category.create({
       name: 'Bar'
+    }),
+    Category.create({
+      name: 'Filled'
+    }),
+    Category.create({
+      name: 'Criollo'
+    }),
+    Category.create({
+      name: 'Fair Trade'
+    }),
+    Category.create({
+      name: 'Arriba Nacional'
+    }),
+    Category.create({
+      name: 'Trinitario'
+    }),
+    Category.create({
+      name: 'Sugar Free'
     })
   ])
 
@@ -71,7 +110,7 @@ async function seed() {
       name: 'Valrhona - Le Noir Amer',
       description: '71%% cacao',
       price: 1599,
-      quantity: 20,
+      quantity: 1,
       imgURL: 'http://via.placeholder.com/100x100'
     }),
       Product.create({
@@ -85,7 +124,7 @@ async function seed() {
       name: 'Pralus',
       description: '75% cacao',
       price: 1599,
-      quantity: 20,
+      quantity: 99,
       imgURL: 'http://via.placeholder.com/100x100'
     }),
       Product.create({
@@ -99,7 +138,7 @@ async function seed() {
       name: 'Soma - Chuao',
       description: '70% cacao',
       price: 1599,
-      quantity: 20,
+      quantity: 2000,
       imgURL: 'http://via.placeholder.com/100x100'
     }),
       Product.create({
@@ -123,6 +162,20 @@ async function seed() {
       quantity: 20,
       imgURL: 'http://via.placeholder.com/100x100'
     }),
+    Product.create({
+      name: 'Camino Verde',
+      description: 'Ambato, 75% cacao',
+      price: 1599,
+      quantity: 2,
+      imgURL: 'http://via.placeholder.com/100x100'
+    }),
+    Product.create({
+      name: 'Toscano Black',
+      description: 'Italy, 70% cacao',
+      price: 1599,
+      quantity: 400,
+      imgURL: 'http://via.placeholder.com/100x100'
+    })
 
   ])
 
@@ -131,13 +184,13 @@ async function seed() {
     Review.create({
       userId: 1,
       productId: 1,
-      content: 'This is a review.',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus, lorem vel lobortis laoreet, sem ante dapibus enim, id pellentesque enim velit vel diam. Phasellus auctor in dolor sit amet aliquet. Vestibulum nulla est, convallis posuere purus vitae, aliquet dapibus elit. Nullam volutpat eros eu tempor laoreet. Nulla elit risus, faucibus nec ultricies et, pellentesque et velit. ',
       rating: 3
     }),
     Review.create({
       userId: 2,
       productId: 2,
-      content: 'This is another review',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus, lorem vel lobortis laoreet, sem ante dapibus enim, id pellentesque enim velit vel diam. Phasellus auctor in dolor sit amet aliquet. Vestibulum nulla est, convallis posuere purus vitae, aliquet dapibus elit. Nullam volutpat eros eu tempor laoreet. Nulla elit risus, faucibus nec ultricies et, pellentesque et velit. ',
       rating: 4
     })
   ])
@@ -154,27 +207,45 @@ async function seed() {
       email: 'murphy@email.com',
       status: 'Processing',
       userId: 2
+    }),
+    Order.create({
+      session: 'www',
+      email: 'harrypotter@email.com',
+      status: 'Processing',
+      userId: 8
     })
   ])
 
   const orderItems = await Promise.all([
     OrderItem.create({
       price: 299,
-      quantity: 2,
+      quantity: 1,
       orderId: 1,
       productId: 1
     }),
     OrderItem.create({
       price: 99,
-      quantity: 10,
+      quantity: 1,
       orderId: 1,
       productId: 2
     }),
     OrderItem.create({
       price: 300,
-      quantity: 4,
+      quantity: 1,
       orderId: 2,
       productId: 1
+    }),
+    OrderItem.create({
+      price: 3000,
+      quantity: 1,
+      orderId: 2,
+      productId: 5
+    }),
+    OrderItem.create({
+      price: 3000,
+      quantity: 1,
+      orderId: 2,
+      productId: 10
     })
   ])
 
