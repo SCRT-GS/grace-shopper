@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import history from './history'
 
 
-import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, MyOrderDetail, AdminEditProductDetail, AdminEditOrderDetail, AdminProductList, AdminOrderList, ReviewForm, MyOrders, Cart, Checkout, ReviewDetail, AdminCategoryList,ResetPassword, OrderSubmitted, Category } from './components'
+import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, MyOrderDetail, AdminEditProductDetail, AdminEditOrderDetail, AdminProductList, AdminOrderList, ReviewForm, MyOrders, Cart, Checkout, ReviewDetail, AdminCategoryList, ResetPassword, OrderSubmitted, Category } from './components'
 
 import store, { me, getProducts, getUsers, getReviews, getCart, getOrders, getCategories } from './store'
 
@@ -102,7 +102,7 @@ class Routes extends Component {
 
             <Route
               exact
-              path="/category/:id"
+              path="/category/:categoryId"
               component={Category}
             />
 

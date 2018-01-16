@@ -26,5 +26,6 @@ export { AdminHome} from './AdminHome'
 export {default as MyOrders} from './MyOrders'
 export { OrderSubmitted } from './OrderSubmitted'
 export {default as SideBar } from './SideBar'
+export {default as Category} from './Category'
 
 //will be exporting the centsToDollarString function from here

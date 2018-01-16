@@ -21,7 +21,7 @@ class Checkout extends Component {
       line2: '',
       city: '',
       state: '',
-      zip: 0,
+      zip: '',
       orderId: null,
     }
 
@@ -110,28 +110,25 @@ render() {
         <div>
           <input value={this.state.email} onChange={this.inputEmail} type="text" placeholder="Email" className="form-one-col" required />
         </div>
-        <div>
-          <p>Already have an account? <Link to="/login" className="component-link">Log in here</Link></p>
-        </div>
         <div id="label-checkout">
           <label>Shipping Address</label>
         </div>
         <div>
-          <input value={this.state.line1} onChange={this.inputLineOne} type="text" placeholder="Address" className="form-two-col" />
+          <input value={this.state.line1} onChange={this.inputLineOne} type="text" placeholder="Address" className="form-two-col" required />
           <input value={this.state.line2} onChange={this.inputLineTwo} type="text" placeholder="Apt, suite, etc. (optional)" className="form-two-col" />
         </div>
         <div>
-        <input value={this.state.city} onChange={this.inputCity} type="text" placeholder="City" className="form-one-col" />
+        <input value={this.state.city} onChange={this.inputCity} type="text" placeholder="City" className="form-one-col" required />
         </div>
         <div>
-          <select value={this.state.state} onChange={this.inputState} className="select-state" >
+          <select value={this.state.state} onChange={this.inputState} className="select-state" required >
             <option>State</option>
             {
               selectState.map(selectedState =>
-                <option key={selectedState} value={selectedState}>{selectedState}</option>)
+                <option key={selectedState} value={selectedState}>{selectedState} </option>)
             }
           </select>
-          <input value={this.state.zip} onChange={this.inputZip} type="text" placeholder="Zip code" className="form-two-col" />
+          <input value={this.state.zip} onChange={this.inputZip} type="text" placeholder="Zip code" className="form-two-col" required />
         </div>
       </form>
         <div className="div-submit">

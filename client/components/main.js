@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {withRouter, Link, NavLink} from 'react-router-dom'
 import {logout} from '../store'
 import ProductList from './ProductList'
-import SideBar from './SideBar'
 
 /**
  * COMPONENT
@@ -23,17 +22,17 @@ const Main = (props) => {
       <NavLink to="/products">Shop</NavLink>
       <NavLink to="/cart">Cart</NavLink>
       {/* temporary navlinks for development */}
-      
-      
+
+
       <NavLink to="/my-account">My Account</NavLink>
-      
+
       <NavLink to="/admin/products">Proucts</NavLink>
       <NavLink to="/admin/users">Users</NavLink>
         {
           isLoggedIn
             ? <div>
               {/* The navbar will show these links after you log in */}
-              
+
               <NavLink to="/my-account">My Account</NavLink>
               <a href="#" onClick={handleClick}>Logout</a>
             </div>
@@ -47,7 +46,7 @@ const Main = (props) => {
       <hr />
       {children}
     </div>
-    
+
   )
 }
 

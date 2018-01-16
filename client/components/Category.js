@@ -6,8 +6,6 @@ import store, {getProductsCategory, addToCart} from '../store'
 
 export class Category extends Component {
 
-
-
   render() {
   const categories = this.props.categories
   const allProducts = categories.map(category => {
@@ -23,8 +21,7 @@ export class Category extends Component {
     return product
   })
 
-
-
+console.log("DOES THIS TRIGGER")
     return (
       <div>
         {
