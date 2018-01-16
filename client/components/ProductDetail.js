@@ -44,6 +44,10 @@ export class ProductDetail extends Component {
           id="product-pic"
           src={product.imgURL}
         />
+        {product.quantity === 0 ? (
+          <h3>
+          Currently Unavailable
+          </h3>) : null}
         <h4>
         Categories: {categories.map(category => {
           return (
