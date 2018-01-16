@@ -197,67 +197,68 @@ router.post('/admin/shipping-email', async (req, res, next) => {
 
 
 router.put('/update/orders/:id', async (req, res, next) => {
-try{
-          const order = await Order.findOne({
-            where: {
-              id: +req.params.id
-            }
-          })
-
-          await order.update({
-            status: req.body.status,
-            email: req.body.email,
-            userId: req.body.userId
-          })
-          await order.reload()
-          res.json(order)
-
-          if (order.status === 'Processing') {
-
-            const text = `Thank you for placing your order at The Chocolate Store. We\'re packing up your sweet treats now and will send you a notification email when it ships. Your order number is ${order.id}. We appreciate your business!\n\nLove and chocolate,\n\nWilliam Wonka\n\nChocolatier & CEO \n\nThe Chocolate Store`
-
-            const mailOptions = {
-              from: 'wwchocolatefactory2@gmail.com',
-              to: `${order.email}`,
-              subject: 'Thank you for ordering from The Chocolate Store!',
-              text: text
-            }
-            await transporter.sendMail(mailOptions, function (error, info) {
-              if (error) {
-                console.log(error);
-                res.json({ yo: 'error' });
-              } else {
-                console.log('Message sent: ' + info.response);
-                res.json({ yo: info.response });
-              }
-            });
-          }
-          if (order.status === 'Completed') {
-
-            const text = `Your order from The Chocolate Store has been delivered. Your order number is ${order.id}. We appreciate your business!\n\nLove and chocolate,\n\nWilliam Wonka\n\nChocolatier & CEO \n\nThe Chocolate Store`
-
-            const mailOptions = {
-              from: 'wwchocolatefactory2@gmail.com',
-              to: `${order.email}`,
-              subject: 'Your order has been delivered!',
-              text: text
-            }
-            await transporter.sendMail(mailOptions, function (error, info) {
-              if (error) {
-                console.log(error);
-                res.json({ yo: 'error' });
-              } else {
-                console.log('Message sent: ' + info.response);
-                res.json({ yo: info.response });
-              }
-            })
-          }
-        }
-
-      catch (error) {
-        next(error)
+  try {
+    const order = await Order.findOne({
+      where: {
+        id: +req.params.id
       }
     })
+
+    await order.update({
+      status: req.body.status,
+      email: req.body.email,
+      userId: req.body.userId
+    })
+    await order.reload()
+    res.json(order)
+
+
+    if (order.status === 'Processing') {
+
+      const text = `Thank you for placing your order at The Chocolate Store. We\'re packing up your sweet treats now and will send you a notification email when it ships. Your order number is ${order.id}. We appreciate your business!\n\nLove and chocolate,\n\nWilliam Wonka\n\nChocolatier & CEO \n\nThe Chocolate Store`
+
+      const mailOptions = {
+        from: 'wwchocolatefactory2@gmail.com',
+        to: `${order.email}`,
+        subject: 'Thank you for ordering from The Chocolate Store!',
+        text: text
+      }
+      await transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+          res.json({ yo: 'error' });
+        } else {
+          console.log('Message sent: ' + info.response);
+          res.json({ yo: info.response });
+        }
+      });
+    }
+    if (order.status === 'Completed') {
+
+      const text = `Your order from The Chocolate Store has been delivered. Your order number is ${order.id}. We appreciate your business!\n\nLove and chocolate,\n\nWilliam Wonka\n\nChocolatier & CEO \n\nThe Chocolate Store`
+
+      const mailOptions = {
+        from: 'wwchocolatefactory2@gmail.com',
+        to: `${order.email}`,
+        subject: 'Your order has been delivered!',
+        text: text
+      }
+      await transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+          res.json({ yo: 'error' });
+        } else {
+          console.log('Message sent: ' + info.response);
+          res.json({ yo: info.response });
+        }
+      })
+    }
+  }
+
+  catch (error) {
+    next(error)
+  }
+})
 
 
 router.put('/update/:id', async (req, res, next) => {
@@ -315,6 +316,29 @@ router.put('/update/:id', async (req, res, next) => {
   } else {
     return res.status(500).send('You do not have permission to view this page')
   }
+})
+
+router.put('/resetPassword/:id', async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        id: +req.params.id
+      }
+    })
+
+    await user.update({
+      password: req.body.password,
+      resetPassword: req.body.resetPassword
+    })
+    await user.reload()
+    res.json(user)
+
+  }
+
+  catch (error) {
+    next(error)
+  }
+
 })
 
 router.delete('/:id', async (req, res, next) => {

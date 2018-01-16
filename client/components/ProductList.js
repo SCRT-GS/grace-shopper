@@ -39,8 +39,8 @@ export class ProductList extends Component {
       <div>
         <div className="ui category search">
         <div className="ui icon input">
-          <input 
-          value={this.state.search} 
+          <input
+          value={this.state.search}
           onChange={this.inputSearch}
           type="text"
           name="search"
@@ -52,25 +52,25 @@ export class ProductList extends Component {
           <datalist id="productList">
            {products.map(company => {
             return (<option key={company.id} value={company.name}>{company.name}</option> )
-           })} 
+           })}
           </datalist>
         </div>
         <div className="results"></div>
         </div>
-        
-        
+
+
         <div
           className="ui grid"
-        
+
         >
         {filteredProducts.map((product) => {
 
           return (
-           <div 
+           <div
             className="four wide column"
             key={product.id}
            >
-            <div 
+            <div
               className="ui raised segments"
             >
             <div className="ui segment" >
@@ -88,16 +88,16 @@ export class ProductList extends Component {
                 </h2>
                 <span>{product.price}</span>
                 <h3>
-                
+
                 </h3>
                 <h3>
-                
+
                 </h3>
               </Link>
               </div>
               <div className="ui segment">
-                <div 
-                  class="ui vertical animated button"
+                <div
+                  className="ui vertical animated button"
                   onClick={() => store.dispatch(addToCart(product.id, 1, product.price))}
                 >
                   <div class="hidden content">
