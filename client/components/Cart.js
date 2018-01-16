@@ -36,7 +36,9 @@ class Cart extends Component {
                 <h2 className="ui icon header">
                     <i className="circular cart icon"></i>
                     <div className="content">
-                    Your Shopping Cart
+                    Your Shopping Cart {
+                        this.props.cart === null || this.props.cart.order_items && this.props.cart.order_items.length === 0 ? "is empty" : ""
+                    }
                     </div>
                 </h2>
                 <ul className="ui relaxed divided list">
@@ -94,13 +96,13 @@ class Cart extends Component {
                         orderItems={this.props.cart && this.props.cart.order_items || []}
                     />
                 </h4>
-                <Link to="/products">
-                    <button
-                        type='button'
-                        className="ui right floated button"
-                    >
-                        SHOP MORE
-                    </button>
+                <Link to='/products'>
+                <button
+                    type='button'
+                    className="ui right floated button"
+                >
+                    SHOP MORE
+                </button>
                 </Link>
                 <Link to="/checkout">
                     <button
