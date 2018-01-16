@@ -99,7 +99,8 @@ export class ProductList extends Component {
               </div>
               <div className="ui segment">
                 <div
-                  class="ui vertical animated button"
+                  className="ui vertical animated button"
+
                   onClick={() => store.dispatch(addToCart(product.id, 1, product.price))}
                 >
                   <div class="hidden content">
