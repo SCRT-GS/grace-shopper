@@ -29,7 +29,7 @@ class Cart extends Component {
     }
 
     render(){
-        console.log('cart: ', this.props.cart)
+        
         const orderItems = this.props.cart && this.props.cart.order_items || []
         return (
             <div>
