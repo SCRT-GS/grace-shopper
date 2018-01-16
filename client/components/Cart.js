@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import store, { getCart, deleteFromCart } from '../store'
+import store, { getCart, deleteFromCart, addToCart } from '../store'
 import Subtotal from './Subtotal'
 import { Link } from 'react-router-dom'
 
@@ -60,9 +60,12 @@ class Cart extends Component {
                                     </span>
                                 </div>
                                 <div className="two wide column">
-                                    <span>
-                                        Quantity: {item.quantity}
-                                    </span>
+                                    <button
+                                    className="circular ui icon button"
+                                    onClick={() => store.dispatch(addToCart(item.productId, 1, item.price))}
+                                    >
+                                        <i className="icon add"></i>
+                                    </button>
                                 </div>
                                 <div className="two wide column">
                                     <span>
@@ -102,6 +105,7 @@ class Cart extends Component {
                     <button
                         type="button"
                         className="ui primary right floated button"
+                        disabled={this.props.cart === null || this.props.cart.order_items && this.props.cart.order_items.length === 0}
                     >
                         CHECKOUT
                     </button>
