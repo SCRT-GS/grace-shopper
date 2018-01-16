@@ -23,7 +23,7 @@ export const SideBar = (props) => {
 
     return (
       <div>
-       <h5>Filter by Category</h5>
+       <h5>Category</h5>
        <div>
         <h5>
           {
