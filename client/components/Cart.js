@@ -51,12 +51,12 @@ class Cart extends Component {
                                 <div className="two wide column">
                                     <img
                                         className="ui avatar image"
-                                        src={item.imgURL}
+                                        src={item.product.imgURL}
                                     />
                                 </div>
                                 <div className="eight wide column">
                                     <span>
-                                        {item.name}
+                                        {item.product.name}
                                     </span>
                                 </div>
                                 <div className="two wide column">
