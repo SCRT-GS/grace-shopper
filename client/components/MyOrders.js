@@ -78,6 +78,7 @@ class MyOrders extends Component {
                             <p>
                               Quantity: {orderItem.quantity}
                             </p>
+
                           </li>
                         </ul>
                       )
