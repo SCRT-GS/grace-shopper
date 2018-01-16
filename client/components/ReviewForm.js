@@ -41,6 +41,8 @@ export class ReviewForm extends Component {
       const productId = this.props.product.id
       this.props.submitReview(this.state.rating, this.state.content, this.state.productId) //NEED TO ADD USERID TO SUBMIT HANDLER
       this.props.history.push(`/products/${productId}`)
+      window.location.reload()
+
     }
 
 

@@ -44,6 +44,7 @@ router.put('/update/:id', async (req, res, next) => {
             name: req.body.name,
             description: req.body.description,
             price: req.body.price,
+            quantity: req.body.quantity,
             imgURL: req.body.imgURL,
           })
           await product.reload()

@@ -25,7 +25,7 @@ class MyOrders extends Component {
       status: 'Created',
       userId: 1
     }]
-
+    console.log('ordersfirst', userOrders)
 
     const products = this.props.products
     return (
@@ -50,24 +50,45 @@ class MyOrders extends Component {
             <ul key={order.id} >
               <li>
                 <NavLink to={`/my-account/orders/${order.id}`} >
-                  <h3>Order # {order.id}</h3>
-                  <h4 id="order-item">Items:{orderItems.map(orderItem => {
-                    count++
-                    let idx = orderItem.productId - 1
-                    const realPrice = (orderItem.price / 100)
-                    return (
-                      <ul key={orderItem.id} >
-                        <li>
-                          <p>{count}.</p>
-                          <p>{products[idx] ? products[idx].name : null}</p>
-                          <p>${realPrice}</p>
-                          <p>Quantity: {orderItem.quantity}</p>
-                        </li>
-                      </ul>
-                    )
-                  })}</h4>
-                  <p id="total">Order Total: ${sum}</p>
-                  <p id="date">Date Placed: {date.slice(0, 10)}}</p>
+                  <h3>
+                    Order # {order.id}
+                  </h3>
+
+                  <h4
+                    id="order-item"
+                  >
+                    Items:{orderItems.map(orderItem => {
+                      count++
+                      let idx = orderItem.productId - 1
+                      const realPrice = (orderItem.price / 100)
+                      return (
+                        <ul
+                          key={orderItem.id}
+                        >
+                          <li>
+                            <p>
+                              {count}.
+                          </p>
+                            <p>
+                              {products[idx] ? products[idx].name : null}
+                            </p>
+                            <p>
+                              ${realPrice}
+                            </p>
+                            <p>
+                              Quantity: {orderItem.quantity}
+                            </p>
+
+                          </li>
+                        </ul>
+                      )
+                    })}</h4>
+                  <p
+                  id="total">Order Total: ${sum}
+                  </p>
+                  <p
+                  id="date">Date Placed: {date.slice(0, 10)}
+                  </p>
                 </NavLink>
               </li>
             </ul>

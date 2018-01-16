@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import store, {addToCart} from '../store'
+import store, { addToCart } from '../store'
 
 export class ProductList extends Component {
   constructor(props) {
@@ -21,19 +21,19 @@ export class ProductList extends Component {
 
   render() {
 
-  const products = this.props.products.sort(function(a,b) {
-    var nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase();
-    if (nameA < nameB)
-      return -1
-    if(nameA>nameB)
-      return 1
-    return 0;
-  })
+    const products = this.props.products.sort(function (a, b) {
+      var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+      if (nameA < nameB)
+        return -1
+      if (nameA > nameB)
+        return 1
+      return 0;
+    })
 
 
-  const filteredProducts = products.filter((product) => {
-    return product.name.indexOf(this.state.search) !== -1
-  })
+    const filteredProducts = products.filter((product) => {
+      return product.name.indexOf(this.state.search) !== -1
+    })
 
     return (
       <div>
@@ -51,9 +51,7 @@ export class ProductList extends Component {
           <i className="search icon"></i>
           <datalist id="productList">
         {
-          products.map(company =>
-          <option key={company.id} value={company.name}>{company.name}</option>)
-          }
+          products.map(company => <option key={company.id} value={company.name}>{company.name}</option> )
         </datalist>
         </div>
         <div className="results"></div>
@@ -65,6 +63,7 @@ export class ProductList extends Component {
         
         >
         {filteredProducts.map((product) => {
+
           return (
            <div 
             className="four wide column"

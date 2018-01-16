@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import store, { getOrder, updateOrder } from '../store'
+import store, { getOrder } from '../store'
 import axios from 'axios'
+import {NavLink} from 'react-router-dom'
 
 
-export class AdminEditOrderDetail extends Component {
+export class MyOrderDetail extends Component {
   constructor(props) {
     super(props)
 
@@ -12,15 +13,12 @@ export class AdminEditOrderDetail extends Component {
       status: null,
     }
 
-    this.submit = this.submit.bind(this);
-    this.sendEmail = this.sendEmail.bind(this);
 
   }
 
   componentDidMount() {
     const orderId = Number(this.props.match.params.orderId)
     const orderThunk = getOrder(orderId)
-
     store.dispatch(orderThunk);
   }
 
@@ -33,7 +31,7 @@ export class AdminEditOrderDetail extends Component {
     }
 
     this.props.updateOrder(order.id, updatedOrder)
-    window.location.reload()
+    // this.props.history.push(`/admin/orders`)
   }
   sendEmail(event) {
     event.preventDefault();
@@ -48,17 +46,17 @@ export class AdminEditOrderDetail extends Component {
   render() {
     const order = this.props.order
     const products = this.props.products || [{
-      name: 'Pacari - Super Milky',
-      description: 'Single Origin Hybrid, 30% cacao',
-      price: 1599,
-      quantity: 20,
+      name: 'No Product to Display',
+      description: 'No Product to Display',
+      price: null,
+      quantity: null,
       imgURL: 'http://via.placeholder.com/100x100'
     }]
     const items = order.order_items || [{
       id: 99,
-      name: 'Chocolate Bar',
-      price: 1099,
-      quantity: 2,
+      name: 'No Item to Display',
+      price: null,
+      quantity: null,
       imgURL: 'http://via.placeholder.com/32x32'
     }]
     const sum = (items.reduce((total, item) => {
@@ -67,7 +65,6 @@ export class AdminEditOrderDetail extends Component {
     const date = order.createdAt || 'today'
 
     let count = 0
-    let idx = count
 
     return (
       <div>
@@ -76,9 +73,11 @@ export class AdminEditOrderDetail extends Component {
         >
           Order # {order.id}
         </h2>
-        <h3>
+        <h2
+          className="order-number"
+        >
           Ordered By: {order.email}
-        </h3>
+        </h2>
         <h2
           className="order-number"
         >
@@ -100,6 +99,7 @@ export class AdminEditOrderDetail extends Component {
               key={item.id}
             >
               <li>
+              <NavLink to={`/products/${item.productId}`}>
 
                 <p>
                   {products[idx] ? products[idx].name : null}
@@ -110,6 +110,7 @@ export class AdminEditOrderDetail extends Component {
                 <p>
                   Quantity: {item.quantity}
                 </p>
+                </NavLink>
               </li>
             </ul>
           )
@@ -128,49 +129,6 @@ export class AdminEditOrderDetail extends Component {
         >
           Date Placed: {date.slice(0, 10)}
         </p>
-        <p
-          id="status"
-        >
-          Select New Order Status
-        </p>
-        <form
-          id="orderform"
-          onSubmit={this.submit}
-        >
-          <select
-            form="orderform"
-            name="status"
-          >
-            <option
-              value="Processing"
-            >
-              Processing
-            </option>
-            <option
-              value="Cancelled"
-            >
-              Cancelled
-            </option>
-            <option
-              value="Completed"
-            >
-              Completed
-            </option>
-          </select>
-          <button
-            id="submit"
-            type="submit"
-          >
-            Set New Order Status
-          </button>
-        </form>
-        <button
-          id="sendEmail"
-          onClick={this.sendEmail}
-          type="button"
-        >
-          Send Shipping Notification Email
-      </button>
 
         <br />
       </div>
@@ -184,6 +142,6 @@ const mapState = (state) => {
     products: state.products
   }
 }
-const mapDispatch = { getOrder, updateOrder }
+const mapDispatch = { getOrder }
 
-export default connect(mapState, mapDispatch)(AdminEditOrderDetail)
+export default connect(mapState, mapDispatch)(MyOrderDetail)
