@@ -132,6 +132,23 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    const category = await Category.findOne({
+      where: {
+        id: +req.params.id
+      }}, {
+        include: [{
+        model: Product
+      }]
+    })
+    res.json(category)
+  }
+  catch (error) {
+    next(error)
+  }
+})
+
 
 router.delete('/:id', async (req, res, next) => {
   if (req.session.passport) {

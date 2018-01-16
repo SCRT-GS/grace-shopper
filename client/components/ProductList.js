@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import store, { addToCart } from '../store'
+import { SideBar } from './Sidebar'
 
 export class ProductList extends Component {
   constructor(props) {
@@ -38,6 +39,7 @@ export class ProductList extends Component {
     return (
       <div>
         <div className="ui category search">
+        <SideBar />
         <div className="ui icon input">
           <input
           value={this.state.search}
@@ -98,6 +100,7 @@ export class ProductList extends Component {
               <div className="ui segment">
                 <div
                   className="ui vertical animated button"
+
                   onClick={() => store.dispatch(addToCart(product.id, 1, product.price))}
                 >
                   <div class="hidden content">
