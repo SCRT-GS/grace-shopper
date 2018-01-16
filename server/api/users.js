@@ -120,16 +120,7 @@ router.get('/orders/', async (req, res, next) => {
 })
 
 router.get('/admin/orders/:id', async (req, res, next) => {
-  if (req.session.passport) {
-    if (req.session.passport.user) {
-      try {
-        const adminUser = await User.findOne({
-          where: {
-            id: req.session.passport.user
-          }
-        })
-
-        if (adminUser.isAdmin) {
+  try {
           const order = await Order.findOne({
             where: {
               id: +req.params.id
@@ -140,15 +131,9 @@ router.get('/admin/orders/:id', async (req, res, next) => {
           })
           res.json(order)
         }
-      }
       catch (error) {
         next(error)
       }
-    }
-  }
-  else {
-    return res.status(500).send('You do not have permission to view this page')
-  }
 })
 
 router.post('/admin/shipping-email', async (req, res, next) => {
