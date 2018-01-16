@@ -80,11 +80,13 @@ class Checkout extends Component {
   handleCheckoutSubmit(evt) {
     evt.preventDefault()
     const orderId = this.props.cart.id
+    const userId = this.props.user.id
     const processingStatus = 'Processing'
     const orderEmail = this.state.email
     const updatedOrder = {
       email: orderEmail,
-      status: processingStatus
+      status: processingStatus,
+      userId: userId
     }
     this.props.submitCheckout(this.state.line1, this.state.line2, this.state.city, this.state.state, this.state.zip, this.state.orderId)
     this.props.processingOrder(orderId, updatedOrder)

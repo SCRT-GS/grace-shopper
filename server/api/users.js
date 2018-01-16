@@ -131,7 +131,8 @@ router.put('/update/orders/:id', async (req, res, next) => {
 
     await order.update({
       status: req.body.status,
-      email: req.body.email
+      email: req.body.email,
+      userId: req.body.userId
     })
     await order.reload()
     res.json(order)
