@@ -3,16 +3,7 @@ const { Product, Category, User } = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
-  if (req.session.passport) {
-    if (req.session.passport.user) {
-      try {
-        const adminUser = await User.findOne({
-          where: {
-            id: req.session.passport.user
-          }
-        })
-
-        if (adminUser.isAdmin) {
+  try {
           const categories = await Category.findAll({
             include: [{
               model: Product
@@ -20,14 +11,10 @@ router.get('/', async (req, res, next) => {
           })
           res.json(categories)
         }
-      }
       catch (error) {
         next(error)
       }
-    }
-  } else {
-    return res.status(500).send('You do not have permission to view this page')
-  }
+
 })
 
 router.get('/products/:id', async (req, res, next) => {
