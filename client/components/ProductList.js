@@ -50,9 +50,10 @@ export class ProductList extends Component {
           />
           <i className="search icon"></i>
           <datalist id="productList">
-        {
-          products.map(company => <option key={company.id} value={company.name}>{company.name}</option> )
-        </datalist>
+           {products.map(company => {
+            return (<option key={company.id} value={company.name}>{company.name}</option> )
+           })} 
+          </datalist>
         </div>
         <div className="results"></div>
         </div>
