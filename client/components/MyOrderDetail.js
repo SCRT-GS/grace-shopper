@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import store, { getOrder } from '../store'
 import axios from 'axios'
+import {NavLink} from 'react-router-dom'
 
 
 export class MyOrderDetail extends Component {
@@ -98,6 +99,7 @@ export class MyOrderDetail extends Component {
               key={item.id}
             >
               <li>
+              <NavLink to={`/products/${item.productId}`}>
 
                 <p>
                   {products[idx] ? products[idx].name : null}
@@ -108,6 +110,7 @@ export class MyOrderDetail extends Component {
                 <p>
                   Quantity: {item.quantity}
                 </p>
+                </NavLink>
               </li>
             </ul>
           )

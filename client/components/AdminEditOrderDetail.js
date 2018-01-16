@@ -33,7 +33,7 @@ export class AdminEditOrderDetail extends Component {
     }
 
     this.props.updateOrder(order.id, updatedOrder)
-    // this.props.history.push(`/admin/orders`)
+    window.location.reload()
   }
   sendEmail(event) {
     event.preventDefault();
@@ -77,8 +77,8 @@ export class AdminEditOrderDetail extends Component {
           Order # {order.id}
         </h2>
         <h3>
-         Ordered By: {order.email}
-         </h3>
+          Ordered By: {order.email}
+        </h3>
         <h2
           className="order-number"
         >
