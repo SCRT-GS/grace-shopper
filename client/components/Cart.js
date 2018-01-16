@@ -28,8 +28,8 @@ class Cart extends Component {
         return this.centsToDollarString(sum)
     }
 
+
     render(){
-        console.log(this.props.cart)
         const orderItems = this.props.cart && this.props.cart.order_items || []
         return (
             <div>
@@ -53,12 +53,12 @@ class Cart extends Component {
                                 <div className="two wide column">
                                     <img
                                         className="ui avatar image"
-                                        src={item.imgURL}
+                                        src={item.product.imgURL}
                                     />
                                 </div>
                                 <div className="eight wide column">
                                     <span>
-                                        {item.name}
+                                        {item.product.name}
                                     </span>
                                 </div>
                                 <div className="two wide column">
@@ -100,7 +100,6 @@ class Cart extends Component {
                 <button
                     type='button'
                     className="ui right floated button"
-
                 >
                     SHOP MORE
                 </button>
@@ -109,7 +108,9 @@ class Cart extends Component {
                     <button
                         type="button"
                         className="ui primary right floated button"
+
                         disabled={this.props.cart === null || this.props.cart.order_items && this.props.cart.order_items.length === 0}
+
                     >
                         CHECKOUT
                     </button>
