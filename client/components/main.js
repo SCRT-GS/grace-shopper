@@ -16,26 +16,24 @@ const Main = (props) => {
   const {children, handleClick, isLoggedIn} = props
 
   return (
-    <div>
-      <h1>MVP Chocolate Store</h1>
-      <h2>Some links are for [dev]elopment purposes</h2>
-      <SideBar />
-      <nav>
+    <div >
+      <nav className="ui text menu">
+      <h1 className="item">Forestero</h1>
       <NavLink to="/">Home</NavLink>
       <NavLink to="/products">Shop</NavLink>
       <NavLink to="/cart">Cart</NavLink>
       {/* temporary navlinks for development */}
-      <NavLink to="/checkout">Checkout[dev]</NavLink>
-      <NavLink to="/home">Home[dev]</NavLink>
-      <NavLink to="/my-account">My Account[dev]</NavLink>
-      <NavLink to="/admin">Admin Home[dev]</NavLink>
-      <NavLink to="/admin/products">Admin Proucts[dev]</NavLink>
-      <NavLink to="/admin/users">Admin Users[dev]</NavLink>
+      
+      
+      <NavLink to="/my-account">My Account</NavLink>
+      
+      <NavLink to="/admin/products">Proucts</NavLink>
+      <NavLink to="/admin/users">Users</NavLink>
         {
           isLoggedIn
             ? <div>
               {/* The navbar will show these links after you log in */}
-              <NavLink to="/home">Home</NavLink>
+              
               <NavLink to="/my-account">My Account</NavLink>
               <a href="#" onClick={handleClick}>Logout</a>
             </div>
@@ -49,6 +47,7 @@ const Main = (props) => {
       <hr />
       {children}
     </div>
+    
   )
 }
 
