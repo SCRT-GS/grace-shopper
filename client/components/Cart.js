@@ -28,8 +28,10 @@ class Cart extends Component {
         return this.centsToDollarString(sum)
     }
 
+
     render(){
         console.log('cart: ', this.props.cart)
+        console.log("CART: ", this.props.cart.order_items)
         const orderItems = this.props.cart && this.props.cart.order_items || []
         return (
             <div>
@@ -78,7 +80,7 @@ class Cart extends Component {
                                     <i className="icon trash" />
                                     </button>
                                 </div>
-                                        
+
                                 </div>
                                 </div>
                             )
@@ -86,22 +88,24 @@ class Cart extends Component {
                     }
                 </ul>
                 <h4 className="ui ui sub header">
-                    <Subtotal 
+                    <Subtotal
                         calculateSubTotal={this.calculateSubTotal}
                         orderItems={this.props.cart && this.props.cart.order_items || []}
                     />
                 </h4>
-                
-                <button 
-                    type='button'
-                    className="ui right floated button"
-                >
-                    SHOP MORE
-                </button>
+                <Link to="/products">
+                    <button
+                        type='button'
+                        className="ui right floated button"
+                    >
+                        SHOP MORE
+                    </button>
+                </Link>
                 <Link to="/checkout">
                     <button
                         type="button"
                         className="ui primary right floated button"
+                        disabled={this.props.cart === null || this.props.cart.order_items.length === 0}
                     >
                         CHECKOUT
                     </button>
