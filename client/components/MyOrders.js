@@ -19,29 +19,30 @@ class MyOrders extends Component {
   }
 
   render() {
-    const orders = this.props.orders || [{
+    const userOrders = this.props.userOrders || [{
       session: 'rrr',
       email: 'cody@email.com',
       status: 'Created',
       userId: 1
     }]
-    const orderItems = orders.order_items || [{
-      id: 99,
-      name: 'Chocolate Bar',
-      price: 1099,
-      quantity: 2,
-      imgURL: 'http://via.placeholder.com/32x32'
-    }]
+
 
     const products = this.props.products
-
     return (
       <div>
         <h1>My Orders </h1>
-        {orders.map((order) => {
+        {userOrders.map((order) => {
+          const orderItems = order.order_items || [{
+            id: 99,
+            name: 'Chocolate Bar',
+            price: 1099,
+            quantity: 2,
+            imgURL: 'http://via.placeholder.com/32x32'
+          }]
           const sum = (orderItems.reduce((total, item) => {
             return total + item.price * item.quantity
           }, 0)) / 100
+
           let count = 0
           let date = order.createdAt || 'today'
           return (
@@ -53,7 +54,6 @@ class MyOrders extends Component {
                   <h4 id="order-item">Items:{orderItems.map(orderItem => {
                     count++
                     let idx = orderItem.productId - 1
-                    let product = products[idx]
                     const realPrice = (orderItem.price / 100)
                     return (
                       <ul key={orderItem.id} >
@@ -83,7 +83,8 @@ const mapState = (state) => {
   return {
     user: state.user,
     orders: state.orders,
-    products: state.products
+    products: state.products,
+    userOrders: state.userOrders
   }
 }
 
