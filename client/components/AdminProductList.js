@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { addProduct } from '../store'
+import centsToDollarString from './centsToDollarString'
 
 export class AdminProductList extends Component {
   constructor(props) {
@@ -76,7 +77,7 @@ export class AdminProductList extends Component {
   </div>
   <div className="four wide column">
                 <span  >
-                  ${product.price}
+                  {centsToDollarString(product.price)}
                 </span>
   </div>
   <div className="two wide column">

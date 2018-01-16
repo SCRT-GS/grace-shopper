@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import store, { addToCart } from '../store'
 import Sidebar, { SideBar } from './Sidebar'
+import centsToDollarString from './centsToDollarString'
 
 export class ProductList extends Component {
   constructor(props) {
@@ -93,7 +94,7 @@ export class ProductList extends Component {
                   <h2 className="ui sub header">
                   {product.name}
                   </h2>
-                  <span>{product.price}</span>
+                  <span>{centsToDollarString(product.price)}</span>
                   <h3>
 
                   </h3>
@@ -108,11 +109,11 @@ export class ProductList extends Component {
 
                     onClick={() => store.dispatch(addToCart(product.id, 1, product.price))}
                   >
-                    <div class="hidden content">
+                    <div className="hidden content">
                       +1
                     </div>
-                    <div class="visible content">
-                      <i class="shop icon"></i>
+                    <div className="visible content">
+                      <i className="shop icon"></i>
                     </div>
                   </div>
                 </div>
