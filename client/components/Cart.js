@@ -29,14 +29,16 @@ class Cart extends Component {
     }
 
     render(){
-        
+        console.log(this.props.cart)
         const orderItems = this.props.cart && this.props.cart.order_items || []
         return (
             <div>
                 <h2 className="ui icon header">
                     <i className="circular cart icon"></i>
                     <div className="content">
-                    Your Shopping Cart
+                    Your Shopping Cart {
+                        this.props.cart === null || this.props.cart.order_items && this.props.cart.order_items.length === 0 ? "is empty" : ""
+                    }
                     </div>
                 </h2>
                 <ul className="ui relaxed divided list">
@@ -81,7 +83,7 @@ class Cart extends Component {
                                     <i className="icon trash" />
                                     </button>
                                 </div>
-                                        
+
                                 </div>
                                 </div>
                             )
@@ -89,18 +91,20 @@ class Cart extends Component {
                     }
                 </ul>
                 <h4 className="ui ui sub header">
-                    <Subtotal 
+                    <Subtotal
                         calculateSubTotal={this.calculateSubTotal}
                         orderItems={this.props.cart && this.props.cart.order_items || []}
                     />
                 </h4>
-                
-                <button 
+                <Link to='/products'>
+                <button
                     type='button'
                     className="ui right floated button"
+
                 >
                     SHOP MORE
                 </button>
+                </Link>
                 <Link to="/checkout">
                     <button
                         type="button"
