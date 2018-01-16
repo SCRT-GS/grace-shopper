@@ -61,25 +61,25 @@ export class AdminProductList extends Component {
               >
               
                 
-                <div class="ui grid">
-                  <div class="two wide column">
+                <div className="ui grid">
+                  <div className="two wide column">
                     <img
-                      id="product-pic"
+
                       src={product.imgURL}
                       className="ui avatar image"
                     />
                   </div>
-  <div class="eight wide column">
+  <div className="eight wide column">
   <span>
                   {product.name}
                 </span >
   </div>
-  <div class="four wide column">
+  <div className="four wide column">
                 <span  >
                   ${product.price}
                 </span>
   </div>
-  <div class="two wide column">
+  <div className="two wide column">
                 <span >
                   {product.quantity}
                 </span></div>
@@ -94,7 +94,7 @@ export class AdminProductList extends Component {
         }
         )}
         </ul>
-        <h4 class="ui horizontal divider header">
+        <h4 className="ui horizontal divider header">
           NEW PROUCT
         </h4>
         <section className="ui form">
@@ -157,7 +157,7 @@ export class AdminProductList extends Component {
               type="submit"
               className="ui right floated button"
             >
-            <i class="add sign icon"></i>
+            <i className="add sign icon"></i>
               ADD
         </button>
           </form>

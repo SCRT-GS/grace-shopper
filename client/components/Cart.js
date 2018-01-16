@@ -33,51 +33,75 @@ class Cart extends Component {
         const orderItems = this.props.cart && this.props.cart.order_items || []
         return (
             <div>
-                <h2>Cart</h2>
-                <ul>
+                <h2 className="ui icon header">
+                    <i className="circular cart icon"></i>
+                    <div className="content">
+                    Your Shopping Cart
+                    </div>
+                </h2>
+                <ul className="ui relaxed divided list">
                     {
                         orderItems.map(item => {
                             return (
-                                <li
+                                <div
                                     key={item.id}
+                                    className="item"
                                 >
+                                <div className="ui grid">
+                                <div className="two wide column">
                                     <img
-                                        style={{width: '2em', height: '2em', display: 'inline'}}
-                                        url={item.imgURL}
+                                        className="ui avatar image"
+                                        src={item.imgURL}
                                     />
+                                </div>
+                                <div className="eight wide column">
                                     <span>
                                         {item.name}
                                     </span>
+                                </div>
+                                <div className="two wide column">
                                     <span>
                                         Quantity: {item.quantity}
                                     </span>
+                                </div>
+                                <div className="two wide column">
                                     <span>
                                         {this.centsToDollarString(item.price)}
                                     </span>
+                                </div>
+                                <div className="two wide column">
                                     <button
+                                        className="circular ui icon button"
                                         type="button"
                                         onClick={() => store.dispatch(deleteFromCart(item.id))}
                                     >
-                                        DELETE
+                                    <i className="icon trash" />
                                     </button>
-
-                                </li>
+                                </div>
+                                        
+                                </div>
+                                </div>
                             )
                         })
                     }
                 </ul>
-                <Subtotal 
-                    calculateSubTotal={this.calculateSubTotal}
-                    orderItems={this.props.cart && this.props.cart.order_items || []}
-                />
+                <h4 className="ui ui sub header">
+                    <Subtotal 
+                        calculateSubTotal={this.calculateSubTotal}
+                        orderItems={this.props.cart && this.props.cart.order_items || []}
+                    />
+                </h4>
+                
                 <button 
                     type='button'
+                    className="ui right floated button"
                 >
                     SHOP MORE
                 </button>
                 <Link to="/checkout">
                     <button
                         type="button"
+                        className="ui primary right floated button"
                     >
                         CHECKOUT
                     </button>

@@ -37,47 +37,82 @@ export class ProductList extends Component {
 
     return (
       <div>
-        <h3>Welcome to the Products Page!</h3>
-        <input value={this.state.search} onChange={this.inputSearch} type="text" name="search" list="productList" placeholder="Search delicious chocolate" />
-        <datalist id="productList">
-          {
-            products.map(company =>
-              <option key={company.id} value={company.name}>{company.name}</option>)
-          }
+        <div className="ui category search">
+        <div className="ui icon input">
+          <input 
+          value={this.state.search} 
+          onChange={this.inputSearch}
+          type="text"
+          name="search"
+          list="productList"
+          placeholder="Search delicious chocolate..."
+          className="prompt"
+          />
+          <i className="search icon"></i>
+          <datalist id="productList">
+        {
+          products.map(company => <option key={company.id} value={company.name}>{company.name}</option> )
         </datalist>
-
+        </div>
+        <div className="results"></div>
+        </div>
+        
+        
+        <div
+          className="ui grid"
+        
+        >
         {filteredProducts.map((product) => {
 
           return (
-            <div
-              key={product.id} >
+           <div 
+            className="four wide column"
+            key={product.id}
+           >
+            <div 
+              className="ui raised segments"
+            >
+            <div className="ui segment" >
+              <Link
+              to={`/products/${product.id}`}
+              style={{ textDecoration: 'none' }}
               >
-             {product.quantity > 0 ? (
-                <li
-                  key={product.id} >
-                  <Link
-                    to={`/products/${product.id}`}
-                    style={{ textDecoration: 'none' }}
-                  >
-                    <img
-                      id="product-pic"
-                      src={product.imgURL}
-                    />
-                    <h3>
-                      {product.name}
-                    </h3>
-                    <h3>
-                      ${product.price}
-                    </h3>
-                  </Link>
-                  <button onClick={() => store.dispatch(addToCart(product.id, 1, product.price))}>
-                    Add to Cart
-                </button>
-                </li>) : null}
+                <img
+                id="product-pic"
+                src={product.imgURL}
+                className="ui fluid image"
+                />
+                <h2 class="ui sub header">
+                {product.name}
+                </h2>
+                <span>{product.price}</span>
+                <h3>
+                
+                </h3>
+                <h3>
+                
+                </h3>
+              </Link>
+              </div>
+              <div className="ui segment">
+                <div 
+                  class="ui vertical animated button"
+                  onClick={() => store.dispatch(addToCart(product.id, 1, product.price))}
+                >
+                  <div class="hidden content">
+                    +1
+                  </div>
+                  <div class="visible content">
+                    <i class="shop icon"></i>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
           )
         }
         )}
+        </div>
       </div>
     )
   }
