@@ -24,12 +24,12 @@ export class AdminOrderList extends Component {
     const allOrder = this.props.orders
     const products = this.props.products
 
-    const displayOrders = this.props.orders.filter( order => {
+    const displayOrders = this.props.orders.filter(order => {
       if (this.state.status === 'All') {
         return allOrder
       }
-        return order.status === this.state.status;
-      })
+      return order.status === this.state.status;
+    })
 
     return (
       <div>
@@ -52,79 +52,82 @@ export class AdminOrderList extends Component {
               No {this.state.status} orders to display
             </h2> :
 
-          displayOrders.map((order) => {
-          const items = order.order_items
-          const sum = (items.reduce((total, item) => {
-            return total + item.price * item.quantity
-          }, 0)) / 100
-          let count = 0
-          let date = order.createdAt || 'today'
+            displayOrders.map((order) => {
+              const items = order.order_items
+              const sum = (items.reduce((total, item) => {
+                return total + item.price * item.quantity
+              }, 0)) / 100
+              let count = 0
+              let date = order.createdAt || 'today'
 
-          return (
-            <ul
-              key={order.id}
-            >
-              <li>
-                <NavLink
-                  to={`/admin/orders/${order.id}`}
+              return (
+                <ul
+                  key={order.id}
                 >
-                  <h3>
-                    Order # {order.id}
-                  </h3>
-                  <h3
-                    className="order-status"
-                  >
-                    Order Status: {order.status}
-                  </h3>
-                  <h4
-                    id="order-item"
-                  >
-                    Items:{items.map(orderItem => {
-                      count++
+                  <li>
+                    <NavLink
+                      to={`/admin/orders/${order.id}`}
+                    >
+                      <h3>
+                        Order # {order.id}
+                      </h3>
+                      <h3>
+                        Ordered By: {order.email}
+                      </h3>
+                      <h3
+                        className="order-status"
+                      >
+                        Order Status: {order.status}
+                      </h3>
+                      <h4
+                        id="order-item"
+                      >
+                        Items:{items.map(orderItem => {
+                          count++
 
-                      let idx = orderItem.productId - 1
-                      let product = products[idx]
+                          let idx = orderItem.productId - 1
+                          let product = products[idx]
 
-                      const realPrice = (orderItem.price / 100)
+                          const realPrice = (orderItem.price / 100)
 
-                      return (
-                        <ul
-                          key={count}
-                        >
-                          <li>
-                            <p>
-                              {count}.
+                          return (
+                            <ul
+                              key={count}
+                            >
+                              <li>
+                                <p>
+                                  {count}.
                           </p>
-                            <p>
-                              {products[idx] ? products[idx].name : null}
-                            </p>
-                            <p>
-                              ${realPrice}
-                            </p>
-                            <p>
-                              Quantity: {orderItem.quantity}
-                            </p>
-                          </li>
-                        </ul>
-                      )
-                    })}
-                  </h4>
-                  <p
-                    id="total"
-                  >
-                    Order Total: ${sum}
-                  </p>
-                  <p
-                    id="date"
-                  >
-                    Date Placed: {date.slice(0, 10)}</p>
-                </NavLink>
-              </li>
-            </ul>
-          )
+                                <p>
+                                  {products[idx] ? products[idx].name : null}
+                                </p>
+                                <p>
+                                  ${realPrice}
+                                </p>
+                                <p>
+                                  Quantity: {orderItem.quantity}
+                                </p>
+                              </li>
+                            </ul>
+                          )
+                        })}
+                      </h4>
+                      <p
+                        id="total"
+                      >
+                        Order Total: ${sum}
+                      </p>
+                      <p
+                        id="date"
+                      >
+                        Date Placed: {date.slice(0, 10)}</p>
+                    </NavLink>
+                  </li>
+                </ul>
+              )
+            }
+            )
         }
-        )
-      }
       </div>
     )
   }
