@@ -12,20 +12,23 @@ export class reviewDetail extends Component {
         store.dispatch(review)
       }
 
+
+
+
     render() {
         const productName = this.props.product.name
         const productDescription = this.props.product.description
         const productReviewRating = this.props.singleReview.rating
         const productReviewContent = this.props.singleReview.content
         const productId = this.props.product.id
-
         return (
             <div>
                 <h2>{productName}</h2>
                 <p>{productDescription}</p>
                     <h3>Rating:</h3>
                     <h3>
-                    {[...Array(productReviewRating)].map(e => '*').join('')}
+                    {[...Array(productReviewRating)].map((e, i) => {return (<i key={i} className="star icon"></i>)})}
+
                     </h3>
                     <h3>"{productReviewContent}"</h3>
                 <Link to={`/products/${productId}`}>
