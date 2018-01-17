@@ -10,6 +10,7 @@ dispatch =>
   axios.get(`/api/categories/${id}`)
     .then(res => res.data)
     .then(result => {
+      console.log('any prods?', result)
       dispatch(getAllProductCategoriesActionCreator(result))
     })
     .catch(err => console.log(err))

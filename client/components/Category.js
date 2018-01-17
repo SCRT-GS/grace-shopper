@@ -1,64 +1,93 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import store, {getProductsCategory, addToCart} from '../store'
+import store, { getProductsCategory, getCategory, addToCart } from '../store'
+import centsToDollarString from './centsToDollarString'
 
 
 export class Category extends Component {
-
+  componentDidMount() {
+    const categoryId = Number(this.props.match.params.categoryId)
+    const productCatThunk = getProductsCategory(categoryId)
+    const getCatThunk = getCategory(categoryId)
+    store.dispatch(productCatThunk);
+    store.dispatch(getCatThunk);
+  }
   render() {
-  const categories = this.props.categories
-  const allProducts = categories.map(category => {
-    if ( category.id === +this.props.match.params.categoryId) {
-      return category.products
-    }
-  })
+    const categories = this.props.categories
+    console.log('cats:', this.props.currentCategory)
+    const catProducts = this.props.allCategories
+    const category = this.props.currentCategory || {name: ''}
 
-  const filteredProducts = allProducts.filter(products => products)
-  const filteredCat = filteredProducts[0]
 
-  filteredCat.map(product => {
-    return product
-  })
-
-console.log("DOES THIS TRIGGER")
     return (
       <div>
-        {
-          filteredCat.map(product => {
+      <h2 className="ui icon header">
+      <div className="content">
+        {category.name}
+    </div>
+    </h2>
+      <div className="ui grid">
+
+         { catProducts.map(product => {
             return (
-              <li key={product.id}>
-                <Link
-                to={`/products/${product.id}`}
-                style={{ textDecoration: 'none' }}
+              <div
+              className="four wide column"
+                key={product.id}
+              >
+                <div
+                  className="ui raised segments"
                 >
-                  <img
-                    id="product-pic"
-                    src={product.imgURL}
-                  />
-                  <h3>{product.name}</h3>
-                  <h3>${product.price}</h3>
-                </Link>
-                <button onClick={() => store.dispatch(addToCart(product.id, 1, product.price))}>
-                Add to Cart
-                </button>
-              </li>
-            )
-          })
-        }
-      </div>
-    )
-  }
-}
+                  <div className="ui segment" >
+                    <Link
+                      to={`/products/${product.id}`}
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <img
+                        id="product-pic"
+                        src={product.imgURL}
+                        className="ui fluid image"
+                      />
+                      <h2 className="ui sub header">{product.name}</h2>
+                      <span>{centsToDollarString(product.price)}</span>
+                    </Link>
+                    <div className="ui segment">
+                      <div
+                        className="ui  vertical animated button"
+                        onClick={() => store.dispatch(addToCart(product.id, 1, product.price))}>
+                        <div className="hidden content">
+                        +1
+                      </div>
+                      <div className="visible content">
+                      <i className="shop icon"></i>
+                    </div>
+                </div>
+                    </div>
+                    </div>
+                  </div>
+                  </div> )
+          })}
+
+          </div>
+          </div>
+
+
+                  )
+                }
+              }
+
+
 
 const mapState = (state) => {
   return {
-    categories: state.categories,
-    products: state.products
+                    categories: state.categories,
+    products: state.products,
+    allCategories: state.allCategories,
+    currentCategory: state.currentCategory
   }
 }
 
-const mapDispatch = {getProductsCategory}
+const mapDispatch = {getProductsCategory, getCategory}
 
 
-export default connect(mapState, mapDispatch)(Category)
+ export default connect(mapState, mapDispatch)(Category)
