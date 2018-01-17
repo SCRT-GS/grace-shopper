@@ -27,5 +27,6 @@ export {default as MyOrders} from './MyOrders'
 export { OrderSubmitted } from './OrderSubmitted'
 export {default as SideBar } from './SideBar'
 export {default as Category} from './Category'
+export { LandingPage } from './LandingPage'
 
 //will be exporting the centsToDollarString function from here

@@ -185,7 +185,7 @@ router.delete('/item/:id', async (req, res, next) => {
                 id: orderId
             },
             include: [{
-                model: OrderItem
+                model: OrderItem, include: [Product]
             }]
         })
         res.json(updatedOrder)

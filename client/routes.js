@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import history from './history'
 
 
-import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, MyOrderDetail, AdminEditProductDetail, AdminEditOrderDetail, AdminProductList, AdminOrderList, ReviewForm, MyOrders, Cart, Checkout, ReviewDetail, AdminCategoryList, ResetPassword, OrderSubmitted, Category } from './components'
+import { Main, Login, Signup, UserHome, ProductList, ProductDetail, AdminHome, AdminUserList, AdminEditUserDetail, MyOrderDetail, AdminEditProductDetail, AdminEditOrderDetail, AdminProductList, AdminOrderList, ReviewForm, MyOrders, Cart, Checkout, ReviewDetail, AdminCategoryList, ResetPassword, OrderSubmitted, Category, LandingPage } from './components'
 
 import store, { me, getProducts, getUsers, getReviews, getCart, getOrders, getCategories } from './store'
 
@@ -143,7 +143,7 @@ class Routes extends Component {
                 <Route
                   exact
                   path="/home"
-                  component={UserHome} />
+                  component={LandingPage} />
                   <Route
                   exact
                   path="/reset-password"
@@ -161,7 +161,7 @@ class Routes extends Component {
               </Switch>
             }
             {/* Displays our Login component as a fallback */}
-            <Route component={Login} />
+            <Route component={LandingPage} />
           </Switch>
         </Main>
       </Router>
