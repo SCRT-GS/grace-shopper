@@ -31,6 +31,19 @@ router.get('/products/:id', async (req, res, next) => {
     next(error)
   }
 })
+router.get('/currentCategory/:id', async (req, res, next) => {
+  try {
+    const category = await Category.findOne({
+      where: {
+        id: req.params.id
+      }
+    })
+    res.json(category)
+  }
+  catch (error) {
+    next(error)
+  }
+})
 
 router.get('/:catId/products/:productId', async (req, res, next) => {
   if (req.session.passport) {
@@ -124,12 +137,10 @@ router.get('/:id', async (req, res, next) => {
     const category = await Category.findOne({
       where: {
         id: +req.params.id
-      }}, {
-        include: [{
-        model: Product
-      }]
+      }
     })
-    res.json(category)
+      const products = await category.getProducts()
+    res.json(products)
   }
   catch (error) {
     next(error)
