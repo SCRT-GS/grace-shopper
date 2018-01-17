@@ -30,36 +30,71 @@ export class AdminCategoryList extends Component {
     });
   }
 
-  delete(id){
-   this.props.deleteCategory(id)
-   this.props.history.push(`/admin/categories`)
+  delete(id) {
+    this.props.deleteCategory(id)
+    this.props.history.push(`/admin/categories`)
 
 
   }
   render() {
 
     const categories = this.props.categories
+    let idx = -1
     return (
       <div>
-        <h3 className="title">Our categories</h3>
-        {categories.map((category) => {
-          return (
-            <li
-              key={category.id} >
+        <h2 className="ui icon header">
+          <i className="tag icon"></i>
+          <div className="content">
+            Manage Categories
+        </div>
+        </h2>
+        <div className="ui grid"
+        >
+          {categories.map((category) => {
+            const imageArr = ['http://i67.tinypic.com/2ufg96p.jpg', 'http://i66.tinypic.com/rm70gk.png', 'http://i68.tinypic.com/i3z8lz.jpg', 'http://i64.tinypic.com/5tz89c.jpg', 'http://i68.tinypic.com/2evcfg3.png']
+            if (idx === 4) {
+              idx = 0
+            } else idx++
 
-                <h3>
-                  {category.name}
-                </h3>
-                <button onClick={() => this.delete(category.id)
-                }>
-                  Delete Category
-              </button>
-            </li>
-          )
-        }
-        )}
-        <h2>Add A Category</h2>
-        <section >
+            return (
+              <div className="four wide column" key={category.id}>
+
+
+                <li className="ui list"
+                >
+                  <div className="content">
+
+                    <img
+                      id="product-pic"
+                      src={imageArr[idx]}
+                      className="ui avatar image"
+                    />
+                    <div className="ui  buttons">
+                      <button onClick={() => this.delete(category.id)
+                      }
+                        className="ui right labeled icon button">
+                        {category.name}
+                        <i className="right remove icon"></i>
+                      </button>
+                    </div>
+                  </div >
+                </li>
+
+              </div>
+
+
+            )
+          }
+          )}
+        </div>
+
+        <h2 className="ui icon header">
+          <i className="tag icon"></i>
+          <div className="content">
+            Add Category
+      </div>
+        </h2>
+        <section className="ui form">
           <form
             id="categoryform"
             onSubmit={this.handleSubmit}
@@ -75,9 +110,11 @@ export class AdminCategoryList extends Component {
             <button
               id="submit"
               type="submit"
+              className="ui right floated button"
             >
-              Save Changes
-        </button>
+              <i className="add sign icon"></i>
+              ADD
+              </button>
           </form>
         </section>
       </div>
