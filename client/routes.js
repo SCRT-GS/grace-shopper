@@ -12,6 +12,7 @@ import store, { me, getProducts, getUsers, getReviews, getCart, getOrders, getCa
 
 class Routes extends Component {
   componentDidMount() {
+    console.log('(mounted')
     this.props.loadInitialData()
     const productsThunk = getProducts()
     const usersThunk = getUsers()
