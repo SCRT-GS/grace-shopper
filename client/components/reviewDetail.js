@@ -27,9 +27,11 @@ export class reviewDetail extends Component {
                     <h3>
                     {[...Array(productReviewRating)].map(e => '*').join('')}
                     </h3>
-                    <p>{productReviewContent}</p>
+                    <h3>"{productReviewContent}"</h3>
                 <Link to={`/products/${productId}`}>
-                 <button>Go Back</button>
+                 <button
+                 type="button"
+                 className="ui big right floated button">Go Back</button>
                 </Link>
             </div>
         )

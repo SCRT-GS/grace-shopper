@@ -32,44 +32,63 @@ export class ProductDetail extends Component {
   render() {
 
     const product = this.props.product
-    const categories = product.categories || [{name: 'notaname'}]
+    const categories = product.categories || [{ name: 'notaname' }]
     console.log('productwithcats?', categories[0])
 
     return (
       <div>
-        <h3>{product.name}</h3>
-        <h3>{product.description}</h3>
-        <h3>{product.price}</h3>
-        <img
-          id="product-pic"
-          src={product.imgURL}
-        />
+        <div className="ui card">
+          <div className="image">
+            <img
+              id="product-pic"
+              src={product.imgURL}
+            />
+          </div>
+          <div className="content">
+            <a className="header">{product.name}</a>
+            <div className="meta">
+              <span className="date">{product.price}</span>
+            </div>
+            <div className="description">
+            {product.description}
+    </div>
+          </div>
+        </div>
         {product.quantity === 0 ? (
           <h3>
-          Currently Unavailable
+            Currently Unavailable
           </h3>) : null}
         <h4>
-        Categories: {categories.map(category => {
-          return (
-            <ul
-            key={category.name}
-            >
-            <li>
-            {category.name}
-            </li>
-            </ul>
-          )}
-        )}</h4>
+          Categories: {categories.map(category => {
+            return (
+              <ul
+                key={category.name}
+              >
+                <li>
+                  {category.name}
+                </li>
+              </ul>
+            )
+          }
+          )}</h4>
         <div>
+
           <button
-          onClick={() => store.dispatch(addToCart(product.id, 1, product.price))}
+            className="ui vertical animated button"
+
+            onClick={() => store.dispatch(addToCart(product.id, 1, product.price))}
           >
-          Add to cart
-          </button>
+            <div className="hidden content">
+              +1
+          </div>
+            <div className="visible content">
+              <i className="shop icon"></i>
+            </div>
+          </button >
         </div>
         <Link to={`/products/${product.id}/new-review`}>
           <div>
-            <button>Write a review</button>
+            <button className="medium brown ui button">Write a review</button>
           </div>
         </Link>
 
