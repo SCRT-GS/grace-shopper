@@ -32,27 +32,34 @@ export class ProductDetail extends Component {
   render() {
 
     const product = this.props.product
+    const price = (product.price) / 100
     const categories = product.categories || [{ name: 'notaname' }]
     console.log('productwithcats?', categories[0])
 
     return (
       <div>
-        <div className="ui card">
+      <h2 className="centered ui header">
+      <div className="content">
+      {product.name}
+    </div>
+    </h2>
+        <div className="centered ui card">
           <div className="image">
             <img
               id="product-pic"
               src={product.imgURL}
             />
           </div>
-          <div className="content">
-            <a className="header">{product.name}</a>
+
             <div className="meta">
-              <span className="date">{product.price}</span>
+              <span className="date">${price}</span>
             </div>
+            <div className="content">
             <div className="description">
             {product.description}
     </div>
-          </div>
+    </div>
+
         </div>
         {product.quantity === 0 ? (
           <h3>
@@ -62,9 +69,11 @@ export class ProductDetail extends Component {
           Categories: {categories.map(category => {
             return (
               <ul
+              className="centered ui list"
                 key={category.name}
               >
-                <li>
+                <li
+                className="centered ui list">
                   {category.name}
                 </li>
               </ul>
