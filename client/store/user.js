@@ -1,6 +1,6 @@
 import axios from 'axios'
 import history from '../history'
-import {getCart} from './cart'
+import { getCart } from './cart'
 
 /**
  * ACTION TYPES
@@ -17,9 +17,9 @@ const defaultUser = {}
 /**
  * ACTION CREATORS
  */
-const getUser = user => ({type: GET_USER, user})
-const removeUser = () => ({type: REMOVE_USER})
-const updateUserPasswordActionCreator = user => ({type: UPDATE_USER_PASSWORD, user})
+const getUser = user => ({ type: GET_USER, user })
+const removeUser = () => ({ type: REMOVE_USER })
+const updateUserPasswordActionCreator = user => ({ type: UPDATE_USER_PASSWORD, user })
 
 /**
  * THUNK CREATORS
@@ -36,15 +36,19 @@ export const me = () =>
 export const auth = (email, password, method) =>
   dispatch =>
     axios.post(`/auth/${method}`, { email, password })
+      .then(result => {
+        window.location.reload()
+        return result
+      })
       .then(res => {
         dispatch(getUser(res.data))
-        if(res.data.resetPassword){
+        if (res.data.resetPassword) {
           history.push('/reset-password')
         } else {
-        history.push('/home')
+          history.push('/home')
         }
       }, authError => { // rare example: a good use case for parallel (non-catch) error handler
-        dispatch(getUser({error: authError}))
+        dispatch(getUser({ error: authError }))
       })
       .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
 
@@ -57,12 +61,14 @@ export const logout = () =>
       })
       .catch(err => console.log(err))
 
-   export const updateUserPassword = (id, user) => dispatch => {
-        axios.put(`/api/users/resetPassword/${id}`, user)
-          .then(res => {dispatch(updateUserPasswordActionCreator(res.data))
-          history.push('/login')})
-          .catch(err => console.error(`Could not update user:`, err));
-      }
+export const updateUserPassword = (id, user) => dispatch => {
+  axios.put(`/api/users/resetPassword/${id}`, user)
+    .then(res => {
+      dispatch(updateUserPasswordActionCreator(res.data))
+      history.push('/login')
+    })
+    .catch(err => console.error(`Could not update user:`, err));
+}
 /**
  * REDUCER
  */
