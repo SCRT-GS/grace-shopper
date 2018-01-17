@@ -22,7 +22,14 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.15.3",
+    "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",
+    "babel-loader": "^6.2.10",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.22.0",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.24.1",
     "body-parser": "^1.16.1",
     "compression": "^1.7.1",
     "connect-session-sequelize": "^4.1.0",
@@ -42,21 +49,17 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
+    "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
     "sequelize": "^4.3.1",
-    "socket.io": "^2.0.3"
+    "socket.io": "^2.0.3",
+    "webpack": "^2.2.1",
+    "webpack-livereload-plugin": "^1.0.0"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.9.0",
-    "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",
-    "babel-loader": "^6.2.10",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.22.0",
-    "babel-preset-stage-2": "^6.24.1",
-    "babel-register": "^6.24.1",
     "chai": "^3.5.0",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.0",
@@ -69,8 +72,6 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-mock-store": "^1.2.3",
     "sinon": "^4.1.4",
-    "supertest": "^3.0.0",
-    "webpack": "^2.2.1",
-    "webpack-livereload-plugin": "^1.0.0"
+    "supertest": "^3.0.0"
   }
 }
