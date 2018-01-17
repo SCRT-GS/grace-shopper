@@ -19,7 +19,7 @@ const Main = (props) => {
     <div >
       <nav className="ui text menu">
       <h1 className="item">Forestero</h1>
-      <NavLink to="/">Home</NavLink>
+      <NavLink to="/home">Home</NavLink>
       <NavLink to="/products">Shop</NavLink>
       <NavLink to="/cart">Cart</NavLink>
 
@@ -48,8 +48,9 @@ const Main = (props) => {
               </div>)
         }
       </nav>
-      <hr />
-      {children}
+      <div className="content-container">
+        {children}
+      </div>
     </div>
 
   )
