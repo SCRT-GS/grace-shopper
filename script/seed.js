@@ -99,15 +99,15 @@ async function seed() {
       description: 'Single Origin Arriba Nacional, 78% cacao',
       price: 1299,
       quantity: 18,
-      imgURL: 'http://i68.tinypic.com/2evcfg3.png'
-    }).then(product => product.addCategories([1,2,3])),
+      imgURL: 'http://i67.tinypic.com/2ufg96p.jpg'
+    }).then(product => product.addCategories([10,1,3])),
     Product.create({
-      name: 'Pacari - Super Milky',
+      name: 'Pacari',
       description: 'Single Origin Hybrid, 30% cacao',
       price: 999,
       quantity: 200,
-      imgURL: 'http://i63.tinypic.com/ayanpu.png'
-    }).then(product => product.addCategories([1,3,4,7])),
+      imgURL: 'http://i67.tinypic.com/2ufg96p.jpg'
+    }).then(product => product.addCategories([3,1,7])),
       Product.create({
       name: 'Valrhona - Le Noir Amer',
       description: '71%% cacao',
@@ -120,85 +120,85 @@ async function seed() {
       description: 'Tien Giang batch 10-2-16, 78% cacao',
       price: 2199,
       quantity: 10,
-      imgURL: 'http://i63.tinypic.com/jkelok.jpg'
-    }).then(product => product.addCategories([1,9,3,10])),
+      imgURL: 'http://i68.tinypic.com/i3z8lz.jpg'
+    }).then(product => product.addCategories([9,3,10])),
     Product.create({
       name: 'Trinitario',
       description: 'Port of Spain batch 10-2-16, 78% cacao',
       price: 2199,
       quantity: 10,
-      imgURL: 'http://i63.tinypic.com/jkelok.jpg'
-    }).then(product => product.addCategories([10,9,4,11])),
+      imgURL: 'http://i66.tinypic.com/rm70gk.png'
+    }).then(product => product.addCategories([10,2,4,11])),
       Product.create({
       name: 'Pralus',
       description: '75% cacao',
       price: 1599,
       quantity: 99,
       imgURL: 'http://i66.tinypic.com/rm70gk.png'
-    }).then(product => product.addCategories([6,2,3,1])),
+    }).then(product => product.addCategories([6,3,2])),
       Product.create({
       name: 'Confluence - Porcelana',
       description: '70% cacao',
       price: 1199,
       quantity: 200,
       imgURL: 'http://i64.tinypic.com/5tz89c.jpg'
-    }).then(product => product.addCategories([2,3,4,5])),
+    }).then(product => product.addCategories([3,4,5])),
       Product.create({
       name: 'Soma - Chuao',
       description: '70% cacao',
       price: 1099,
       quantity: 2000,
-      imgURL: 'http://i63.tinypic.com/rm38mf.png'
-    }).then(product => product.addCategories([2,3,6,8])),
+      imgURL: 'http://i68.tinypic.com/2evcfg3.png'
+    }).then(product => product.addCategories([3,6,8])),
       Product.create({
       name: 'Domori',
       description: 'Peru, 64% cacao',
       price: 1599,
       quantity: 150,
-      imgURL: 'http://i68.tinypic.com/2evcfg3.png'
-    }).then(product => product.addCategories([2,3,10])),
+      imgURL: 'http://i68.tinypic.com/i3z8lz.jpg'
+    }).then(product => product.addCategories([3,10])),
     Product.create({
       name: 'Trinitario Deluxe',
       description: 'Trinidad, 64% cacao',
       price: 1599,
       quantity: 150,
-      imgURL: 'http://i68.tinypic.com/2evcfg3.png'
-    }).then(product => product.addCategories([8,9,3,11])),
+      imgURL: 'http://i67.tinypic.com/2ufg96p.jpg'
+    }).then(product => product.addCategories([8,9,3,1])),
       Product.create({
       name: 'Arete - Phantom',
       description: '70% cacao',
       price: 999,
       quantity: 20,
       imgURL: 'http://i63.tinypic.com/rm38mf.png'
-    }).then(product => product.addCategories([1,10,3])),
+    }).then(product => product.addCategories([11,10,3])),
       Product.create({
       name: 'Zokoko',
       description: 'Tokiala, 66% cacao',
       price: 1099,
       quantity: 20,
-      imgURL: 'http://i63.tinypic.com/ayanpu.png'
+      imgURL: 'http://i68.tinypic.com/i3z8lz.jpg'
     }).then(product => product.addCategories([3,6,9,4,11])),
     Product.create({
       name: 'Camino Verde',
       description: 'Ambato, 75% cacao',
       price: 1699,
       quantity: 2,
-      imgURL: 'http://i67.tinypic.com/esnjo4.png'
-    }).then(product => product.addCategories([1,2,4,9])),
+      imgURL: 'http://i68.tinypic.com/2evcfg3.png'
+    }).then(product => product.addCategories([10,4,9])),
     Product.create({
       name: 'Toscano Black',
       description: 'Italy, 70% cacao',
       price: 1599,
       quantity: 400,
       imgURL: 'http://i66.tinypic.com/rm70gk.png'
-    }).then(product => product.addCategories([1,3,6])),
+    }).then(product => product.addCategories([2,3,6])),
     Product.create({
       name: 'Toscano Blend',
       description: 'Italy, 60% cacao',
       price: 1099,
       quantity: 70,
-      imgURL: 'http://i67.tinypic.com/esnjo4.png'
-    }).then(product => product.addCategories([3,4,1])),
+      imgURL: 'http://i68.tinypic.com/i3z8lz.jpg'
+    }).then(product => product.addCategories([3,4,10])),
     Product.create({
       name: 'Toscano White',
       description: 'Italy, 50% cacao',
