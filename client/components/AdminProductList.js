@@ -60,8 +60,8 @@ export class AdminProductList extends Component {
                 to={`/admin/products/${product.id}`}
                 style={{ textDecoration: 'none' }}
               >
-              
-                
+
+
                 <div className="ui grid">
                   <div className="two wide column">
                     <img
@@ -85,10 +85,10 @@ export class AdminProductList extends Component {
                   {product.quantity}
                 </span></div>
 </div>
-               
-                
-                
-              
+
+
+
+
               </NavLink>
             </div>
           )
@@ -96,7 +96,7 @@ export class AdminProductList extends Component {
         )}
         </ul>
         <h4 className="ui horizontal divider header">
-          NEW PROUCT
+          NEW PRODUCT
         </h4>
         <section className="ui form">
           <form
@@ -108,7 +108,7 @@ export class AdminProductList extends Component {
               <input
                 name="name"
                 type="text"
-                
+
                 onChange={this.handleChange}
                 placeholder="Name"
               />
@@ -117,7 +117,7 @@ export class AdminProductList extends Component {
               <input
                 name="description"
                 type="text"
-                
+
                 onChange={this.handleChange}
                 placeholder="Description"
               />
@@ -128,7 +128,7 @@ export class AdminProductList extends Component {
             <input
               name="price"
               type="number"
-              
+
               onChange={this.handleChange}
               placeholder="price"
             />
@@ -137,7 +137,7 @@ export class AdminProductList extends Component {
             <input
               name="imgURL"
               type="text"
-              
+
               onChange={this.handleChange}
               placeholder="Image Link"
             />
@@ -146,7 +146,7 @@ export class AdminProductList extends Component {
             <input
               name="quantity"
               type="number"
-              
+
               onChange={this.handleChange}
               placeholder="Quantity"
             />
