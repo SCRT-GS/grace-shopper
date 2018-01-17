@@ -19,13 +19,13 @@ export const SideBar = (props) => {
     return 0;
   })
 
-  console.log("PROPS: ", props)
+  
 
     return (
-      <div>
-       <h5>Category</h5>
-       <div>
-        <h5>
+      <div className="category-sidebar">
+       <h5>Categories</h5>
+       <div className="categories-container">
+        
           {
             categories.map(category => {
               if (category.name !== 'All') {
@@ -39,7 +39,7 @@ export const SideBar = (props) => {
               }}
             )
           }
-        </h5>
+        
         </div>
       </div>
     )
