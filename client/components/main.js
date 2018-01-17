@@ -36,7 +36,9 @@ const Main = (props) => {
               {/* The navbar will show these links before you log in */}
               <NavLink to="/my-account">My Account</NavLink>
 
-              <NavLink to="/admin/products">Proucts</NavLink>
+              <NavLink to="/admin/products">Products</NavLink>
+              <NavLink to="/admin/orders">Orders</NavLink>
+              <NavLink to="/admin/categories">Categories</NavLink>
               <NavLink to="/admin/users">Users</NavLink>
               <a href="#" onClick={handleClick}>Logout</a>
             </div>)

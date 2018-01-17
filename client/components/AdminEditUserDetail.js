@@ -19,8 +19,7 @@ export class AdminEditUserDetail extends Component {
 
   componentDidMount() {
     const userId = Number(this.props.match.params.userId)
-
-    store.dispatch(usersThunk);
+    const adminUserThunk = getAdminUser(userId)
     store.dispatch(adminUserThunk);
   }
 
