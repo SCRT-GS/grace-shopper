@@ -13,8 +13,6 @@ const transporter = nodemailer.createTransport({
 })
 
 router.get('/', async (req, res, next) => {
-  if (req.session.passport) {
-    if (req.session.passport.user) {
       try {
         const adminUser = await User.findOne({
           where: {
@@ -35,11 +33,8 @@ router.get('/', async (req, res, next) => {
       catch (error) {
         next(error)
       }
-    }
-  } else {
-    return res.status(500).send('You do not have permission to view this page')
-  }
-})
+    })
+
 
 router.get('/admin/:id', async (req, res) => {
   if (req.session.passport) {
@@ -91,8 +86,6 @@ router.get('/:id/orders', async (req, res, next) => {
 })
 
 router.get('/orders/', async (req, res, next) => {
-  if (req.session.passport) {
-    if (req.session.passport.user) {
       try {
         const adminUser = await User.findOne({
           where: {
@@ -112,12 +105,7 @@ router.get('/orders/', async (req, res, next) => {
       catch (error) {
         next(error)
       }
-    }
-  }
-  else {
-    return res.status(500).send('You do not have permission to view this page')
-  }
-})
+    })
 
 router.get('/admin/orders/:id', async (req, res, next) => {
   try {
