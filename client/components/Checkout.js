@@ -108,9 +108,9 @@ class Checkout extends Component {
 
         <h3 className="ui dividing header">Shipping Information</h3>
         <div className="ui form">
-          <form onSubmit={this.handleCheckoutSubmit} className="ui-form">
+          <form onSubmit={this.handleCheckoutSubmit} className="ui-form" id="checkout-form">
 
-            <div className="field">
+            <div className="required field">
               <label>Email</label>
               <input value={this.state.email} onChange={this.inputEmail} type="text" placeholder="Email" required />
             </div>
