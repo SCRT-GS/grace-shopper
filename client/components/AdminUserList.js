@@ -10,8 +10,12 @@ export const AdminUserList = (props) => {
 
   return (
     <div>
-      <h3>Welcome to the Admin's User List!</h3>
-      <table className="table">
+    <h2 className="ui icon header">
+    <div className="content">
+      Admin User Dashboard
+  </div>
+  </h2>
+      <table className="ui celled table">
         <thead>
           <tr>
             <th>User I.D.</th>
@@ -47,13 +51,15 @@ export const AdminUserList = (props) => {
                   </NavLink>
                 </td>
                 <td>
+                <div className="ui button">
                   <button
                     id="delete"
                     onClick={() => deleteUser(user.id)}
                     type="delete"
                   >
-                    Delete User
+                  <i className="right remove icon"></i>
                   </button>
+                  </div>
                 </td>
               </tr>
             )
