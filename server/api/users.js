@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
     user: 'wwchocolatefactory2@gmail.com',
-    pass: 'chocolicious'
+    pass: process.env.GOOGLE_AUTO_EMAIL
   }
 })
 
