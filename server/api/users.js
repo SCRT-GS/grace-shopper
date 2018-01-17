@@ -13,14 +13,7 @@ const transporter = nodemailer.createTransport({
 })
 
 router.get('/', async (req, res, next) => {
-      try {
-        const adminUser = await User.findOne({
-          where: {
-            id: req.session.passport.user
-          }
-        })
-
-        if (adminUser.isAdmin) {
+      try{
           const users = await User.findAll({
             // explicitly select only the id and email fields - even though
             // users' passwords are encrypted, it won't help if we just
@@ -29,7 +22,6 @@ router.get('/', async (req, res, next) => {
           })
           res.json(users)
         }
-      }
       catch (error) {
         next(error)
       }
@@ -87,13 +79,7 @@ router.get('/:id/orders', async (req, res, next) => {
 
 router.get('/orders/', async (req, res, next) => {
       try {
-        const adminUser = await User.findOne({
-          where: {
-            id: req.session.passport.user
-          }
-        })
 
-        if (adminUser.isAdmin) {
           const orders = await Order.findAll({
             include: [{
               model: OrderItem
@@ -101,7 +87,7 @@ router.get('/orders/', async (req, res, next) => {
           })
           res.json(orders)
         }
-      }
+
       catch (error) {
         next(error)
       }
