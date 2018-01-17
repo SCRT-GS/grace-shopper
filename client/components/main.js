@@ -18,7 +18,11 @@ const Main = (props) => {
   return (
     <div >
       <nav className="ui text menu">
-      <h1 className="item">Forestero</h1>
+      <img 
+        src="http://i64.tinypic.com/vooidj.png"
+        className="header-icon"
+      />
+      <h1 className="item word-form josefin-font">forestero</h1>
       <NavLink to="/home">Home</NavLink>
       <NavLink to="/products">Shop</NavLink>
       <NavLink to="/cart">Cart</NavLink>

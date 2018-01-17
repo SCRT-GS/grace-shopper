@@ -5,6 +5,7 @@
     <meta name='viewport' content='width=device-width initial-scale=1.0'>
     <title>Chocolate Store</title>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400" rel="stylesheet">
     <link rel="stylesheet" href="/style.css" />
     <script defer src="/bundle.js"></script>
     <style>
@@ -12,6 +13,7 @@
         FFFFF9  off-white for background
         FFCE5E  Stil de Grain yellow as a highlight color
         1F0C03 smoky black for nav and fonts
+        FFE8AA NAVAJO WHITE
 
 
 
@@ -21,7 +23,13 @@
         padding: 0px;
         background-color: #fffff9;
         color: #1F0C03;
+        
       }
+
+      .josefin-font {
+        font-family: 'Josefin Sans', sans-serif; !important
+      }
+
       div.content-container{
         padding: 0 2rem 2rem;
       }
@@ -61,6 +69,10 @@
       margin: 0px;
     }
 
+    nav a, nav h1 {
+      padding-top: 0.8rem;
+      padding-bottom: 0.8rem;
+    }
 
     nav a{
       color: #FFFFF9;
@@ -109,7 +121,54 @@
       margin-bottom: 2rem;
     }
 
+    .giant-image {
+      position: fixed;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url("http://i65.tinypic.com/a5fgv6.jpg");
+      background-attachment: fixed;
+      background-position: center; 
+    }
 
+    .landing-tagline{
+      text-align: center;
+      color: #fffff9;
+      padding-top: 8rem;
+      font-size: 3rem;
+      font-weight: 300;
+      text-shadow: 5px 1px 8px #1F0C03;
+    }
+
+    .shop-link {
+      text-align: center;
+      color: #fffff9;
+      font-size: 3rem;
+      font-weight: 300;
+      text-shadow: 5px 1px 8px #1F0C03;
+
+      
+    }
+
+    .ui.text.menu .item.word-form{
+        color: #FFE8AA;
+        font-weight: 300;
+        padding-right: 2rem;
+        padding-left: 0;
+      }
+
+      .circle-logo{
+        display: block;
+        margin: auto;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .header-icon{
+        height: 44.3px;
+        margin: 0.8rem;
+        padding: 0;
+      }
   </style>
   </head>
   <body>
