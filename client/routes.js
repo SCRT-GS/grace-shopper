@@ -32,6 +32,11 @@ class Routes extends Component {
         {/* <ErrorMessage/> */}
         <Main>
           <Switch>
+          <Route
+              component={LandingPage}
+              exact
+              path="/"
+            />
 
             <Route
               component={ProductList}
