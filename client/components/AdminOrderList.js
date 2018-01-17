@@ -33,26 +33,29 @@ export class AdminOrderList extends Component {
 
     return (
       <div>
-
-        <select onChange={this.inputStatus} className="select-type">
+        <h2 className="ui icon header">
+          <i className="circular truck icon"></i>
+            <div className="content">
+          Manage Orders
+            </div>
+          </h2>
+        <select onChange={this.inputStatus} className="ui dropdown dropdown-orders">
           <option value="All">All</option>
           <option value="Created">Created</option>
           <option value="Processing">Processing</option>
           <option value="Cancelled">Cancelled</option>
           <option value="Completed">Completed</option>
         </select>
-        <h1>
-          {this.state.status} Orders
-        </h1>
 
         {
-          // console.log(displayOrders)
           displayOrders.length === 0 ?
             <h2>
               No {this.state.status} orders to display
-            </h2> :
-
-            displayOrders.map((order) => {
+            </h2> : 
+            <ul
+              className="ui relaxed divided list"
+              >
+            {displayOrders.map((order) => {
               const items = order.order_items
               const sum = (items.reduce((total, item) => {
                 return total + item.price * item.quantity
@@ -61,72 +64,41 @@ export class AdminOrderList extends Component {
               let date = order.createdAt || 'today'
 
               return (
-                <ul
+                <div
+                  className="item"
                   key={order.id}
                 >
-                  <li>
+                  
                     <NavLink
                       to={`/admin/orders/${order.id}`}
                     >
-                      <h3>
-                        Order # {order.id}
-                      </h3>
-                      <h3>
-                        Ordered By: {order.email}
-                      </h3>
-                      <h3
-                        className="order-status"
-                      >
-                        Order Status: {order.status}
-                      </h3>
-                      <h4
-                        id="order-item"
-                      >
-                        Items:{items.map(orderItem => {
-                          count++
-
-                          let idx = orderItem.productId - 1
-                          let product = products[idx]
-
-                          const realPrice = (orderItem.price / 100)
-
-                          return (
-                            <ul
-                              key={count}
-                            >
-                              <li>
-                                <p>
-                                  {count}.
-                          </p>
-                                <p>
-                                  {products[idx] ? products[idx].name : null}
-                                </p>
-                                <p>
-                                  ${realPrice}
-                                </p>
-                                <p>
-                                  Quantity: {orderItem.quantity}
-                                </p>
-                              </li>
-                            </ul>
-                          )
-                        })}
-                      </h4>
-                      <p
-                        id="total"
-                      >
-                        Order Total: ${sum}
-                      </p>
-                      <p
-                        id="date"
-                      >
-                        Date Placed: {date.slice(0, 10)}</p>
+                    <div className="ui grid">
+                      <div className="two wide column">
+                        <span># {order.id}</span>
+                      </div>
+                      <div className="six wide column">
+                        <span>{order.email}</span>
+                      </div>
+                      <div className="two wide column">
+                        <span>{order.status}</span>
+                      </div>
+                      <div className="two wide column">
+                        <span>${sum}</span>
+                      </div>
+                      <div className="four wide column">
+                        <span>{date.slice(0, 10)}</span>
+                      </div>
+                      
+                    </div>
                     </NavLink>
-                  </li>
-                </ul>
+                  </div>
+                
               )
             }
+            
             )
+        }
+      </ul>
         }
       </div>
     )

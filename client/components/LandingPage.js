@@ -2,8 +2,8 @@ import React from 'react'
 
 export const LandingPage = () => {
     return (
-        <div>
-            <h1>Purveyors of Fine Cocoa Products</h1>
+        <div className="giant-image">
+            <h1 className="landing-tagline">Purveyors of Fine Cocoa Products</h1>
         </div>
     )
 }
