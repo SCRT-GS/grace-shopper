@@ -11,6 +11,7 @@ export const AdminUserList = (props) => {
   return (
     <div>
     <h2 className="ui icon header">
+    <i className="user circle outline icon"></i>
     <div className="content">
       Admin User Dashboard
   </div>

@@ -49,77 +49,101 @@ export class AdminEditUserDetail extends Component {
 
     return (
       <div>
-        <h3>
-          User Details
-        </h3>
-        <h2>
-          User Email: {user.email}
+        <h2 className="ui icon header">
+          <i className="circular address card outline icon"></i>
+          <div className="content">
+            Edit User Details
+        </div>
         </h2>
-        <h2>
-          User Privileges: {user.isAdmin ? ' Admin' : ' User'}
-        </h2>
-        <h2>
-          Password Reset Pending? {user.resetPassword ? ' Yes' : ' No'}
-        </h2>
-        <form
-          id="userform"
-          onSubmit={this.submit}
-        >
-          <p>
-            Change the user's email address below.
-        </p>
-          <input
-            name="email"
-            type="text"
-            className="form-like"
-            placeholder={user.email}
-          />
-          <p>
-            Change the user's administrator privileges below.
-          </p>
-          <select
-            form="userform"
-            name="isAdmin"
-          >
-            <option
-              value={user.isAdmin ? 'Admin' : 'User'}
-            >
-              {user.isAdmin ? 'Admin' : 'User'}
-            </option>
-            <option
-              value={user.isAdmin ? 'User' : 'Admin'}
-            >
-              {user.isAdmin ? 'User' : 'Admin'}
-            </option>
-          </select>
-          <p>
-            Change the user's password status below.
-        </p>
-          <select
-            form="userform"
-            name="resetPassword"
-          >
-            <option
-              value={user.resetPassword ? 'Reset pending' : 'No reset pending'}
-            >
-              {user.resetPassword ? 'Reset pending' : 'No reset pending'}
-            </option>
-            <option
-              value={user.resetPassword ? 'No reset pending' : 'Reset pending'}
-            >
-              {user.resetPassword ? 'No reset pending' : 'Reset pending'}
-            </option>
-          </select>
 
-
-          <button
-            id="submit"
-            type="submit"
+        <div className="centered ui card">
+          <div className="content">
+            <div className="header">{user.email}</div>
+          </div>
+          <div className="content">
+            <h4 >
+              User Privileges: {user.isAdmin ? ' Admin' : ' User'}
+            </h4>
+            <h4 >
+              Password Reset Pending? {user.resetPassword ? ' Yes' : ' No'}
+            </h4>
+          </div>
+        </div>
+        <h4 className="ui horizontal divider header">
+          UPDATE USER
+      </h4>
+        <div className="ui form">
+          <form
+            id="userform"
+            onSubmit={this.submit}
           >
-            Save Changes
+            <div className="fields">
+              <div className="ui four wide field">
+                <label>
+                  Email
+        </label>
+                <input
+                  name="email"
+                  type="text"
+                  placeholder={user.email}
+                />
+              </div>
+              <div className="ui six wide field">
+                <label>
+                  Admin Privileges
+          </label>
+                <select
+                  form="userform"
+                  name="isAdmin"
+                  className="ui selection dropdown"
+                >
+                  <option
+                    value={user.isAdmin ? 'Admin' : 'User'}
+                  >
+                    {user.isAdmin ? 'Admin' : 'User'}
+                  </option>
+                  <option
+                    value={user.isAdmin ? 'User' : 'Admin'}
+                  >
+                    {user.isAdmin ? 'User' : 'Admin'}
+                  </option>
+                </select>
+              </div>
+              <div className="ui six wide field">
+
+                <label>
+                  Password Reset Pending
+        </label>
+                <select
+                  form="userform"
+                  name="resetPassword"
+                  className="ui selection dropdown"
+                >
+                  <option
+                  className="content"
+                    value={user.resetPassword ? 'Reset pending' : 'No reset pending'}
+                  >
+                    {user.resetPassword ? 'Reset pending' : 'No reset pending'}
+                  </option>
+                  <option
+                  className="content"
+                    value={user.resetPassword ? 'No reset pending' : 'Reset pending'}
+                  >
+                    {user.resetPassword ? 'No reset pending' : 'Reset pending'}
+                  </option>
+                </select>
+              </div>
+
+              <button
+                id="submit"
+                type="submit"
+                className="ui button"
+              >
+                Save Changes
           </button>
-        </form>
-        <br />
+            </div>
+          </form>
+        </div>
       </div>
     )
   }

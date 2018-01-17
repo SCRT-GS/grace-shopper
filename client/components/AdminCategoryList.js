@@ -43,7 +43,7 @@ export class AdminCategoryList extends Component {
     return (
       <div>
         <h2 className="ui icon header">
-          <i className="tag icon"></i>
+          <i className="circular tag icon"></i>
           <div className="content">
             Manage Categories
         </div>
@@ -88,12 +88,10 @@ export class AdminCategoryList extends Component {
           )}
         </div>
 
-        <h2 className="ui icon header">
-          <i className="tag icon"></i>
-          <div className="content">
-            Add Category
-      </div>
-        </h2>
+        <h4 className="ui horizontal divider header">
+        NEW CATEGORY
+      </h4>
+
         <section className="ui form">
           <form
             id="categoryform"
